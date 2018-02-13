@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Game
+namespace CardGame
 {
-    class Player
+    class HumanPlayer
     {
-        // Abs
     }
 }
