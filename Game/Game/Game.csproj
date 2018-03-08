@@ -52,6 +52,7 @@
     <Compile Include="PlayDurak.Designer.cs">
       <DependentUpon>PlayDurak.cs</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="PlayDurak.resx">
       <DependentUpon>PlayDurak.cs</DependentUpon>
