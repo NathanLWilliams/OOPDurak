@@ -6,7 +6,28 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    public class Player
+    public abstract class Player
     {
+        // fields and properties
+        private Hand myHand;
+
+        public Hand MyHand
+        {
+            get { return myHand; }
+            set { myHand = value; }
+        }
+        public enum PlayerStatus
+        {
+
+        }
+        public virtual Card PlayCard(Card card)
+        {
+            return card;
+        }
+        public void Pass()
+        {
+
+        }
+
     }
 }

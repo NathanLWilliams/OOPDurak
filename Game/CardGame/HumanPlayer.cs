@@ -6,7 +6,28 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    class HumanPlayer
+    public class HumanPlayer : Player
     {
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        private string image;
+
+        public string Image
+        {
+            get { return image; }
+            set { image = value; }
+        }
+
+        public override Card PlayCard(Card card)
+        {
+            return base.PlayCard(card);
+        }
+
     }
 }

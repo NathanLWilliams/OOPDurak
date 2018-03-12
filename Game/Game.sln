@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Game\Game.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardGame", "CardGame\CardGame.csproj", "{CE257858-5512-4ACD-A527-E61FB564CE4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DurakGame", "DurakGame\DurakGame.csproj", "{2705D95E-D9DB-4DFA-ACE6-751F71D7E325}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{CE257858-5512-4ACD-A527-E61FB564CE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE257858-5512-4ACD-A527-E61FB564CE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE257858-5512-4ACD-A527-E61FB564CE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2705D95E-D9DB-4DFA-ACE6-751F71D7E325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2705D95E-D9DB-4DFA-ACE6-751F71D7E325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2705D95E-D9DB-4DFA-ACE6-751F71D7E325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2705D95E-D9DB-4DFA-ACE6-751F71D7E325}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

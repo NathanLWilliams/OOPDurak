@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    class Game
+    public class Game
     {
+        public void Start()
+        {
+
+        }
+        public void Restart()
+        {
+
+        }
+        public void End(Player winner)
+        {
+
+        }
     }
 }
