@@ -42,6 +42,9 @@
             this.Text = "Play Durak";
             this.ResumeLayout(false);
 
+
+
+
         }
 
         #endregion

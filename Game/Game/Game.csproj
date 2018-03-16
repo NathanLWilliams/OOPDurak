@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageDesigns\GamePlay.cs" />
     <Compile Include="PlayDurak.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -54,6 +55,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PageDesigns\StatisticsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="PlayDurak.resx">
       <DependentUpon>PlayDurak.cs</DependentUpon>
     </EmbeddedResource>
@@ -85,6 +89,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mainMenuCombinedBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Screenshot_3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
