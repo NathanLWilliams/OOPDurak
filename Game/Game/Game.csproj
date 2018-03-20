@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MainMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PlayDurak.cs">
       <SubType>Form</SubType>
     </Compile>
