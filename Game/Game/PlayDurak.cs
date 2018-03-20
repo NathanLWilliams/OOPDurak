@@ -18,7 +18,8 @@ namespace Game
 
         //Separate the different sets of controls/layouts into panels so we can easily loop through in code to set visible or invisible
         public static TableLayoutPanel mainMenuPanel;
-        public static StatisticsPage page;
+        public static pgPlayOptions page;
+        public static StatisticsPage statsPage;
 
         public enum GameState
         {
@@ -32,12 +33,15 @@ namespace Game
         public PlayDurak()
         {
             InitializeComponent();
-            page = new StatisticsPage();
-            page.InitializeComponent();
-            this.Controls.Add(page);
-            page.Visible = true;
+            page = new pgPlayOptions();
+            statsPage = new StatisticsPage();
+           this.Controls.Add(page);
+            this.Controls.Add(statsPage);
+            statsPage.Visible = true;
+            page.Visible = false;
 
         }
+
 
     }
 

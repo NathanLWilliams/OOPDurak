@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Game
 {
-    public class StatisticsPage : Panel
+    public class pgPlayOptions : Panel
     {
         #region Windows Form Designer generated code
 
@@ -15,9 +15,9 @@ namespace Game
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        public void InitializeComponent()
+        public pgPlayOptions()
         {
-            StatsPage();
+            InitializeComponent();
         }
         #endregion
 
@@ -27,34 +27,36 @@ namespace Game
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        public void StatsPage()
+        private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsPage));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(pgPlayOptions));
+            this.pictureBox1 = new PictureBox();
+            this.panel1 = new Panel();
+            this.pictureBox4 = new PictureBox();
+            this.pictureBox3 = new PictureBox();
+            this.pictureBox2 = new PictureBox();
+            this.label3 = new Label();
+            this.label2 = new Label();
+            this.checkBox2 = new CheckBox();
+            this.button1 = new Button();
+            this.label1 = new Label();
+            this.panel2 = new Panel();
+            this.radioButton2 = new RadioButton();
+            this.radioButton1 = new RadioButton();
+
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panel2.SuspendLayout();
-
+            this.SuspendLayout();
+            this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = Properties.Resources.Screenshot_1;
-            this.pictureBox1.Location = new System.Drawing.Point(571, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(569, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(26, 24);
             this.pictureBox1.TabIndex = 0;
@@ -65,7 +67,7 @@ namespace Game
             this.panel1.Controls.Add(this.pictureBox4);
             this.panel1.Controls.Add(this.pictureBox3);
             this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Location = new System.Drawing.Point(34, 178);
+            this.panel1.Location = new System.Drawing.Point(47, 201);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(524, 132);
             this.panel1.TabIndex = 4;
@@ -82,7 +84,7 @@ namespace Game
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = Properties.Resources.Screenshot_3;
+            this.pictureBox3.Image = Properties.Resources.Screenshot_3; ;
             this.pictureBox3.Location = new System.Drawing.Point(198, 25);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(100, 78);
@@ -92,6 +94,7 @@ namespace Game
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Image = Properties.Resources.Screenshot_1; ;
             this.pictureBox2.Location = new System.Drawing.Point(25, 25);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 78);
@@ -102,7 +105,7 @@ namespace Game
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 313);
+            this.label3.Location = new System.Drawing.Point(6, 336);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(156, 56);
             this.label3.TabIndex = 5;
@@ -112,7 +115,7 @@ namespace Game
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 128);
+            this.label2.Location = new System.Drawing.Point(3, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(156, 56);
             this.label2.TabIndex = 3;
@@ -122,7 +125,7 @@ namespace Game
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(34, 414);
+            this.checkBox2.Location = new System.Drawing.Point(23, 465);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(130, 17);
             this.checkBox2.TabIndex = 7;
@@ -131,7 +134,7 @@ namespace Game
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(232, 475);
+            this.button1.Location = new System.Drawing.Point(261, 508);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 8;
@@ -143,7 +146,7 @@ namespace Game
             this.label1.BackColor = System.Drawing.Color.Black;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Yellow;
-            this.label1.Location = new System.Drawing.Point(1, 36);
+            this.label1.Location = new System.Drawing.Point(3, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(596, 52);
             this.label1.TabIndex = 9;
@@ -154,7 +157,7 @@ namespace Game
             // 
             this.panel2.Controls.Add(this.radioButton2);
             this.panel2.Controls.Add(this.radioButton1);
-            this.panel2.Location = new System.Drawing.Point(34, 363);
+            this.panel2.Location = new System.Drawing.Point(47, 406);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(524, 35);
             this.panel2.TabIndex = 10;
@@ -180,24 +183,21 @@ namespace Game
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Newbie";
             this.radioButton1.UseVisualStyleBackColor = true;
-
-            this.Controls.Add(pictureBox1);
-            this.Controls.Add(pictureBox2);
-            this.Controls.Add(pictureBox3);
-            this.Controls.Add(pictureBox4);
-            this.Controls.Add(label3);
-            this.Controls.Add(label2);
-            this.Controls.Add(label1);
-            this.Controls.Add(panel1);
-            this.Controls.Add(panel2);
-            this.Controls.Add(button1);
-            this.Controls.Add(checkBox2);
-            this.Controls.Add(radioButton1);
-            this.Controls.Add(radioButton2);
-
-            this.Dock = DockStyle.Fill;
-
-
+            // 
+            // panel3
+            // 
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.checkBox2);
+            this.Location = new System.Drawing.Point(-1, 6);
+            this.Name = "panel3";
+            this.Size = new System.Drawing.Size(598, 555);
+            this.TabIndex = 11;
 
 
         }

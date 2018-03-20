@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PageDesigns\GamePlay.cs" />
+    <Compile Include="PageDesigns\pgStatistics.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PlayDurak.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,7 +58,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PageDesigns\StatisticsPage.cs">
+    <Compile Include="PageDesigns\pgPlayOptions.cs">
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="PlayDurak.resx">
