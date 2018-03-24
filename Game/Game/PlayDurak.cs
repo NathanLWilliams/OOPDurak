@@ -17,32 +17,54 @@ namespace Game
         //TODO: Maybe add some static font sizes or buttons sizes which are shared and consistent between each layout/state
 
         //Separate the different sets of controls/layouts into panels so we can easily loop through in code to set visible or invisible
-        public static TableLayoutPanel mainMenuPanel;
-        public static pgPlayOptions page;
-        public static StatisticsPage statsPage;
 
-        public enum GameState
+        public enum Screen
         {
-            MainMenu,
+            MainMenu = 0,
+            Instructions,
+            Statistics,
             Playing,
             PlayOptions,
-            Instructions,
-            GameResult
+            GameResults
         }
+
+        static MainMenu menu;
+        
 
         public PlayDurak()
         {
             InitializeComponent();
-            page = new pgPlayOptions();
-            statsPage = new StatisticsPage();
-           this.Controls.Add(page);
-            this.Controls.Add(statsPage);
-            statsPage.Visible = true;
-            page.Visible = false;
-
+            menu = new MainMenu();
+            this.Controls.Add(menu);
+            SetScreen(Screen.MainMenu);
         }
 
+        /// <summary>
+        /// Used to change any information that is needed for a change in the screen, ex: Form size
+        /// along with setting the related panel of controls to visible
+        /// </summary>
+        /// <param name="screen"></param>
+        public static void SetScreen(Screen screen)
+        {
+            switch(screen)
+            {
+                case Screen.MainMenu:
+                    menu.Visible = true;
+                    break;
+                case Screen.Instructions:
+                    break;
+                case Screen.Statistics:
+                    break;
+                case Screen.Playing:
+                    break;
+                case Screen.PlayOptions:
+                    break;
+                case Screen.GameResults:
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
-
 }
