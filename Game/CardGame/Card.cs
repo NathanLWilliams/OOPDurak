@@ -185,7 +185,7 @@ namespace CardGame
             }
             else
             {
-                imageName = myRank.ToString() + "_" + mySuit.ToString(); // enumerations are handy
+                imageName = myRank.ToString() + "_of_" + mySuit.ToString(); // enumerations are handy
             }
             // set the image firl to cardimage from the resourse
             cardImage = Properties.Resources.ResourceManager.GetObject(imageName) as Image;

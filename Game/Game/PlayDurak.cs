@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardBoxControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,11 +39,14 @@ namespace Game
             //Instantiate screens/panels and add them to the form
             menu = new MainMenu();
             playOptions = new pgPlayOptions();
+
             this.Controls.Add(menu);
             this.Controls.Add(playOptions);
+
             menu.Visible = false;
-            playOptions.Visible = true;
-            SetScreen(Screen.Statistics);
+            playOptions.Visible = false;
+
+            SetScreen(Screen.MainMenu);
         }
 
         /// <summary>
@@ -62,11 +66,12 @@ namespace Game
                 case Screen.Instructions:
                     break;
                 case Screen.Statistics:
-                    playOptions.Visible = true;
                     break;
                 case Screen.Playing:
                     break;
                 case Screen.PlayOptions:
+                    menu.Visible = false;
+                    playOptions.Visible = true;
                     break;
                 case Screen.GameResults:
                     break;

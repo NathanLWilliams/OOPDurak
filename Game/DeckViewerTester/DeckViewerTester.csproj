@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8B3679F-01C4-43C4-B346-97F65080D047}</ProjectGuid>
+    <ProjectGuid>{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game</RootNamespace>
-    <AssemblyName>Game</AssemblyName>
+    <RootNamespace>DeckViewerTester</RootNamespace>
+    <AssemblyName>DeckViewerTester</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,25 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainMenu.cs">
-      <SubType>Component</SubType>
+    <Compile Include="DeckViewer.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PageDesign\pgPlayOptions.cs">
-      <SubType>Component</SubType>
+    <Compile Include="DeckViewer.Designer.cs">
+      <DependentUpon>DeckViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="PageDesign\pgStatistics.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="PlayDurak.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PlayDurak.Designer.cs">
-      <DependentUpon>PlayDurak.cs</DependentUpon>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="PlayDurak.resx">
-      <DependentUpon>PlayDurak.cs</DependentUpon>
+    <EmbeddedResource Include="DeckViewer.resx">
+      <DependentUpon>DeckViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -74,7 +74,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -90,28 +89,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\mainMenuBackground.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\mainMenuCombinedBackground.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\large_deck.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\medium_deck.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\small_deck.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CardBoxControl\CardBoxControl.csproj">
       <Project>{5833CDAC-0E8E-4214-9944-3BC2FAF88009}</Project>
       <Name>CardBoxControl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DeckViewerTester\DeckViewerTester.csproj">
-      <Project>{32fe9cc6-6f3a-42af-9708-7cffe6f02c6e}</Project>
-      <Name>DeckViewerTester</Name>
+    <ProjectReference Include="..\CardGame\CardGame.csproj">
+      <Project>{CE257858-5512-4ACD-A527-E61FB564CE4F}</Project>
+      <Name>CardGame</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
