@@ -49,6 +49,12 @@
     <Compile Include="MainMenu.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PageDesign\pgPlayOptions.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PageDesign\pgStatistics.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PlayDurak.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mainMenuCombinedBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\large_deck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\medium_deck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\small_deck.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -54,13 +54,13 @@ namespace Game
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Yellow;
             this.label1.Location = new System.Drawing.Point(0, 9);
-            this.label1.Name = "label1";
+            this.label1.Name = "lblTitle";
             this.label1.Size = new System.Drawing.Size(605, 64);
             this.label1.TabIndex = 0;
             this.label1.Text = "Statistics Page";

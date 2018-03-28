@@ -63,6 +63,16 @@ namespace Game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap large_deck {
+            get {
+                object obj = ResourceManager.GetObject("large_deck", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mainMenuBackground {
             get {
                 object obj = ResourceManager.GetObject("mainMenuBackground", resourceCulture);
@@ -83,9 +93,9 @@ namespace Game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_1 {
+        internal static System.Drawing.Bitmap medium_deck {
             get {
-                object obj = ResourceManager.GetObject("Screenshot_1", resourceCulture);
+                object obj = ResourceManager.GetObject("medium_deck", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,19 +103,9 @@ namespace Game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_2 {
+        internal static System.Drawing.Bitmap small_deck {
             get {
-                object obj = ResourceManager.GetObject("Screenshot_2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Screenshot_3 {
-            get {
-                object obj = ResourceManager.GetObject("Screenshot_3", resourceCulture);
+                object obj = ResourceManager.GetObject("small_deck", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
