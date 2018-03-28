@@ -34,6 +34,8 @@ namespace Game
         public PlayDurak()
         {
             InitializeComponent();
+
+            //Instantiate screens/panels and add them to the form
             menu = new MainMenu();
             playOptions = new pgPlayOptions();
             this.Controls.Add(menu);
@@ -48,12 +50,14 @@ namespace Game
         /// along with setting the related panel of controls to visible
         /// </summary>
         /// <param name="screen"></param>
-        public static void SetScreen(Screen screen)
+        public void SetScreen(Screen screen)
         {
             switch(screen)
             {
                 case Screen.MainMenu:
                     menu.Visible = true;
+                    this.AcceptButton = (Button)menu.Controls["start"];
+                    this.CancelButton = (Button)menu.Controls["exit"];
                     break;
                 case Screen.Instructions:
                     break;

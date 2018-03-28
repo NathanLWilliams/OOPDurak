@@ -37,6 +37,8 @@ namespace Game
             start.BackColor = buttonColor;
             start.FlatStyle = FlatStyle.Popup;
             start.Click += Start_Click;
+            start.TabIndex = 1;
+            start.Name = "start";
             this.Controls.Add(start);
 
             Button instructions = new Button();
@@ -47,6 +49,7 @@ namespace Game
             instructions.BackColor = buttonColor;
             instructions.FlatStyle = FlatStyle.Popup;
             instructions.Click += Instructions_Click;
+            instructions.TabIndex = 2;
             this.Controls.Add(instructions);
 
             Button statistics = new Button();
@@ -57,6 +60,7 @@ namespace Game
             statistics.BackColor = buttonColor;
             statistics.FlatStyle = FlatStyle.Popup;
             statistics.Click += Statistics_Click;
+            statistics.TabIndex = 3;
             this.Controls.Add(statistics);
 
             Button exit = new Button();
@@ -67,6 +71,8 @@ namespace Game
             exit.BackColor = buttonColor;
             exit.FlatStyle = FlatStyle.Popup;
             exit.Click += Exit_Click;
+            exit.TabIndex = 4;
+            exit.Name = "exit";
             this.Controls.Add(exit);
 
             this.BackgroundImage = Properties.Resources.mainMenuCombinedBackground;
@@ -84,17 +90,20 @@ namespace Game
         private void Start_Click(object sender, EventArgs e)
         {
             //Goto play options
-            PlayDurak.SetScreen(PlayDurak.Screen.PlayOptions);
+            if(this.Parent is Form)
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.PlayOptions);
         }
         private void Statistics_Click(object sender, EventArgs e)
         {
             //Goto statistics
-            PlayDurak.SetScreen(PlayDurak.Screen.Statistics);
+            if (this.Parent is Form)
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Statistics);
         }
         private void Instructions_Click(object sender, EventArgs e)
         {
             //Goto instructions
-            PlayDurak.SetScreen(PlayDurak.Screen.Instructions);
+            if (this.Parent is Form)
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Instructions);
         }
 
     }
