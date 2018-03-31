@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardBoxControl;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,7 +31,6 @@ namespace Game
 
         static MainMenu menu;
         static pgPlayOptions playOptions;
-        static StatisticsPage statsPage; 
 
         public PlayDurak()
         {
@@ -39,15 +39,14 @@ namespace Game
             //Instantiate screens/panels and add them to the form
             menu = new MainMenu();
             playOptions = new pgPlayOptions();
-            statsPage = new StatisticsPage();
-            this.Controls.Add(menu);
-            this.Controls.Add(statsPage);
 
+            this.Controls.Add(menu);
             this.Controls.Add(playOptions);
+
             menu.Visible = false;
-            statsPage.Visible = true;
-            //playOptions.Visible = true;
-           // SetScreen(Screen.Statistics);
+            playOptions.Visible = false;
+
+            SetScreen(Screen.MainMenu);
         }
 
         /// <summary>
@@ -67,11 +66,12 @@ namespace Game
                 case Screen.Instructions:
                     break;
                 case Screen.Statistics:
-                    playOptions.Visible = true;
                     break;
                 case Screen.Playing:
                     break;
                 case Screen.PlayOptions:
+                    menu.Visible = false;
+                    playOptions.Visible = true;
                     break;
                 case Screen.GameResults:
                     break;

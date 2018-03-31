@@ -3,7 +3,7 @@
  * @Author : Qasim Iqbal
  * @since  : March 03, 2018
  * @see    : https://www.youtube.com/watch?v=gK6bJ9IudW8&t=87s Thom MacDonald's Youtube Video on CardBox
- * @see    : Images used for cards were royalty free from http://acbl.mybigcommerce.com/52-playing-cards/
+ * @see    : Images used for cards were royalty free from http://acbl.mybigcommerce.com/52-playing-cards/, and https://code.google.com/archive/p/vector-playing-cards/
  */
 using System;
 using System.Collections.Generic;
