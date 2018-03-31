@@ -52,7 +52,7 @@
     <Compile Include="PageDesign\pgPlayOptions.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PageDesign\pgStatistics.cs">
+    <Compile Include="PageDesign\StatisticsPage.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PlayDurak.cs">
