@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardBoxControl", "CardBoxCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeckViewerTester", "DeckViewerTester\DeckViewerTester.csproj", "{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hand", "Hand\Hand.csproj", "{F8742216-3DF2-451B-876A-A24B9CC46EC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8742216-3DF2-451B-876A-A24B9CC46EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8742216-3DF2-451B-876A-A24B9CC46EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8742216-3DF2-451B-876A-A24B9CC46EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8742216-3DF2-451B-876A-A24B9CC46EC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

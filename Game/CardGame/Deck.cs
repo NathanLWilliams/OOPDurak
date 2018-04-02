@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    public class Deck : Hand
-    {
-        // Methods
-        public Deck Shuffle()
-        {
-            Deck deck = new Deck();
+    //public class Deck : Hand
+    //{
+    //    // Methods
+    //    public Deck Shuffle()
+    //    {
+    //        Deck deck = new Deck();
 
-            return deck.Shuffle();
-        }
+    //        return deck.Shuffle();
+    //    }
 
-        public new Card DrawCard() // hiding base call method
-        {
-            return cards.First();
-        }
-    }
+    //    public new Card DrawCard() // hiding base call method
+    //    {
+    //        return cards.First();
+    //    }
+    //}
 }
