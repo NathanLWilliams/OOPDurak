@@ -52,8 +52,6 @@ namespace Game
             stats.Visible = false;
 
             SetScreen(Screen.MainMenu);
-
-            deckViewer1.AddCards(new Deck(), 6);
         }
 
         /// <summary>
