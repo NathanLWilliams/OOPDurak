@@ -1,4 +1,6 @@
-﻿namespace Game
+﻿using Game;
+
+namespace Game
 {
     partial class PlayDurak
     {
@@ -32,11 +34,12 @@
             // 
             // PlayDurak
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1184, 761);
+            this.ClientSize = new System.Drawing.Size(1579, 937);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.Name = "PlayDurak";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
