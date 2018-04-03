@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardBoxControl", "CardBoxCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeckViewer", "DeckViewerTester\DeckViewer.csproj", "{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ch13CardLib", "..\..\Ch13CardLib\Ch13CardLib\Ch13CardLib.csproj", "{6C0E076B-CA37-4678-8131-EE84037157B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ch13CardLib", "Ch13CardLib\Ch13CardLib\Ch13CardLib.csproj", "{6C0E076B-CA37-4678-8131-EE84037157B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
