@@ -21,18 +21,35 @@ namespace Ch13CardLib
 {
     public class Deck  : ICloneable
     {
+        public enum Size
+        {
+            Small,
+            Medium,
+            Large
+        }
         private Cards cards = new Cards();
         public event EventHandler LastCardDrawn;
 
         #region Constructors
-        public Deck()
+        public Deck(Size size = Size.Large)
         {
+            int minRank = 2;
+            switch(size)
+            {
+                case Size.Small:
+                    minRank = 10;
+                    break;
+                case Size.Medium:
+                    minRank = 6;
+                    break;
+            }
             for(int suitVal = 0; suitVal < 4; suitVal++)
             {
-                for(int rankVal = 1; rankVal < 14; rankVal++)
+                for(int rankVal = minRank; rankVal < 14; rankVal++)
                 {
                     cards.Add(new Card((Suit)suitVal, (Rank)rankVal));
                 }
+                cards.Add(new Card((Suit)suitVal, Rank.Ace));
             }
         }
 
