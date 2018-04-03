@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DeckViewerTester</RootNamespace>
     <AssemblyName>DeckViewerTester</AssemblyName>
@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,24 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeckViewer.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DeckViewer.Designer.cs">
       <DependentUpon>DeckViewer.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DeckViewer.resx">
       <DependentUpon>DeckViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -89,6 +82,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Ch13CardLib\Ch13CardLib\Ch13CardLib.csproj">
+      <Project>{6C0E076B-CA37-4678-8131-EE84037157B7}</Project>
+      <Name>Ch13CardLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CardBoxControl\CardBoxControl.csproj">
       <Project>{5833CDAC-0E8E-4214-9944-3BC2FAF88009}</Project>
       <Name>CardBoxControl</Name>

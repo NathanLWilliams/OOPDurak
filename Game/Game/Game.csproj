@@ -37,7 +37,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
@@ -46,9 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageDesign\DurakPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="PageDesign\MainMenu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -108,17 +104,22 @@
     <None Include="Resources\small_deck.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Ch13CardLib\Ch13CardLib\Ch13CardLib.csproj">
+      <Project>{6C0E076B-CA37-4678-8131-EE84037157B7}</Project>
+      <Name>Ch13CardLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CardBoxControl\CardBoxControl.csproj">
-      <Project>{5833CDAC-0E8E-4214-9944-3BC2FAF88009}</Project>
+      <Project>{5833cdac-0e8e-4214-9944-3bc2faf88009}</Project>
       <Name>CardBoxControl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hand\Hand.csproj">
-      <Project>{f8742216-3df2-451b-876a-a24b9cc46ec1}</Project>
-      <Name>Hand</Name>
+    <ProjectReference Include="..\CardGame\CardGame.csproj">
+      <Project>{CE257858-5512-4ACD-A527-E61FB564CE4F}</Project>
+      <Name>CardGame</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\mainMenuBackgroundCenter.JPG" />
+    <ProjectReference Include="..\DeckViewerTester\DeckViewer.csproj">
+      <Project>{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}</Project>
+      <Name>DeckViewer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
