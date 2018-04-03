@@ -21,19 +21,43 @@ namespace Ch13CardLib
 {
     public class Deck  : ICloneable
     {
+        public enum Size
+        {
+            Small,
+            Medium,
+            Large
+        }
         private Cards cards = new Cards();
         public event EventHandler LastCardDrawn;
 
         #region Constructors
-        public Deck()
+        public Deck(Size size, bool isAceHigh = false, bool useTrumps = false, Suit trump = Suit.Clubs)
         {
+            int minRank = isAceHigh ? 2 : 1;
+
+            switch(size)
+            {
+                case Size.Small:
+                    minRank = 10;
+                    break;
+                case Size.Medium:
+                    minRank = 6;
+                    break;
+            }
+
             for(int suitVal = 0; suitVal < 4; suitVal++)
             {
-                for(int rankVal = 1; rankVal < 14; rankVal++)
+                for(int rankVal = minRank; rankVal < 14; rankVal++)
                 {
                     cards.Add(new Card((Suit)suitVal, (Rank)rankVal));
                 }
+                if(isAceHigh)
+                    cards.Add(new Card((Suit)suitVal, Rank.Ace));
             }
+
+            Card.isAceHigh = isAceHigh;
+            Card.useTrumps = useTrumps;
+            Card.trump = trump;
         }
 
         private Deck(Cards newCards)
@@ -45,7 +69,7 @@ namespace Ch13CardLib
         /// <summary>
         /// Nondefault constructor. Allows aces to be set high.
         /// </summary>
-        public Deck(bool isAceHigh) : this()
+        public Deck(bool isAceHigh) : this(Size.Large, isAceHigh)
         {
             Card.isAceHigh = isAceHigh;
         }
@@ -53,7 +77,7 @@ namespace Ch13CardLib
         /// <summary>
         /// Nondefault constructor. Allows a trump suit to be used.
         /// </summary>
-        public Deck(bool useTrumps, Suit trump) : this()
+        public Deck(bool useTrumps, Suit trump) : this(Size.Large)
         {
             Card.useTrumps = useTrumps;
             Card.trump = trump;
@@ -63,7 +87,7 @@ namespace Ch13CardLib
         /// Nondefault constructor. Allows aces to be set high and a trump suit
         /// to be used.
         /// </summary>
-        public Deck(bool isAceHigh, bool useTrumps, Suit trump) : this()
+        public Deck(bool isAceHigh, bool useTrumps, Suit trump) : this(Size.Large, isAceHigh)
         {
             Card.isAceHigh = isAceHigh;
             Card.useTrumps = useTrumps;
