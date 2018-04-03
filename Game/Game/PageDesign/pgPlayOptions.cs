@@ -177,6 +177,7 @@ namespace Game
             this.btPlay.TabIndex = 10;
             this.btPlay.Text = "Play";
             this.btPlay.BackColor = Color.LimeGreen;
+            this.btPlay.Click += BtPlay_Click;
             // 
             // checkBox1
             // 
@@ -209,8 +210,12 @@ namespace Game
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.Dock = DockStyle.Fill;
         }
-     
 
+        /// <summary>
+        /// Makes the currently selected picturebox (deck size) highlight
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PbDeckSize_Click(object sender, EventArgs e)
         {
             PictureBox pbDeckSelected = sender as PictureBox;
@@ -226,6 +231,16 @@ namespace Game
                     pbDeckSize.BorderStyle = BorderStyle.None;
             }
         }
+
+        private void BtPlay_Click(object sender, EventArgs e)
+        {
+            //Goto instructions
+            if (this.Parent is Form)
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Playing);
+        }
+
+
+
     }
 
 }

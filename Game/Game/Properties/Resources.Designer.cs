@@ -83,6 +83,16 @@ namespace Game.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap mainMenuBackgroundCenter {
+            get {
+                object obj = ResourceManager.GetObject("mainMenuBackgroundCenter", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap mainMenuCombinedBackground {
             get {
                 object obj = ResourceManager.GetObject("mainMenuCombinedBackground", resourceCulture);
