@@ -42,21 +42,24 @@ namespace CardBoxControl
             // 
             this.pbCardDisplay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbCardDisplay.Location = new System.Drawing.Point(0, 0);
+            this.pbCardDisplay.Margin = new System.Windows.Forms.Padding(4);
             this.pbCardDisplay.Name = "pbCardDisplay";
-            this.pbCardDisplay.Size = new System.Drawing.Size(173, 264);
+            this.pbCardDisplay.Size = new System.Drawing.Size(231, 325);
             this.pbCardDisplay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbCardDisplay.TabIndex = 0;
             this.pbCardDisplay.TabStop = false;
             this.pbCardDisplay.Click += new System.EventHandler(this.pbCardDisplay_Click);
+
             // 
             // CardBox
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pbCardDisplay);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CardBox";
-            this.Size = new System.Drawing.Size(173, 264);
+            this.Size = new System.Drawing.Size(231, 325);
             this.Load += new System.EventHandler(this.CardBox_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbCardDisplay)).EndInit();
             this.ResumeLayout(false);

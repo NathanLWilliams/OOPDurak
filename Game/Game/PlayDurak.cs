@@ -1,13 +1,4 @@
-﻿using CardBoxControl;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace Game
 {
@@ -31,8 +22,7 @@ namespace Game
 
         static MainMenu menu;
         static pgPlayOptions playOptions;
-        static InstructionsPage instructionPage;
-        static Win winPage;
+        static StatisticsPage stats;
 
         public PlayDurak()
         {
@@ -41,24 +31,17 @@ namespace Game
             //Instantiate screens/panels and add them to the form
             menu = new MainMenu();
             playOptions = new pgPlayOptions();
-            instructionPage = new InstructionsPage();
-            winPage = new Win();
+            stats = new StatisticsPage();
 
             this.Controls.Add(menu);
             this.Controls.Add(playOptions);
-            this.Controls.Add(instructionPage);
-            this.Controls.Add(winPage);
-            
-
-            
+            this.Controls.Add(stats);
 
             menu.Visible = false;
             playOptions.Visible = false;
-            instructionPage.Visible = false;
-            winPage.Visible = false;
+            stats.Visible = false;
 
-            //   SetScreen(Screen.MainMenu);
-            SetScreen(Screen.GameResults);
+            SetScreen(Screen.MainMenu);
         }
 
         /// <summary>
@@ -76,11 +59,10 @@ namespace Game
                     this.CancelButton = (Button)menu.Controls["exit"];
                     break;
                 case Screen.Instructions:
-                    menu.Visible = false;
-                    instructionPage.Visible = true;
-                    
                     break;
                 case Screen.Statistics:
+                    menu.Visible = false;
+                    stats.Visible = true;
                     break;
                 case Screen.Playing:
                     break;
@@ -89,15 +71,10 @@ namespace Game
                     playOptions.Visible = true;
                     break;
                 case Screen.GameResults:
-                    menu.Visible = false;
-                    winPage.Visible = true;
-                    
-
                     break;
                 default:
                     break;
             }
         }
-
     }
 }

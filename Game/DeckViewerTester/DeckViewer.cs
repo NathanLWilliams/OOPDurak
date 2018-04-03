@@ -8,31 +8,57 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CardBoxControl;
-using CardGame;
+using Ch13CardLib;
 
 namespace Game
 {
-    public partial class DeckViewer : UserControl
+    public partial class DeckViewer : Panel
     {
+        Cards cards;
         public DeckViewer()
         {
             InitializeComponent();
-            
-            this.panel1.ControlAdded += AdjustCards;
-            this.panel1.ControlRemoved += AdjustCards;
+
+            cards = new Cards();
         }
-        public void AddCard()
+        public DeckViewer(Deck deck, int numberOfCards) : this()
         {
-            this.panel1.Controls.Add(new CardBox());
-            
+            this.AddCards(deck, numberOfCards);
+        }
+        public void AddCards(Deck deck, int numberOfCards)
+        {
+            for (int i = 0; i < numberOfCards; i++)
+            {
+                Card card = deck.DrawCard();
+                this.AddCard(card, false);
+            }
+            AdjustCards();
+        }
+        public void AddCard(Card card, bool adjust = true)
+        {
+            //this.panel1.Controls.Add(new CardBox(card));
+            cards.Add(card);
+            AdjustCards();
         }
         public void RemoveCard(int index)
         {
-            this.panel1.Controls.RemoveAt(index);
+            cards.RemoveAt(index);
+            AdjustCards();
         }
-        public void AdjustCards(object source, ControlEventArgs args)
+        public void UpdateCardBoxes()
         {
-            for(int i = 0; i < this.panel1.Controls.Count; i++)
+            this.Controls.Clear();
+
+            foreach(Card c in cards)
+            {
+                this.Controls.Add(new CardBox(c, true));
+            }
+            this.Controls[this.Controls.Count - 1].Name = "lastCardInView";
+        }
+        //public void AdjustCards(object source, EventArgs args)
+        public void AdjustCards()
+        {
+            /*for(int i = 0; i < this.panel1.Controls.Count; i++)
             {
                 (this.panel1.Controls[i] as CardBox).FaceUp = true;
                 double widthDivider = (2 + this.panel1.Controls.Count/3);
@@ -55,6 +81,17 @@ namespace Game
                     this.panel1.Controls[i].Location = new Point(farRightCardX - this.panel1.Controls[0].Width / 2, this.Size.Height / 2 - this.panel1.Controls[i].Height / 2);
                     this.panel1.Controls[i].BringToFront();
                 }
+            }*/
+            UpdateCardBoxes();
+            for (int i = 0; i < this.Controls.Count; i++)
+            {
+                double widthDivider = (2 + this.Controls.Count / 3);
+                int firstCardX = this.Size.Width/2 - (this.Controls.Count + 1) * (int)(this.Controls[0].Width / widthDivider) / 2;
+                int nextCardX = firstCardX + (i + 1) * (int)(this.Controls[0].Width / widthDivider);
+
+                (this.Controls[i] as CardBox).FaceUp = true;
+                this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2);
+                this.Controls[i].BringToFront();
             }
         }
     }

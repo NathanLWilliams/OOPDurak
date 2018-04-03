@@ -6,15 +6,10 @@
  * @see    : Images used for cards were royalty free from http://acbl.mybigcommerce.com/52-playing-cards/, and https://code.google.com/archive/p/vector-playing-cards/
  */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CardGame;
+using Ch13CardLib;
 
 namespace CardBoxControl
 {
@@ -93,20 +88,37 @@ namespace CardBoxControl
             get { return myOrentaion; }
         }
 
+        /// <summary>
+        /// The amount the card size increases upon mouse over
+        /// </summary>
+        private const float CARD_POP_SIZE = 1.1f;
+
+        //for tracking where to place the card when popping the card forward or back upon mouse over
+        private int lastZIndex = 0;
+
+        private bool isEnlarged = false;
+        private Size smallSize;
+        private Size bigSize;
+        private Point previousLocation;
+
         #endregion
         #region Constructor
-        public CardBox()
+        public CardBox() : this(new Card(), false, Orientation.Vertical)
         {
             InitializeComponent();
-            myOrentaion = Orientation.Vertical;
-            myCard = new Card();
         }
 
-        public CardBox(Card card, Orientation orientation = Orientation.Vertical)
+        public CardBox(Card card, bool canGrow = false, Orientation orientation = Orientation.Vertical)
         {
             InitializeComponent();
             myOrentaion = orientation;
             myCard = card; // set the underlying card
+
+            if(canGrow)
+            {
+                this.pbCardDisplay.MouseLeave += new System.EventHandler(this.pbCardDisplay_MouseLeave);
+                this.pbCardDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseMove);
+            }
         }
         #endregion
 
@@ -114,6 +126,9 @@ namespace CardBoxControl
         private void CardBox_Load(object sender, EventArgs e)
         {
             UpdateCardImage(); // update card image();
+            this.smallSize = this.Size;
+            this.bigSize = new Size((int)(this.Size.Width * CARD_POP_SIZE), (int)(this.Size.Height * CARD_POP_SIZE));
+            this.previousLocation = this.Location;
         }
 
         /// <summary>
@@ -130,6 +145,52 @@ namespace CardBoxControl
             if (Click != null) // if there is client for clicking control in client program
                 Click(this, e); // call it
         }
+
+        private void pbCardDisplay_MouseLeave(object sender, EventArgs e)
+        {
+            Shrink();
+        }
+        private void pbCardDisplay_MouseMove(object sender, EventArgs e)
+        {
+            double widthDivider = (2 + this.Parent.Controls.Count / 3);
+
+            //Grow if the visible portion of the card is being moused over
+            if (this.Parent.PointToClient(Cursor.Position).X < this.previousLocation.X + (int)(smallSize.Width / widthDivider)
+                || this.Name == "lastCardInView")
+            {
+                Grow();
+            }
+            else
+            {
+                Shrink();
+            }
+        }
+
+        private void Shrink()
+        {
+            if(this.isEnlarged)
+            {
+                this.Parent.Controls.SetChildIndex(this, lastZIndex);
+                this.Location = new Point(this.Location.X + (bigSize.Width - smallSize.Width) / 2, this.Location.Y + (bigSize.Height - smallSize.Height) / 2);
+                this.Size = smallSize;
+                this.isEnlarged = false;
+                //this.Parent.Refresh();
+            }
+        }
+        private void Grow()
+        {
+            if(this.isEnlarged == false)
+            {
+                lastZIndex = this.Parent.Controls.GetChildIndex(this);
+                this.Size = bigSize;
+                this.previousLocation = this.Location;
+                this.Location = new Point(this.Location.X - (bigSize.Width - smallSize.Width) / 2, this.Location.Y - (bigSize.Height - smallSize.Height) / 2);
+                this.BringToFront();
+                this.isEnlarged = true;
+                //this.Parent.Refresh();
+            }
+        }
+
         /// <summary>
         /// an event that flips card when triggered
         /// </summary>
@@ -156,8 +217,9 @@ namespace CardBoxControl
         }
 
 
-        #endregion
 
+
+        #endregion
 
     }
 }
