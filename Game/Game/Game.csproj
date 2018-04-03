@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageDesign\InstructionsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -63,17 +66,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tutorial.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tutorial.designer.cs">
-      <DependentUpon>Tutorial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WinLost.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinLost.designer.cs">
-      <DependentUpon>WinLost.cs</DependentUpon>
+    <Compile Include="PageDesign\Win.cs">
+      <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="PlayDurak.resx">
       <DependentUpon>PlayDurak.cs</DependentUpon>
@@ -88,12 +82,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Tutorial.resx">
-      <DependentUpon>Tutorial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WinLost.resx">
-      <DependentUpon>WinLost.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
