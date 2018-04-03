@@ -31,9 +31,9 @@ namespace Ch13CardLib
         public event EventHandler LastCardDrawn;
 
         #region Constructors
-        public Deck(Size size = Size.Large)
+        public Deck(Size size = Size.Large, bool isAceHigh = true)
         {
-            int minRank = 2;
+            int minRank = isAceHigh ? 2 : 1;
             switch(size)
             {
                 case Size.Small:
@@ -49,7 +49,10 @@ namespace Ch13CardLib
                 {
                     cards.Add(new Card((Suit)suitVal, (Rank)rankVal));
                 }
-                cards.Add(new Card((Suit)suitVal, Rank.Ace));
+                if(isAceHigh)
+                {
+                    cards.Add(new Card((Suit)suitVal, Rank.Ace));
+                }
             }
         }
 
