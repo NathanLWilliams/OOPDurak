@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{3034BFF6-020E-4E45-A825-9C625208E08F}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DeckViewerTester</RootNamespace>
-    <AssemblyName>DeckViewerTester</AssemblyName>
+    <RootNamespace>Ch11CardClient</RootNamespace>
+    <AssemblyName>Ch11CardsClient</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,9 +32,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,55 +39,20 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeckViewer.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="DeckViewer.Designer.cs">
-      <DependentUpon>DeckViewer.cs</DependentUpon>
-    </Compile>
+    <Compile Include="CardClientProgram.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="DeckViewer.resx">
-      <DependentUpon>DeckViewer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CardBoxControl\CardBoxControl.csproj">
-      <Project>{5833CDAC-0E8E-4214-9944-3BC2FAF88009}</Project>
-      <Name>CardBoxControl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CardGame\CardGame.csproj">
-      <Project>{CE257858-5512-4ACD-A527-E61FB564CE4F}</Project>
-      <Name>CardGame</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ch13CardLib\Ch13CardLib\Ch13CardLib.csproj">
+    <ProjectReference Include="..\Ch13CardLib\Ch13CardLib.csproj">
       <Project>{6C0E076B-CA37-4678-8131-EE84037157B7}</Project>
       <Name>Ch13CardLib</Name>
     </ProjectReference>
