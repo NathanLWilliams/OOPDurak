@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CardGame.Properties {
+namespace Ch13CardLib.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CardGame.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CardGame.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Ch13CardLib.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Ace_of_Clubs {
+        internal static System.Drawing.Bitmap _ace_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Ace_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_ace_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Ace_of_Diamonds {
+        internal static System.Drawing.Bitmap _ace_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Ace_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_ace_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Ace_of_Hearts {
+        internal static System.Drawing.Bitmap _ace_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Ace_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_ace_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Ace_of_Spades {
+        internal static System.Drawing.Bitmap _ace_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Ace_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_ace_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap aces {
+        internal static System.Drawing.Bitmap _black_joker {
             get {
-                object obj = ResourceManager.GetObject("aces", resourceCulture);
+                object obj = ResourceManager.GetObject("_black_joker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Back {
+        internal static System.Drawing.Bitmap _deuce_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Back", resourceCulture);
+                object obj = ResourceManager.GetObject("_deuce_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -123,9 +123,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap back_cards_07 {
+        internal static System.Drawing.Bitmap _deuce_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("back_cards_07", resourceCulture);
+                object obj = ResourceManager.GetObject("_deuce_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -133,9 +133,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap blue_back {
+        internal static System.Drawing.Bitmap _deuce_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("blue_back", resourceCulture);
+                object obj = ResourceManager.GetObject("_deuce_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -143,9 +143,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Deuce_of_Clubs {
+        internal static System.Drawing.Bitmap _deuce_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Deuce_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_deuce_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -153,9 +153,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Deuce_of_Diamonds {
+        internal static System.Drawing.Bitmap _eight_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Deuce_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_eight_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -163,9 +163,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Deuce_of_Hearts {
+        internal static System.Drawing.Bitmap _eight_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Deuce_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_eight_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,9 +173,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Deuce_of_Spades {
+        internal static System.Drawing.Bitmap _eight_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Deuce_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_eight_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -183,9 +183,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Eight_of_Clubs {
+        internal static System.Drawing.Bitmap _eight_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Eight_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_eight_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -193,9 +193,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Eight_of_Diamonds {
+        internal static System.Drawing.Bitmap _five_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Eight_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_five_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -203,9 +203,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Eight_of_Hearts {
+        internal static System.Drawing.Bitmap _five_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Eight_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_five_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -213,9 +213,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Eight_of_Spades {
+        internal static System.Drawing.Bitmap _five_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Eight_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_five_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -223,9 +223,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Five_of_Clubs {
+        internal static System.Drawing.Bitmap _five_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Five_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_five_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -233,9 +233,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Five_of_Diamonds {
+        internal static System.Drawing.Bitmap _four_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Five_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_four_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -243,9 +243,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Five_of_Hearts {
+        internal static System.Drawing.Bitmap _four_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Five_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_four_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -253,9 +253,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Five_of_Spades {
+        internal static System.Drawing.Bitmap _four_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Five_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_four_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -263,9 +263,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Four_of_Clubs {
+        internal static System.Drawing.Bitmap _four_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Four_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_four_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -273,9 +273,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Four_of_Diamonds {
+        internal static System.Drawing.Bitmap _jack_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Four_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_jack_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -283,9 +283,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Four_of_Hearts {
+        internal static System.Drawing.Bitmap _jack_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Four_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_jack_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -293,9 +293,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Four_of_Spades {
+        internal static System.Drawing.Bitmap _jack_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Four_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_jack_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,9 +303,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Gray_back {
+        internal static System.Drawing.Bitmap _jack_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Gray_back", resourceCulture);
+                object obj = ResourceManager.GetObject("_jack_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -313,9 +313,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Green_back {
+        internal static System.Drawing.Bitmap _king_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Green_back", resourceCulture);
+                object obj = ResourceManager.GetObject("_king_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -323,9 +323,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap honor_clubs {
+        internal static System.Drawing.Bitmap _king_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("honor_clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_king_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -333,9 +333,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap honor_diamond {
+        internal static System.Drawing.Bitmap _king_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("honor_diamond", resourceCulture);
+                object obj = ResourceManager.GetObject("_king_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -343,9 +343,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap honor_heart_14 {
+        internal static System.Drawing.Bitmap _king_of_spades {
             get {
-                object obj = ResourceManager.GetObject("honor_heart_14", resourceCulture);
+                object obj = ResourceManager.GetObject("_king_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -353,9 +353,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap honor_spade {
+        internal static System.Drawing.Bitmap _nine_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("honor_spade", resourceCulture);
+                object obj = ResourceManager.GetObject("_nine_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -363,9 +363,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Jack_of_Clubs {
+        internal static System.Drawing.Bitmap _nine_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Jack_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_nine_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -373,9 +373,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Jack_of_Diamonds {
+        internal static System.Drawing.Bitmap _nine_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Jack_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_nine_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -383,9 +383,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Jack_of_Hearts {
+        internal static System.Drawing.Bitmap _nine_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Jack_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_nine_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -393,9 +393,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Jack_of_Spades {
+        internal static System.Drawing.Bitmap _queen_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Jack_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_queen_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -403,9 +403,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap King_of_Clubs {
+        internal static System.Drawing.Bitmap _queen_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("King_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_queen_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -413,9 +413,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap King_of_Diamonds {
+        internal static System.Drawing.Bitmap _queen_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("King_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_queen_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -423,9 +423,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap King_of_Hearts {
+        internal static System.Drawing.Bitmap _queen_of_spades {
             get {
-                object obj = ResourceManager.GetObject("King_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_queen_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -433,9 +433,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap King_of_Spades {
+        internal static System.Drawing.Bitmap _red_joker {
             get {
-                object obj = ResourceManager.GetObject("King_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_red_joker", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -443,9 +443,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Nine_of_Clubs {
+        internal static System.Drawing.Bitmap _seven_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Nine_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_seven_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -453,9 +453,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Nine_of_Diamonds {
+        internal static System.Drawing.Bitmap _seven_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Nine_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_seven_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -463,9 +463,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Nine_of_Hearts {
+        internal static System.Drawing.Bitmap _seven_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Nine_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_seven_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -473,9 +473,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Nine_of_Spades {
+        internal static System.Drawing.Bitmap _seven_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Nine_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_seven_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -483,9 +483,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap purple_back {
+        internal static System.Drawing.Bitmap _six_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("purple_back", resourceCulture);
+                object obj = ResourceManager.GetObject("_six_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -493,9 +493,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Queen_of_Clubs {
+        internal static System.Drawing.Bitmap _six_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Queen_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_six_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -503,9 +503,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Queen_of_Diamonds {
+        internal static System.Drawing.Bitmap _six_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Queen_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_six_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -513,9 +513,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Queen_of_Hearts {
+        internal static System.Drawing.Bitmap _six_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Queen_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_six_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -523,9 +523,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Queen_of_Spades {
+        internal static System.Drawing.Bitmap _ten_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Queen_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_ten_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -533,9 +533,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Red_back {
+        internal static System.Drawing.Bitmap _ten_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Red_back", resourceCulture);
+                object obj = ResourceManager.GetObject("_ten_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -543,9 +543,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Seven_of_Clubs {
+        internal static System.Drawing.Bitmap _ten_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Seven_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_ten_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -553,9 +553,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Seven_of_Diamonds {
+        internal static System.Drawing.Bitmap _ten_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Seven_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_ten_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -563,9 +563,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Seven_of_Hearts {
+        internal static System.Drawing.Bitmap _three_of_clubs {
             get {
-                object obj = ResourceManager.GetObject("Seven_of_Hearts", resourceCulture);
+                object obj = ResourceManager.GetObject("_three_of_clubs", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -573,9 +573,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Seven_of_Spades {
+        internal static System.Drawing.Bitmap _three_of_diamonds {
             get {
-                object obj = ResourceManager.GetObject("Seven_of_Spades", resourceCulture);
+                object obj = ResourceManager.GetObject("_three_of_diamonds", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -583,9 +583,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Six_of_Clubs {
+        internal static System.Drawing.Bitmap _three_of_hearts {
             get {
-                object obj = ResourceManager.GetObject("Six_of_Clubs", resourceCulture);
+                object obj = ResourceManager.GetObject("_three_of_hearts", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -593,9 +593,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Six_of_Diamonds {
+        internal static System.Drawing.Bitmap _three_of_spades {
             get {
-                object obj = ResourceManager.GetObject("Six_of_Diamonds", resourceCulture);
+                object obj = ResourceManager.GetObject("_three_of_spades", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -603,109 +603,9 @@ namespace CardGame.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Six_of_Hearts {
+        internal static System.Drawing.Bitmap back {
             get {
-                object obj = ResourceManager.GetObject("Six_of_Hearts", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Six_of_Spades {
-            get {
-                object obj = ResourceManager.GetObject("Six_of_Spades", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ten_of_Clubs {
-            get {
-                object obj = ResourceManager.GetObject("Ten_of_Clubs", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ten_of_Diamonds {
-            get {
-                object obj = ResourceManager.GetObject("Ten_of_Diamonds", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ten_of_Hearts {
-            get {
-                object obj = ResourceManager.GetObject("Ten_of_Hearts", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ten_of_Spades {
-            get {
-                object obj = ResourceManager.GetObject("Ten_of_Spades", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_of_Clubs {
-            get {
-                object obj = ResourceManager.GetObject("Three_of_Clubs", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_of_Diamonds {
-            get {
-                object obj = ResourceManager.GetObject("Three_of_Diamonds", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_of_Hearts {
-            get {
-                object obj = ResourceManager.GetObject("Three_of_Hearts", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Three_of_Spades {
-            get {
-                object obj = ResourceManager.GetObject("Three_of_Spades", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Yellow_back {
-            get {
-                object obj = ResourceManager.GetObject("Yellow_back", resourceCulture);
+                object obj = ResourceManager.GetObject("back", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,151 +1,104 @@
-﻿/*
- * Card.cs
- * @Author : Qasim Iqbal
- * @since  : March 03, 2018
- * @see    : https://www.youtube.com/watch?v=gK6bJ9IudW8&t=87s Thom MacDonald's Youtube Video on CardBox
- * @Desc   : This class has been modifed to after watching thom's video on CardBox to fit in tutorail 7 requirements
+﻿/**
+ * OOP4200 Book Excercise 
+ * 
+ * By following the "Adding a Cards Collection to CardLib",
+ * "Adding Deep Copying to CardLib", and other excercises written in chapter 11, 12
+ *  of the book called: Beginning Visual C# 2012 Programming
+ * this library was created.
+ * 
+ * @author       Nathan Williams
+ * @author       Karli Watson (author of the book)
+ * @version      3.0
+ * @since        2018-03-07
+ * Images used are open source, found here:
+ * https://code.google.com/archive/p/vector-playing-cards/
  */
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
 
-namespace CardGame
+namespace Ch13CardLib
 {
-    public class Card : ICloneable, IComparable
+    public class Card : ICloneable
     {
-        #region FEILDS & Attributes
-
-        protected Suit mySuit;
-        public Suit Suit
-        {
-            get { return mySuit; } // return suit
-            set { mySuit = value; } // set the suit
-        }
-        protected Rank myRank;
+        protected Rank rank; //Previously readonly
         public Rank Rank
         {
-            get { return myRank; }
-            set { myRank = value; }
+            get
+            {
+                return this.rank;
+            }
+            set
+            {
+                this.rank = value;
+            }
         }
 
-        protected int myValue;
-        public int CardValue
+        protected Suit suit; //Previously readonly
+        public Suit Suit
         {
-            set { myValue = value; }
-            get { return myValue; }
+            get
+            {
+                return this.suit;
+            }
+            set
+            {
+                this.suit = value;
+            }
         }
 
-        protected bool faceUp = false;
-
+        private bool isFaceUp;
         public bool FaceUp
         {
-            get { return faceUp; }
-            set { faceUp = value; }
+            get
+            {
+                return this.isFaceUp;
+            }
+            set
+            {
+                this.isFaceUp = value;
+            }
         }
-
-        private string image; // card image
-
-        public string Image
-        {
-            get { return image; }
-            set { image = value; }
-        }
-        #endregion
-
-        #region Constructors 
 
         /// <summary>
-        /// Card constructor. initialized default card.
+        /// Flag for trump usage. If true, trumps are valued higher than cards of other suits.
         /// </summary>
-        /// <param name="rank"></param>
-        /// <param name="suit"></param>
-        public Card(Rank rank = Rank.Ace, Suit suit = Suit.Hearts)
-        {   // set rank, suit
-            this.myRank = rank;
-            this.mySuit = suit;
+        public static bool useTrumps = false;
 
-            // set default card value
-            this.myValue = (int)rank;
-        }
-        #endregion
-
-        #region RELATIONAL OPERATORS
-        public static bool operator ==(Card left, Card right)
-        {
-            return (left.CardValue == right.CardValue);
-        }
-        public static bool operator !=(Card left, Card right)
-        {
-            return (left.CardValue != right.CardValue);
-        }
-        public static bool operator <(Card left, Card right)
-        {
-            return (left.CardValue < right.CardValue);
-        }
-        public static bool operator >(Card left, Card right)
-        {
-            return (left.CardValue > right.CardValue);
-        }
-        public static bool operator <=(Card left, Card right)
-        {
-            return (left.CardValue <= right.CardValue);
-        }
-        public static bool operator >=(Card left, Card right)
-        {
-            return (left.CardValue >= right.CardValue);
-        }
-        #endregion
-
-        #region Public Methods
         /// <summary>
-        /// Card specific comparision method used for sorting cards. Helps IEnumerable interface for card specific methods
+        /// Trump suit to use if useTrumps is true.
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public virtual int CompareTo(object obj)
-        {
-            // is the argument null?
-            if (obj == null)
-            {
-                throw new ArgumentNullException("Unable to compare a card to a null object.");
-            }
-            // convert the argument to a card
-            Card compareCard = obj as Card;
-            // if the conversion worked
-            if (compareCard != null)
-            {
-                int thisSort = this.myValue * 10 + (int)this.mySuit;
-                int compareCardSort = compareCard.myValue * 10 + (int)compareCard.mySuit;
-                return (thisSort.CompareTo(compareCardSort));
-            }
-            else
-            {
-                throw new ArgumentException("Object being compared cannot be converted toa  Card.");
-            }
+        public static Suit trump = Suit.Clubs;
 
-        }
         /// <summary>
-        /// Copy of Card
+        /// Flag that determines whether aces are higher than kings or lower than deuces.
         /// </summary>
-        /// <returns></returns>
+        public static bool isAceHigh = true;
+
+        public Card()
+        {
+            this.Rank = Rank.Ace;
+            this.Suit = Suit.Spades;
+            this.FaceUp = false;
+        }
+
+        public Card(Suit newSuit, Rank newRank)
+        {
+            suit = newSuit;
+            rank = newRank;
+        }
+
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return MemberwiseClone();
         }
-        /// <summary>
-        /// Card class ToString Overriden
-        /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
-            string cardString;     // holds the playing card name.
-            // if the card is faceup 
-            if (faceUp)
+            string cardString;
+
+            if (FaceUp)
             {
-                cardString = myRank.ToString() + " of " + mySuit.ToString();
+                cardString = Rank.ToString() + " of " + Suit.ToString();
             }
             else
             {
@@ -153,46 +106,140 @@ namespace CardGame
             }
             return cardString;
         }
-        /// <summary>
-        /// Compairing different card objects with each other with card value
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public override bool Equals(object obj)
+        public static bool operator ==(Card card1, Card card2)
         {
-            return (this.CardValue == ((Card)obj).CardValue);
+            return (card1.suit == card2.suit) && (card1.rank == card2.rank);
         }
-        /// <summary>
-        /// Unique value of each card calculated based on its state
-        /// </summary>
-        /// <returns></returns>
+        public static bool operator !=(Card card1, Card card2)
+        {
+            return !(card1 == card2);
+        }
+        public override bool Equals(object card)
+        {
+            return this == (Card)card;
+        }
         public override int GetHashCode()
         {
-            return this.myValue * 100 + (int)this.mySuit * 10 + ((this.faceUp) ? 1 : 0);
+            return (int)suit * 10 + (int)rank * 100 + ((this.FaceUp)?1:0);
         }
-        /// <summary>
-        /// gets image for card given string name made my rank and suit
-        /// </summary>
-        /// <returns></returns>
-        public Image GetCardImage()
+        public static bool operator >(Card card1, Card card2)
         {
-            string imageName;     // the name of image for the back of a card
-            Image cardImage;      // holds the image
-
-            if (!faceUp)
+            if (card1.suit == card2.suit)
             {
-                imageName = "Back";    // sets it to the image name for the back of a card
+                if (isAceHigh)
+                {
+                    if (card1.rank == Rank.Ace)
+                    {
+                        if (card2.rank == Rank.Ace)
+                            return false;
+                        else
+                            return true;
+                    }
+                    else
+                    {
+                        if (card2.rank == Rank.Ace)
+                            return false;
+                        else
+                            return (card1.rank > card2.rank);
+                    }
+                }
+                else
+                {
+                    return (card1.rank > card2.rank);
+                }
             }
             else
             {
-                imageName = myRank.ToString() + "_of_" + mySuit.ToString(); // enumerations are handy
+                if (useTrumps && (card2.suit == Card.trump))
+                    return false;
+                else
+                    return true;
             }
-            // set the image firl to cardimage from the resourse
-            cardImage = Properties.Resources.ResourceManager.GetObject(imageName) as Image;
+        }
+        public static bool operator <(Card card1, Card card2)
+        {
+            return !(card1 >= card2);
+        }
+        public static bool operator >=(Card card1, Card card2)
+        {
+            if (card1.suit == card2.suit)
+            {
+                if (isAceHigh)
+                {
+                    if (card1.rank == Rank.Ace)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        if (card2.rank == Rank.Ace)
+                            return false;
+                        else
+                            return (card1.rank >= card2.rank);
+                    }
+                }
+                else
+                {
+                    return (card1.rank >= card2.rank);
+                }
+            }
+            else
+            {
+                if (useTrumps && (card2.suit == Card.trump))
+                    return false;
+                else
+                    return true;
+            }
+        }
+        public static bool operator <=(Card card1, Card card2)
+        {
+            return !(card1 > card2);
+        }
+        public virtual int CompareTo(object obj)
+        {
+            if(obj == null)
+            {
+                throw new ArgumentNullException("Unable to compare a Card to a null object.");
+            }
+            //convert the argument to a Card
+            Card compareCard = obj as Card;
+            //if the conversion worked
+            if(compareCard != null)
+            {
+                //compare based on Value first, then suit
+                int thisSort = (int)this.Rank * 10 + (int)this.Suit;
+                int compareCardSort = (int)compareCard.Rank * 10 + (int)compareCard.Suit;
+                return (thisSort.CompareTo(compareCardSort));
+            }
+            else // otherwise, the conversion failed
+            {
+                // throw an argument exception
+                throw new ArgumentException("Object being compared cannot be converted to a Card.");
+            }
+        }
 
+        /// <summary>
+        /// Gets the card image resource that matches the rank and suit of this card
+        /// </summary>
+        /// <returns>The card image resource</returns>
+        public Image GetCardImage()
+        {
+            string imageName; // the name of the image in the resource file
+            Image cardImage; // holds the image
+            //if the card is not face up
+            if(!FaceUp)
+            {
+                imageName = "back";
+            }
+            else
+            {
+                //set the image to _{Suit}_of_{Rank}
+                imageName = "_" + Rank.ToString().ToLower() + "_of_" + Suit.ToString().ToLower();
+            }
+            //set the image to the appropriate object we get from the resources file
+            cardImage = Properties.Resources.ResourceManager.GetObject(imageName) as Image;
+            //return the image
             return cardImage;
         }
-        #endregion
-
     }
 }
