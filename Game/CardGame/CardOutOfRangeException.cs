@@ -12,14 +12,13 @@
  * @since        2018-03-18
  */
 
-using Ch13CardLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ch13CardLib
+namespace CardGame
 {
     public class CardOutOfRangeException : Exception
     {

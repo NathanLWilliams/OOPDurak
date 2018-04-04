@@ -7,18 +7,20 @@
  */
 using System;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using Ch13CardLib;
+using CardGame;
 
 namespace CardBoxControl
 {
     /// <summary>
     /// A control to use in a window forms application that displays a playing card.
     /// </summary>
-    public partial class CardBox: UserControl
+    public partial class CardBox : UserControl
     {
         #region FIELDS AND PROPERTIES
+        Point move;
+
+
 
         private Card myCard;
         public Card Card
@@ -106,6 +108,7 @@ namespace CardBoxControl
         public CardBox() : this(new Card(), false, Orientation.Vertical)
         {
             InitializeComponent();
+            this.AllowDrop = true;
         }
 
         public CardBox(Card card, bool canGrow = false, Orientation orientation = Orientation.Vertical)
@@ -114,10 +117,10 @@ namespace CardBoxControl
             myOrentaion = orientation;
             myCard = card; // set the underlying card
 
-            if(canGrow)
+            if (canGrow)
             {
                 this.pbCardDisplay.MouseLeave += new System.EventHandler(this.pbCardDisplay_MouseLeave);
-                this.pbCardDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseMove);
+                //this.pbCardDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseMove);
             }
         }
         #endregion
@@ -131,44 +134,31 @@ namespace CardBoxControl
             this.previousLocation = this.Location;
         }
 
-        /// <summary>
-        /// an event the client program can handle when the user clicks the control
-        /// </summary>
-        new public event EventHandler Click;
-        /// <summary>
-        /// Event for picture box click
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void pbCardDisplay_Click(object sender, EventArgs e)
-        {
-            if (Click != null) // if there is client for clicking control in client program
-                Click(this, e); // call it
-        }
 
         private void pbCardDisplay_MouseLeave(object sender, EventArgs e)
         {
             Shrink();
         }
-        private void pbCardDisplay_MouseMove(object sender, EventArgs e)
-        {
-            double widthDivider = (2 + this.Parent.Controls.Count / 3);
+        //private void pbCardDisplay_MouseMove(object sender, MouseEventArgs e)
+        //{
+        //    double widthDivider = (2 + this.Parent.Controls.Count / 3);
 
-            //Grow if the visible portion of the card is being moused over
-            if (this.Parent.PointToClient(Cursor.Position).X < this.previousLocation.X + (int)(smallSize.Width / widthDivider)
-                || this.Name == "lastCardInView")
-            {
-                Grow();
-            }
-            else
-            {
-                Shrink();
-            }
-        }
+        //    //Grow if the visible portion of the card is being moused over
+        //    if (this.Parent.PointToClient(Cursor.Position).X < this.previousLocation.X + (int)(smallSize.Width / widthDivider)
+        //        || this.Name == "lastCardInView")
+        //    {
+        //        Grow();
+        //    }
+        //    else
+        //    {
+        //        Shrink();
+        //    }
+
+        //}
 
         private void Shrink()
         {
-            if(this.isEnlarged)
+            if (this.isEnlarged)
             {
                 this.Parent.Controls.SetChildIndex(this, lastZIndex);
                 this.Location = new Point(this.Location.X + (bigSize.Width - smallSize.Width) / 2, this.Location.Y + (bigSize.Height - smallSize.Height) / 2);
@@ -179,7 +169,7 @@ namespace CardBoxControl
         }
         private void Grow()
         {
-            if(this.isEnlarged == false)
+            if (this.isEnlarged == false)
             {
                 lastZIndex = this.Parent.Controls.GetChildIndex(this);
                 this.Size = bigSize;
@@ -190,6 +180,8 @@ namespace CardBoxControl
                 //this.Parent.Refresh();
             }
         }
+
+
 
         /// <summary>
         /// an event that flips card when triggered
@@ -221,5 +213,44 @@ namespace CardBoxControl
 
         #endregion
 
+        public event EventHandler CardClicked;
+        public event DragEventHandler CardDragEnter;
+        public event DragEventHandler CardDragDrop;
+        public event MouseEventHandler CardMouseDown;
+        private void pbCardDisplay_Click(object sender, EventArgs e)
+        {
+            // bubble event to parent
+            if (this.CardClicked != null)
+            {
+                this.CardClicked(this, e);
+            }
+        }
+        private void pbCardDisplay_DragEnter(object sender, DragEventArgs e)
+        {
+            // bubble event to parent
+            if (this.CardDragEnter != null)
+            {
+                this.CardDragEnter(this, e);
+            }
+        }
+
+        private void pbCardDisplay_DragDrop(object sender, DragEventArgs e)
+        {
+            // bubble event to parent
+            if (this.CardDragDrop != null)
+            {
+                this.CardDragDrop(this, e);
+            }
+        }
+
+        private void pbCardDisplay_MouseDown(object sender, MouseEventArgs e)
+        {
+            // bubble event to parent
+            if (this.CardMouseDown != null)
+            {
+                this.CardMouseDown(this, e);
+            }
+        }
     }
+
 }

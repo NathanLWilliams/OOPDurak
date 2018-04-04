@@ -23,6 +23,7 @@ namespace Game
         static MainMenu menu;
         static pgPlayOptions playOptions;
         static StatisticsPage stats;
+        static DurakPage durakPage;
 
         public PlayDurak()
         {
@@ -32,14 +33,17 @@ namespace Game
             menu = new MainMenu();
             playOptions = new pgPlayOptions();
             stats = new StatisticsPage();
+            durakPage = new DurakPage();
 
             this.Controls.Add(menu);
             this.Controls.Add(playOptions);
             this.Controls.Add(stats);
+            this.Controls.Add(durakPage);
 
             menu.Visible = false;
             playOptions.Visible = false;
             stats.Visible = false;
+            durakPage.Visible = false;
 
             SetScreen(Screen.MainMenu);
         }
@@ -65,6 +69,8 @@ namespace Game
                     stats.Visible = true;
                     break;
                 case Screen.Playing:
+                    playOptions.Visible = false;
+                    durakPage.Visible = true;
                     break;
                 case Screen.PlayOptions:
                     menu.Visible = false;

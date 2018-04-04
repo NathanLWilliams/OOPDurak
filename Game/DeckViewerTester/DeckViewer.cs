@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CardBoxControl;
-using Ch13CardLib;
+using CardGame;
 
 namespace Game
 {
     public partial class DeckViewer : Panel
     {
         Cards cards;
+        Size standardCardSize = new Size(87, 141);
         public DeckViewer()
         {
             InitializeComponent();
@@ -34,7 +35,7 @@ namespace Game
             }
             AdjustCards();
         }
-        public void AddCard(Card card, bool adjust = true)
+        public void AddCard(Card card , bool adjust = true)
         {
             //this.panel1.Controls.Add(new CardBox(card));
             cards.Add(card);
@@ -51,7 +52,10 @@ namespace Game
 
             foreach(Card c in cards)
             {
-                this.Controls.Add(new CardBox(c, true));
+                CardBox cardBox = new CardBox(c, true);
+                cardBox.Size = standardCardSize;
+                cardBox.Click += CardBoxClick;
+                this.Controls.Add(cardBox);
             }
             this.Controls[this.Controls.Count - 1].Name = "lastCardInView";
         }
@@ -93,6 +97,11 @@ namespace Game
                 this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2);
                 this.Controls[i].BringToFront();
             }
+        }
+        private void CardBoxClick(object obj, EventArgs args)
+        {
+            
+
         }
     }
 }

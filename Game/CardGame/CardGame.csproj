@@ -7,8 +7,8 @@
     <ProjectGuid>{6C0E076B-CA37-4678-8131-EE84037157B7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ch13CardLib</RootNamespace>
-    <AssemblyName>Ch13CardLib</AssemblyName>
+    <RootNamespace>CardGame</RootNamespace>
+    <AssemblyName>CardGame</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
