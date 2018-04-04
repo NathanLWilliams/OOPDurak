@@ -88,6 +88,13 @@ namespace CardGame
             rank = newRank;
         }
 
+        public Card(int hashCode)
+        {
+            this.Rank = (Rank)Math.Floor((double)(hashCode / 100));
+            this.Suit = (Suit)Math.Floor((double)((hashCode - ((int)this.Rank * 100)) / 10));
+            this.isFaceUp = (hashCode - (int)this.Rank * 100 - (int)this.Suit * 10) == 1;
+        }
+
         public object Clone()
         {
             return MemberwiseClone();

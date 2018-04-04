@@ -18,9 +18,6 @@ namespace CardBoxControl
     public partial class CardBox : UserControl
     {
         #region FIELDS AND PROPERTIES
-        Point move;
-
-
 
         private Card myCard;
         public Card Card
@@ -108,7 +105,6 @@ namespace CardBoxControl
         public CardBox() : this(new Card(), false, Orientation.Vertical)
         {
             InitializeComponent();
-            this.AllowDrop = true;
         }
 
         public CardBox(Card card, bool canGrow = false, Orientation orientation = Orientation.Vertical)
@@ -120,8 +116,9 @@ namespace CardBoxControl
             if (canGrow)
             {
                 this.pbCardDisplay.MouseLeave += new System.EventHandler(this.pbCardDisplay_MouseLeave);
-                //this.pbCardDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseMove);
+                this.pbCardDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseMove);
             }
+            this.pbCardDisplay.MouseDown += new MouseEventHandler(this.pbCardDisplay_MouseDown);
         }
         #endregion
 
@@ -139,22 +136,22 @@ namespace CardBoxControl
         {
             Shrink();
         }
-        //private void pbCardDisplay_MouseMove(object sender, MouseEventArgs e)
-        //{
-        //    double widthDivider = (2 + this.Parent.Controls.Count / 3);
+        private void pbCardDisplay_MouseMove(object sender, MouseEventArgs e)
+        {
+            double widthDivider = (2 + this.Parent.Controls.Count / 3);
 
-        //    //Grow if the visible portion of the card is being moused over
-        //    if (this.Parent.PointToClient(Cursor.Position).X < this.previousLocation.X + (int)(smallSize.Width / widthDivider)
-        //        || this.Name == "lastCardInView")
-        //    {
-        //        Grow();
-        //    }
-        //    else
-        //    {
-        //        Shrink();
-        //    }
+            //Grow if the visible portion of the card is being moused over
+            if (this.Parent.PointToClient(Cursor.Position).X < this.previousLocation.X + (int)(smallSize.Width / widthDivider)
+                || this.Name == "lastCardInView")
+            {
+                Grow();
+            }
+            else
+            {
+                Shrink();
+            }
 
-        //}
+        }
 
         private void Shrink()
         {
@@ -181,6 +178,20 @@ namespace CardBoxControl
             }
         }
 
+        public event EventHandler CardClicked;
+        private void pbCardDisplay_Click(object sender, EventArgs e)
+        {
+            // bubble event to parent
+            if (this.CardClicked != null)
+            {
+                this.CardClicked(this, e);
+            }
+        }
+
+        private void pbCardDisplay_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.DoDragDrop(new DataObject(DataFormats.Text, this.Card.GetHashCode()), DragDropEffects.Move);
+        }
 
 
         /// <summary>
@@ -212,45 +223,6 @@ namespace CardBoxControl
 
 
         #endregion
-
-        public event EventHandler CardClicked;
-        public event DragEventHandler CardDragEnter;
-        public event DragEventHandler CardDragDrop;
-        public event MouseEventHandler CardMouseDown;
-        private void pbCardDisplay_Click(object sender, EventArgs e)
-        {
-            // bubble event to parent
-            if (this.CardClicked != null)
-            {
-                this.CardClicked(this, e);
-            }
-        }
-        private void pbCardDisplay_DragEnter(object sender, DragEventArgs e)
-        {
-            // bubble event to parent
-            if (this.CardDragEnter != null)
-            {
-                this.CardDragEnter(this, e);
-            }
-        }
-
-        private void pbCardDisplay_DragDrop(object sender, DragEventArgs e)
-        {
-            // bubble event to parent
-            if (this.CardDragDrop != null)
-            {
-                this.CardDragDrop(this, e);
-            }
-        }
-
-        private void pbCardDisplay_MouseDown(object sender, MouseEventArgs e)
-        {
-            // bubble event to parent
-            if (this.CardMouseDown != null)
-            {
-                this.CardMouseDown(this, e);
-            }
-        }
     }
 
 }

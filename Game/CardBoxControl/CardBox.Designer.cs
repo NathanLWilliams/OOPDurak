@@ -48,8 +48,6 @@ namespace CardBoxControl
             this.pbCardDisplay.TabIndex = 0;
             this.pbCardDisplay.TabStop = false;
             this.pbCardDisplay.Click += new System.EventHandler(this.pbCardDisplay_Click);
-            this.pbCardDisplay.DragDrop += new System.Windows.Forms.DragEventHandler(this.pbCardDisplay_DragDrop);
-            this.pbCardDisplay.DragEnter += new System.Windows.Forms.DragEventHandler(this.pbCardDisplay_DragEnter);
             this.pbCardDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseDown);
            // this.pbCardDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseMove);
             // 

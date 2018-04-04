@@ -11,9 +11,6 @@ namespace Game
 {
     public class DurakPage : Panel
     {
-        // Card being dragged
-        private CardBox dragCard;
-
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -94,7 +91,7 @@ namespace Game
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 10;
             this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += PictureBox3_Click;
+            //this.pictureBox3.Click += PictureBox3_Click;
             // 
             // panel9
             // 
@@ -176,27 +173,18 @@ namespace Game
 
         }
 
-        private void PictureBox3_Click(object sender, EventArgs e)
-        {
-            // CardObject event wiring
-            dragCard = new CardBox(new Card());
-            dragCard.CardClicked += DragCard_Click;
-            dragCard.CardMouseDown += DragCard_MouseDown;
-            dragCard.CardDragEnter += DragCard_DragEnter;
-            dragCard.CardDragDrop += DragCard_DragDrop;
+        //private void PictureBox3_Click(object sender, EventArgs e)
+        //{
+        //    //CardBox aCardBox = new CardBox(new Card());
+        //    // add card to right place
+        //    //deckViewer3.AllowDrop = true;
+        //    //deckViewer2.AllowDrop = true;
 
-            CardBox aCardBox = new CardBox(new Card());
-            // add card to right place
-            deckViewer3.AllowDrop = true;
-            deckViewer2.AllowDrop = true;
-            dragCard.AllowDrop = true;
-            deckViewer3.Controls.Add(dragCard);
+        //    //deckViewer3.DragEnter += DeckViewer3_DragEnter;
+        //    //deckViewer3.DragDrop += DeckViewer3_DragDrop;
+        //}
 
-            deckViewer3.DragEnter += DeckViewer3_DragEnter;
-            deckViewer3.DragDrop += DeckViewer3_DragDrop;
-        }
-
-        private void DragCard_Click(object sender, EventArgs e)
+        /*private void DragCard_Click(object sender, EventArgs e)
         {
             CardBox aCardBox = sender as CardBox;
             if(aCardBox.Parent == deckViewer3)
@@ -204,9 +192,9 @@ namespace Game
                 deckViewer3.Controls.Remove(aCardBox);
                 deckViewer2.Controls.Add(aCardBox);
             }
-        }
+        }*/
 
-        private void DeckViewer3_DragDrop(object sender, DragEventArgs e)
+        /*private void DeckViewer3_DragDrop(object sender, DragEventArgs e)
         {
             if (dragCard != null)
             {
@@ -222,9 +210,9 @@ namespace Game
                     }
                 }
             }
-        }
+        }*/
 
-        private void DeckViewer3_DragEnter(object sender, DragEventArgs e)
+        /*private void DeckViewer3_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
@@ -255,7 +243,7 @@ namespace Game
             {
                 DoDragDrop(dragCard, DragDropEffects.Move);
             }
-        }
+        }*/
 
 
       

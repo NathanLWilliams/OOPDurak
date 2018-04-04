@@ -30,7 +30,27 @@ namespace Game
         /// </summary>
         private void InitializeComponent()
         {
+            this.deckViewer2 = new Game.DeckViewer();
+            this.deckViewer1 = new Game.DeckViewer();
             this.SuspendLayout();
+            // 
+            // deckViewer2
+            // 
+            this.deckViewer2.AllowDrop = true;
+            this.deckViewer2.BackColor = System.Drawing.Color.Lime;
+            this.deckViewer2.Location = new System.Drawing.Point(39, 418);
+            this.deckViewer2.Name = "deckViewer2";
+            this.deckViewer2.Size = new System.Drawing.Size(1000, 400);
+            this.deckViewer2.TabIndex = 1;
+            // 
+            // deckViewer1
+            // 
+            this.deckViewer1.AllowDrop = true;
+            this.deckViewer1.BackColor = System.Drawing.Color.Lime;
+            this.deckViewer1.Location = new System.Drawing.Point(39, 12);
+            this.deckViewer1.Name = "deckViewer1";
+            this.deckViewer1.Size = new System.Drawing.Size(1000, 400);
+            this.deckViewer1.TabIndex = 0;
             // 
             // PlayDurak
             // 
@@ -38,6 +58,8 @@ namespace Game
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1184, 761);
+            this.Controls.Add(this.deckViewer2);
+            this.Controls.Add(this.deckViewer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "PlayDurak";
@@ -48,6 +70,9 @@ namespace Game
         }
 
         #endregion
+
+        private DeckViewer deckViewer1;
+        private DeckViewer deckViewer2;
     }
 }
 

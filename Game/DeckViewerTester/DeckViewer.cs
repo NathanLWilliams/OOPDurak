@@ -16,11 +16,14 @@ namespace Game
     {
         Cards cards;
         Size standardCardSize = new Size(87, 141);
+
         public DeckViewer()
         {
             InitializeComponent();
-
             cards = new Cards();
+            this.AllowDrop = true;
+            this.DragEnter += new DragEventHandler(this.DeckViewer_DragEnter);
+            this.DragDrop += new DragEventHandler(this.DeckViewer_DragDrop);
         }
         public DeckViewer(Deck deck, int numberOfCards) : this()
         {
@@ -60,7 +63,6 @@ namespace Game
             {
                 CardBox cardBox = new CardBox(c, true);
                 cardBox.Size = standardCardSize;
-                cardBox.Click += CardBoxClick;
                 this.Controls.Add(cardBox);
             }
             this.Controls[this.Controls.Count - 1].Name = "lastCardInView";
@@ -104,10 +106,19 @@ namespace Game
                 this.Controls[i].BringToFront();
             }
         }
-        private void CardBoxClick(object obj, EventArgs args)
+        public void DeckViewer_DragEnter(object sender, DragEventArgs e)
         {
-            
-
+            if(e.Data.GetData(DataFormats.Text) != null)
+                e.Effect = DragDropEffects.Move;
+        }
+        public void DeckViewer_DragDrop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetData(DataFormats.Text) != null)
+            {
+                int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
+                Card draggedCard = new Card(cardHashCode);
+                this.AddCard(draggedCard);
+            }
         }
     }
 }
