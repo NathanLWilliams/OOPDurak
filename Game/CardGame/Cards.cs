@@ -20,7 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ch13CardLib
+namespace CardGame
 {
     public class Cards : ObservableCollection<Card>, ICloneable
     {

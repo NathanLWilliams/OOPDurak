@@ -17,7 +17,7 @@
 using System;
 using System.Drawing;
 
-namespace Ch13CardLib
+namespace CardGame
 {
     public class Card : ICloneable
     {

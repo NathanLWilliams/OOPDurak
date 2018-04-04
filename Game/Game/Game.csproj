@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PageDesign\DurakPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PageDesign\MainMenu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -107,6 +110,10 @@
     <ProjectReference Include="..\CardBoxControl\CardBoxControl.csproj">
       <Project>{5833cdac-0e8e-4214-9944-3bc2faf88009}</Project>
       <Name>CardBoxControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CardGame\CardGame.csproj">
+      <Project>{6C0E076B-CA37-4678-8131-EE84037157B7}</Project>
+      <Name>CardGame</Name>
     </ProjectReference>
     <ProjectReference Include="..\DeckViewerTester\DeckViewer.csproj">
       <Project>{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}</Project>

@@ -87,7 +87,7 @@
       <Name>CardBoxControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\CardGame\CardGame.csproj">
-      <Project>{6C0E076B-CA37-4678-8131-EE84037157B7}</Project>
+      <Project>{6c0e076b-ca37-4678-8131-ee84037157b7}</Project>
       <Name>CardGame</Name>
     </ProjectReference>
   </ItemGroup>
