@@ -45,6 +45,12 @@ namespace Game
             cards.RemoveAt(index);
             AdjustCards();
         }
+        public Card TakeCard(int index)
+        {
+            Card temp = (Card)cards[index].Clone();
+            this.RemoveCard(index);
+            return temp;
+        }
         public void UpdateCardBoxes()
         {
             this.Controls.Clear();
