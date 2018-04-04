@@ -17,7 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CardGame
+namespace Ch13CardLib
 {
     public class Deck  : ICloneable
     {
@@ -31,10 +31,9 @@ namespace CardGame
         public event EventHandler LastCardDrawn;
 
         #region Constructors
-        public Deck(Size size, bool isAceHigh = false, bool useTrumps = false, Suit trump = Suit.Clubs)
+        public Deck(Size size = Size.Large, bool isAceHigh = true)
         {
             int minRank = isAceHigh ? 2 : 1;
-
             switch(size)
             {
                 case Size.Small:
@@ -44,7 +43,6 @@ namespace CardGame
                     minRank = 6;
                     break;
             }
-
             for(int suitVal = 0; suitVal < 4; suitVal++)
             {
                 for(int rankVal = minRank; rankVal < 14; rankVal++)
@@ -52,12 +50,10 @@ namespace CardGame
                     cards.Add(new Card((Suit)suitVal, (Rank)rankVal));
                 }
                 if(isAceHigh)
+                {
                     cards.Add(new Card((Suit)suitVal, Rank.Ace));
+                }
             }
-
-            Card.isAceHigh = isAceHigh;
-            Card.useTrumps = useTrumps;
-            Card.trump = trump;
         }
 
         private Deck(Cards newCards)
@@ -69,7 +65,7 @@ namespace CardGame
         /// <summary>
         /// Nondefault constructor. Allows aces to be set high.
         /// </summary>
-        public Deck(bool isAceHigh) : this(Size.Large, isAceHigh)
+        public Deck(bool isAceHigh) : this()
         {
             Card.isAceHigh = isAceHigh;
         }
@@ -77,7 +73,7 @@ namespace CardGame
         /// <summary>
         /// Nondefault constructor. Allows a trump suit to be used.
         /// </summary>
-        public Deck(bool useTrumps, Suit trump) : this(Size.Large)
+        public Deck(bool useTrumps, Suit trump) : this()
         {
             Card.useTrumps = useTrumps;
             Card.trump = trump;
@@ -87,7 +83,7 @@ namespace CardGame
         /// Nondefault constructor. Allows aces to be set high and a trump suit
         /// to be used.
         /// </summary>
-        public Deck(bool isAceHigh, bool useTrumps, Suit trump) : this(Size.Large, isAceHigh)
+        public Deck(bool isAceHigh, bool useTrumps, Suit trump) : this()
         {
             Card.isAceHigh = isAceHigh;
             Card.useTrumps = useTrumps;
