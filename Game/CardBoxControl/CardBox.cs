@@ -118,7 +118,7 @@ namespace CardBoxControl
                 this.pbCardDisplay.MouseLeave += new System.EventHandler(this.pbCardDisplay_MouseLeave);
                 this.pbCardDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseMove);
             }
-            this.pbCardDisplay.MouseDown += new MouseEventHandler(this.pbCardDisplay_MouseDown);
+            this.pbCardDisplay.MouseClick += new MouseEventHandler(this.pbCardDisplay_MouseDown);
         }
         #endregion
 
@@ -191,6 +191,7 @@ namespace CardBoxControl
         private void pbCardDisplay_MouseDown(object sender, MouseEventArgs e)
         {
             this.DoDragDrop(new DataObject(DataFormats.Text, this.Card.GetHashCode()), DragDropEffects.Move);
+            System.Console.WriteLine("MouseDown");
         }
 
 

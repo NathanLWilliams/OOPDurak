@@ -43,6 +43,7 @@ namespace Game
             //this.panel1.Controls.Add(new CardBox(card));
             cards.Add(card);
             AdjustCards();
+            System.Console.WriteLine("Add Card");
         }
         public void RemoveCard(int index)
         {
@@ -115,6 +116,7 @@ namespace Game
         {
             if (e.Data.GetData(DataFormats.Text) != null)
             {
+                System.Console.WriteLine("DragDrop");
                 int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
                 Card draggedCard = new Card(cardHashCode);
                 this.AddCard(draggedCard);
