@@ -10,38 +10,45 @@ namespace Game
 {
     public class Toolbar : Panel
     {
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
+        private PictureBox backButton;
+        private PictureBox settingsButton;
 
         public Toolbar()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.backButton = new System.Windows.Forms.PictureBox();
+            this.settingsButton = new System.Windows.Forms.PictureBox();
             
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackColor = Color.White;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 5);
-            this.pictureBox1.Size = new System.Drawing.Size(53, 50);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += PictureBox1_Click;
+            //Found here: http://www.free-icons-download.net/green-back-button-icon-65921/
+            this.backButton.Image = Properties.Resources.goback;
+            this.backButton.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            this.backButton.Location = new System.Drawing.Point(10, 5);
+            this.backButton.Size = new System.Drawing.Size(53, 50);
+            this.backButton.TabIndex = 0;
+            this.backButton.TabStop = false;
+            this.backButton.Click += PictureBox1_Click;
             // 
             // pictureBox2
             // 
-            this.pictureBox2.BackColor = Color.White;
-            this.pictureBox2.Location = new System.Drawing.Point(75, 5);
-            this.pictureBox2.Size = new System.Drawing.Size(53, 50);
-            this.pictureBox2.TabIndex = 1;
-            this.pictureBox2.TabStop = false;
-            this.pictureBox2.Click += PictureBox2_Click;
+            //Found here: https://www.freeiconspng.com/img/19352
+            this.settingsButton.BackColor = Color.LightGreen;
+            this.settingsButton.Image = Properties.Resources.menu;
+            this.settingsButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.settingsButton.Location = new System.Drawing.Point(75, 5);
+            this.settingsButton.Size = new System.Drawing.Size(53, 50);
+            this.settingsButton.TabIndex = 1;
+            this.settingsButton.TabStop = false;
+            this.settingsButton.Click += PictureBox2_Click;
+            this.settingsButton.Visible = false;
             // 
             // panel1
             // 
-            this.BackColor = Color.Black;
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.pictureBox1);
+            this.BackColor = Color.Goldenrod;
+            this.Controls.Add(this.settingsButton);
+            this.Controls.Add(this.backButton);
             this.Dock = DockStyle.Fill;
         }
 
