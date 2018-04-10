@@ -50,6 +50,11 @@ namespace Game
             cards.RemoveAt(index);
             AdjustCards();
         }
+        public void RemoveCard(Card card)
+        {
+            cards.Remove(card);
+            AdjustCards();
+        }
         public Card TakeCard(int index)
         {
             Card temp = (Card)cards[index].Clone();
@@ -66,7 +71,9 @@ namespace Game
                 cardBox.Size = standardCardSize;
                 this.Controls.Add(cardBox);
             }
-            this.Controls[this.Controls.Count - 1].Name = "lastCardInView";
+
+            if(this.Controls.Count > 0)
+                this.Controls[this.Controls.Count - 1].Name = "lastCardInView";
         }
         //public void AdjustCards(object source, EventArgs args)
         public void AdjustCards()
@@ -109,17 +116,21 @@ namespace Game
         }
         public void DeckViewer_DragEnter(object sender, DragEventArgs e)
         {
-            if(e.Data.GetData(DataFormats.Text) != null)
+            if(e.Data.GetData(typeof(CardBox)) != null)
                 e.Effect = DragDropEffects.Move;
         }
         public void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(DataFormats.Text) != null)
+            if (e.Data.GetData(typeof(CardBox)) != null)
             {
                 System.Console.WriteLine("DragDrop");
-                int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
-                Card draggedCard = new Card(cardHashCode);
-                this.AddCard(draggedCard);
+                //int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
+                //Card draggedCard = new Card(cardHashCode);
+                CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
+                //this.AddCard(draggedCard);
+                Card newCard = (Card)draggedCard.Card.Clone();
+                (draggedCard.Parent as DeckViewer).RemoveCard(draggedCard.Card);
+                this.AddCard(newCard);
             }
         }
     }

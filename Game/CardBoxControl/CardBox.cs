@@ -155,7 +155,7 @@ namespace CardBoxControl
 
         private void Shrink()
         {
-            if (this.isEnlarged)
+            if (this.isEnlarged && this.Parent != null)
             {
                 this.Parent.Controls.SetChildIndex(this, lastZIndex);
                 this.Location = new Point(this.Location.X + (bigSize.Width - smallSize.Width) / 2, this.Location.Y + (bigSize.Height - smallSize.Height) / 2);
@@ -190,7 +190,8 @@ namespace CardBoxControl
 
         private void pbCardDisplay_MouseDown(object sender, MouseEventArgs e)
         {
-            this.DoDragDrop(new DataObject(DataFormats.Text, this.Card.GetHashCode()), DragDropEffects.Move);
+            //this.DoDragDrop(new DataObject(DataFormats.Text, this.Card.GetHashCode()), DragDropEffects.Move);
+            this.DoDragDrop(this, DragDropEffects.Move);
             System.Console.WriteLine("MouseDown");
         }
 
