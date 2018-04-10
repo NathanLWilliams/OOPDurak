@@ -30,27 +30,33 @@ namespace Game
         /// </summary>
         private void InitializeComponent()
         {
-            this.deckViewer2 = new Game.DeckViewer();
-            this.deckViewer1 = new Game.DeckViewer();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.toolbar1 = new Game.Toolbar();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // deckViewer2
+            // tableLayoutPanel1
             // 
-            this.deckViewer2.AllowDrop = true;
-            this.deckViewer2.BackColor = System.Drawing.Color.Lime;
-            this.deckViewer2.Location = new System.Drawing.Point(39, 418);
-            this.deckViewer2.Name = "deckViewer2";
-            this.deckViewer2.Size = new System.Drawing.Size(1000, 400);
-            this.deckViewer2.TabIndex = 1;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.toolbar1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.672799F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.3272F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 761);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // deckViewer1
+            // toolbar1
             // 
-            this.deckViewer1.AllowDrop = true;
-            this.deckViewer1.BackColor = System.Drawing.Color.Lime;
-            this.deckViewer1.Location = new System.Drawing.Point(39, 12);
-            this.deckViewer1.Name = "deckViewer1";
-            this.deckViewer1.Size = new System.Drawing.Size(1000, 400);
-            this.deckViewer1.TabIndex = 0;
+            this.toolbar1.BackColor = System.Drawing.Color.Black;
+            this.toolbar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolbar1.Location = new System.Drawing.Point(3, 3);
+            this.toolbar1.Name = "toolbar1";
+            this.toolbar1.Size = new System.Drawing.Size(1178, 60);
+            this.toolbar1.TabIndex = 0;
             // 
             // PlayDurak
             // 
@@ -58,21 +64,21 @@ namespace Game
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1184, 761);
-            this.Controls.Add(this.deckViewer2);
-            this.Controls.Add(this.deckViewer1);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "PlayDurak";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Play Durak";
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DeckViewer deckViewer1;
-        private DeckViewer deckViewer2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private Toolbar toolbar1;
     }
 }
 
