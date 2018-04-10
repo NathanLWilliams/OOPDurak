@@ -138,6 +138,7 @@ namespace CardBoxControl
         }
         private void pbCardDisplay_MouseMove(object sender, MouseEventArgs e)
         {
+
             double widthDivider = (2 + this.Parent.Controls.Count / 3);
 
             //Grow if the visible portion of the card is being moused over
@@ -149,6 +150,11 @@ namespace CardBoxControl
             else
             {
                 Shrink();
+            }
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                this.Left = e.X + this.Left - previousLocation.X;
+                this.Top = e.Y + this.Top - previousLocation.Y;
             }
 
         }
@@ -190,7 +196,12 @@ namespace CardBoxControl
 
         private void pbCardDisplay_MouseDown(object sender, MouseEventArgs e)
         {
+            //        this.DoDragDrop(new DataObject(DataFormats.Text, this.Card.GetHashCode()), DragDropEffects.Move);
             this.DoDragDrop(new DataObject(DataFormats.Text, this.Card.GetHashCode()), DragDropEffects.Move);
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                previousLocation = e.Location;
+            }
         }
 
 
