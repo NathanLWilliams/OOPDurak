@@ -43,16 +43,11 @@ namespace Game
             //this.panel1.Controls.Add(new CardBox(card));
             cards.Add(card);
             AdjustCards();
+            System.Console.WriteLine("Add Card");
         }
         public void RemoveCard(int index)
         {
             cards.RemoveAt(index);
-            AdjustCards();
-
-        }
-        public void RemoveCard(Card card)
-        {
-            cards.Remove(card);
             AdjustCards();
         }
         public Card TakeCard(int index)
@@ -119,33 +114,12 @@ namespace Game
         }
         public void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
-             
             if (e.Data.GetData(DataFormats.Text) != null)
             {
-                //DeckViewer toPanel = sender as DeckViewer;
-                //DeckViewer fromPanel = this;
-                //if (fromPanel != null && toPanel != null)
-                //{
-                //    int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
-                //    Card draggedCard = new Card(cardHashCode);
-                //    var count = toPanel.Controls.Count;
-                //    var count2 = fromPanel.Controls.Count;
-
-                //    if (toPanel != fromPanel)
-                //    {
-                //        //fromPanel.RemoveCard() // how do we pass index to these cards
-                //        fromPanel.RemoveCard();
-                //        toPanel.AddCard(draggedCard);
-
-                //    }
-                //}
-                if (e.Data.GetData(DataFormats.Text) != null)
-                {
-                    int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
-                    Card draggedCard = new Card(cardHashCode);
-                    this.AddCard(draggedCard);
-                }
-
+                System.Console.WriteLine("DragDrop");
+                int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
+                Card draggedCard = new Card(cardHashCode);
+                this.AddCard(draggedCard);
             }
         }
     }
