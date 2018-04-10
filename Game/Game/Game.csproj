@@ -48,6 +48,9 @@
     <Compile Include="PageDesign\DurakPage.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PageDesign\InstructionsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PageDesign\MainMenu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -55,6 +58,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PageDesign\StatisticsPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PageDesign\Win.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PlayDurak.cs">
