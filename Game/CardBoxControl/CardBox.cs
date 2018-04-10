@@ -151,12 +151,11 @@ namespace CardBoxControl
                 Shrink();
             }
 
-
         }
 
         private void Shrink()
         {
-            if (this.isEnlarged)
+            if (this.isEnlarged && this.Parent != null)
             {
                 this.Parent.Controls.SetChildIndex(this, lastZIndex);
                 this.Location = new Point(this.Location.X + (bigSize.Width - smallSize.Width) / 2, this.Location.Y + (bigSize.Height - smallSize.Height) / 2);
@@ -180,10 +179,6 @@ namespace CardBoxControl
         }
 
         public event EventHandler CardClicked;
-        public event MouseEventHandler CardMouseDown;
-        public event DragEventHandler CardDragEnter;
-        public event DragEventHandler CardDragDrop;
-
         private void pbCardDisplay_Click(object sender, EventArgs e)
         {
             // bubble event to parent
@@ -193,34 +188,12 @@ namespace CardBoxControl
             }
         }
 
-       
         private void pbCardDisplay_MouseDown(object sender, MouseEventArgs e)
         {
-            // bubble event to parent
-            if (this.CardMouseDown != null)
-            {
-                this.CardMouseDown(this, e);
-            }
             //this.DoDragDrop(new DataObject(DataFormats.Text, this.Card.GetHashCode()), DragDropEffects.Move);
-            //System.Console.WriteLine("MouseDown");
+            this.DoDragDrop(this, DragDropEffects.Move);
+            System.Console.WriteLine("MouseDown");
         }
-        private void PbCardDisplay_DragEnter(object sender, System.Windows.Forms.DragEventArgs e)
-        {
-            if (this.CardDragEnter != null)
-            {
-                this.CardDragEnter(this, e);
-            }
-        }
-
-        private void PbCardDisplay_DragDrop(object sender, System.Windows.Forms.DragEventArgs e)
-        {
-            if (this.CardDragDrop != null)
-            {
-                this.CardDragDrop(this, e);
-            }
-        }
-
-        #endregion
 
 
         /// <summary>
@@ -229,6 +202,7 @@ namespace CardBoxControl
         public event EventHandler CardFlipped;
 
 
+        #endregion
         #region Other methods
         /// <summary>
         /// returns image for the card, also manages orientation of image
