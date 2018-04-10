@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CardGame;
 using CardBoxControl;
+using System.Drawing;
 
 namespace Game
 {
@@ -21,7 +22,11 @@ namespace Game
         private DeckViewer deckViewer4;
         private Panel deckViewer3;
         private Panel deckViewer2;
-        private DeckViewer deckViewer1;
+        private Panel deckViewer1;
+
+        private CardBox dragCard;
+
+        private const int POP = 25;
 
         /// <summary>
         /// Durak form
@@ -36,8 +41,8 @@ namespace Game
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel9 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.deckViewer3 = new Panel();
-            this.deckViewer2 = new Panel();
+            this.deckViewer3 = new DeckViewer();
+            this.deckViewer2 = new DeckViewer();
             this.deckViewer1 = new DeckViewer();
             this.deckViewer4 = new DeckViewer();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -91,7 +96,8 @@ namespace Game
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 10;
             this.pictureBox3.TabStop = false;
-            //this.pictureBox3.Click += PictureBox3_Click;
+            this.pictureBox3.Click += PictureBox3_Click;
+            this.pictureBox3.BackColor = System.Drawing.Color.AliceBlue;
             // 
             // panel9
             // 
@@ -168,51 +174,97 @@ namespace Game
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
-            
-     
 
         }
+        private Control activeControl;
+        private Point previousLocation;
+        private void DragCard_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragCard = sender as CardBox;
+            if (dragCard != null)
+            {
+                DoDragDrop(dragCard, DragDropEffects.Move);
+            }
+            activeControl = sender as Control;
+            previousLocation = e.Location;
+            Cursor = Cursors.Hand;
+        }
 
-        //private void PictureBox3_Click(object sender, EventArgs e)
-        //{
-        //    //CardBox aCardBox = new CardBox(new Card());
-        //    // add card to right place
-        //    //deckViewer3.AllowDrop = true;
-        //    //deckViewer2.AllowDrop = true;
+        private void PictureBox3_Click(object sender, EventArgs e)
+        {
 
-        //    //deckViewer3.DragEnter += DeckViewer3_DragEnter;
-        //    //deckViewer3.DragDrop += DeckViewer3_DragDrop;
-        //}
 
-        /*private void DragCard_Click(object sender, EventArgs e)
+            Deck deck = new Deck(Deck.Size.Small);
+            //List<CardBox> cardBoxList = new List<CardBox>();
+
+            //foreach (Card card in deck)
+            //{
+            //    cardBoxList.Add(new CardBox(card));
+
+            //}
+            foreach (Card card in deck)
+            {
+                //
+                // DragCard
+                //
+                CardBox aCardbox = new CardBox(card);
+                aCardbox.CardMouseDown += DragCard_MouseDown;
+                aCardbox.CardClicked += DragCard_Click;
+                
+
+                this.deckViewer2.Controls.Add(aCardbox);  //(new Deck(Deck.Size.Small), 5);
+
+            }
+
+            RealignCards(deckViewer2);
+            //this.deckViewer1.Controls.Add(cardBoxList);  //(new Deck(Deck.Size.Small), 5);
+
+            //    add card to right place
+            deckViewer3.AllowDrop = true;
+            deckViewer2.AllowDrop = true;
+
+            deckViewer3.DragEnter += DeckViewer3_DragEnter;
+            deckViewer3.DragDrop += DeckViewer3_DragDrop;
+        }
+
+        private void DragCard_Click(object sender, EventArgs e)
         {
             CardBox aCardBox = sender as CardBox;
-            if(aCardBox.Parent == deckViewer3)
+            if (aCardBox.Parent == deckViewer3)
             {
                 deckViewer3.Controls.Remove(aCardBox);
                 deckViewer2.Controls.Add(aCardBox);
-            }sss
-        }*/
+            }
 
-        /*private void DeckViewer3_DragDrop(object sender, DragEventArgs e)
+        }
+
+        private void DeckViewer3_DragDrop(object sender, DragEventArgs e)
         {
             if (dragCard != null)
             {
                 Panel thisPanel = sender as Panel;
+
                 Panel fromPanel = dragCard.Parent as Panel;
-                if(thisPanel !=null && fromPanel !=null)
+                if (thisPanel != null && fromPanel != null)
                 {
                     if (thisPanel != fromPanel)
                     {
-                        fromPanel.Controls.Remove(dragCard);
                         thisPanel.Controls.Add(dragCard);
-
+                        fromPanel.Controls.Remove(dragCard);
                     }
+                    foreach (CardBox cardbox in thisPanel.Controls)
+                    {
+                        cardbox.FaceUp = true;
+                    }
+                    RealignCards(thisPanel);
+                    RealignCards(fromPanel);
+
+   
                 }
             }
-        }*/
+        }
 
-        /*private void DeckViewer3_DragEnter(object sender, DragEventArgs e)
+        private void DeckViewer3_DragEnter(object sender, DragEventArgs e)
         {
             e.Effect = DragDropEffects.Move;
         }
@@ -230,25 +282,68 @@ namespace Game
         private void DragCard_DragEnter(object sender, DragEventArgs e)
         {
             CardBox aCardBox = sender as CardBox;
-            if(aCardBox !=null)
+            if (aCardBox != null)
             {
                 DeckViewer3_DragEnter(aCardBox.Parent, e);
             }
         }
 
-        private void DragCard_MouseDown(object sender, MouseEventArgs e)
+        /// <summary>
+        /// Repositions the cards in a panel so that they are evenly distributed
+        //in the area available.
+        /// </summary>
+        /// <param name="panelHand"></param>
+        private void RealignCards(Panel panelHand)
         {
-            dragCard = sender as CardBox;
-            if (dragCard !=null)
+            // Determine the number of cards/controls in the panel.
+            int myCount = panelHand.Controls.Count;
+            // If there are any cards in the panel
+            if (myCount > 0)
             {
-                DoDragDrop(dragCard, DragDropEffects.Move);
+                // Determine how wide one card/control is.
+                int cardWidth = panelHand.Controls[0].Width;
+                // Determine where the lefthand edge of a card/ control placed
+                // in the middle of the panel should be
+                int startPoint = (panelHand.Width - cardWidth) / 2;
+                // An offset for the remaining cards
+                int offset = 0;
+
+                // If there are more than one cards/controls in the panel
+                if (myCount > 1)
+                {
+                    // Determine what the offset should be for each card based onthe
+                    // space available and the number of card/controls
+                    offset = (panelHand.Width - cardWidth - 2 * POP) / (myCount - 1);
+                    // If the offset is bigger than the card/control width, i.e.there is lots of room,
+                    // set the offset to the card width. The cards/controls willnot overlap at all.
+                    if (offset > cardWidth)
+                        offset = cardWidth;
+                    // Determine width of all the cards/controls
+                    int allCardsWidth = (myCount - 1) * offset + cardWidth;
+                    // Set the start point to where the lefthand edge of the "first" card should be.
+                    startPoint = (panelHand.Width - allCardsWidth) / 2;
+                }
+                // Aligning the cards: Note that I align them in reserve order from how they
+                // are stored in the controls collection. This is so that cardson the left
+                // appear underneath cards to the right. This allows the user to see the rank
+                // and suit more easily.
+                // Align the "first" card (which is the last control in the collection) 
+                panelHand.Controls[myCount - 1].Top = POP;
+                System.Diagnostics.Debug.Write(panelHand.Controls[myCount - 1].Top.ToString() + "\n");
+                panelHand.Controls[myCount - 1].Left = startPoint;
+                // for each of the remaining controls, in reverse order.
+                for (int index = myCount - 2; index >= 0; index--)
+                {
+                    // Align the current card
+                    panelHand.Controls[index].Top = POP;
+                    panelHand.Controls[index].Left = panelHand.Controls[index +
+                    1].Left + offset;
+                }
             }
-        }*/
-
-
-      
-
+        }
     }
-
-
 }
+
+
+
+

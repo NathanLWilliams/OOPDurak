@@ -121,6 +121,8 @@ namespace Game
                 Card draggedCard = new Card(cardHashCode);
                 this.AddCard(draggedCard);
             }
+
+            
         }
     }
 }
