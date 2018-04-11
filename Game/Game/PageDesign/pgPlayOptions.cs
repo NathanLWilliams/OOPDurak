@@ -235,8 +235,8 @@ namespace Game
         private void BtPlay_Click(object sender, EventArgs e)
         {
             //Goto instructions
-            if (this.Parent is Form)
-                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Playing);
+            if (this.Parent.Parent is Form)
+                (this.Parent.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Playing);
         }
 
 

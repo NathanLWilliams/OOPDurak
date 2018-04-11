@@ -158,7 +158,7 @@ namespace CardBoxControl
             if (this.isEnlarged && this.Parent != null)
             {
                 this.Parent.Controls.SetChildIndex(this, lastZIndex);
-                this.Location = new Point(this.Location.X + (bigSize.Width - smallSize.Width) / 2, this.Location.Y + (bigSize.Height - smallSize.Height) / 2);
+                this.Location = new Point(this.Location.X + (bigSize.Width - smallSize.Width) / 2, this.Location.Y + (bigSize.Height - smallSize.Height) - 90 / 2);
                 this.Size = smallSize;
                 this.isEnlarged = false;
                 //this.Parent.Refresh();
@@ -171,7 +171,7 @@ namespace CardBoxControl
                 lastZIndex = this.Parent.Controls.GetChildIndex(this);
                 this.Size = bigSize;
                 this.previousLocation = this.Location;
-                this.Location = new Point(this.Location.X - (bigSize.Width - smallSize.Width) / 2, this.Location.Y - (bigSize.Height - smallSize.Height) / 2);
+                this.Location = new Point(this.Location.X - (bigSize.Width - smallSize.Width) / 2, this.Location.Y - (bigSize.Height - smallSize.Height) + 90 / 2);
                 this.BringToFront();
                 this.isEnlarged = true;
                 //this.Parent.Refresh();
