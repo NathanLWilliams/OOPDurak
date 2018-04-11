@@ -51,8 +51,8 @@ namespace CardBoxControl
             
             this.pbCardDisplay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseDown);
             this.pbCardDisplay.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbCardDisplay_MouseMove);
-            this.pbCardDisplay.DragDrop  +=  PbCardDisplay_DragDrop;
-            this.pbCardDisplay.DragEnter += PbCardDisplay_DragEnter;
+            //this.pbCardDisplay.DragDrop  +=  PbCardDisplay_DragDrop;
+            //this.pbCardDisplay.DragEnter += PbCardDisplay_DragEnter;
             // 
             // CardBox
             // 

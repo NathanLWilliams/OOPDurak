@@ -123,14 +123,33 @@ namespace Game
         {
             if (e.Data.GetData(typeof(CardBox)) != null)
             {
+                
                 System.Console.WriteLine("DragDrop");
                 //int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
                 //Card draggedCard = new Card(cardHashCode);
                 CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
+
+                if(draggedCard !=null)
+                {
+                    DeckViewer fromPanel = draggedCard.Parent as DeckViewer;
+                    DeckViewer toPanel = sender as DeckViewer;
+
+                    if(toPanel !=null && fromPanel!=null)
+                    {
+                        if(toPanel != fromPanel)
+                        {
+                            fromPanel.RemoveCard(draggedCard.Card);
+                            toPanel.AddCard(draggedCard.Card);
+                        }
+                    }
+
+                }
                 //this.AddCard(draggedCard);
-                Card newCard = (Card)draggedCard.Card.Clone();
-                (draggedCard.Parent as DeckViewer).RemoveCard(draggedCard.Card);
-                this.AddCard(newCard);
+                //Card newCard = (Card)draggedCard.Card.Clone();
+                //(draggedCard.Parent as DeckViewer).RemoveCard(draggedCard.Card);
+                //this.AddCard(newCard);
+
+
             }
 
             
