@@ -17,9 +17,9 @@ namespace Game
         {
             this.backButton = new System.Windows.Forms.PictureBox();
             this.settingsButton = new System.Windows.Forms.PictureBox();
-            
+
             // 
-            // pictureBox1
+            // backButton
             // 
             //Found here: http://www.free-icons-download.net/green-back-button-icon-65921/
             this.backButton.Image = Properties.Resources.goback;
@@ -29,9 +29,9 @@ namespace Game
             this.backButton.Size = new System.Drawing.Size(53, 50);
             this.backButton.TabIndex = 0;
             this.backButton.TabStop = false;
-            this.backButton.Click += PictureBox1_Click;
+            this.backButton.Click += Back_Click;
             // 
-            // pictureBox2
+            // settingsButton
             // 
             //Found here: https://www.freeiconspng.com/img/19352
             this.settingsButton.BackColor = Color.LightGreen;
@@ -41,23 +41,21 @@ namespace Game
             this.settingsButton.Size = new System.Drawing.Size(53, 50);
             this.settingsButton.TabIndex = 1;
             this.settingsButton.TabStop = false;
-            this.settingsButton.Click += PictureBox2_Click;
+            this.settingsButton.Click += Settings_Click;
             this.settingsButton.Visible = false;
-            // 
-            // panel1
-            // 
+
             this.BackColor = Color.Goldenrod;
             this.Controls.Add(this.settingsButton);
             this.Controls.Add(this.backButton);
             this.Dock = DockStyle.Fill;
         }
 
-        private void PictureBox2_Click(object sender, EventArgs e)
+        private void Settings_Click(object sender, EventArgs e)
         {
             
         }
 
-        private void PictureBox1_Click(object sender, EventArgs e)
+        private void Back_Click(object sender, EventArgs e)
         {
             if (this.Parent.Parent is PlayDurak)
             {

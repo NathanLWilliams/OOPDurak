@@ -135,8 +135,9 @@ namespace Game
             this.deckViewer1.Location = new System.Drawing.Point(11, 502);
             this.deckViewer1.Margin = new System.Windows.Forms.Padding(2);
             this.deckViewer1.Name = "deckViewer1";
-            this.deckViewer1.Size = new System.Drawing.Size(1171, 167);
+            this.deckViewer1.Size = new System.Drawing.Size(1171, 250);
             this.deckViewer1.TabIndex = 11;
+            this.deckViewer1.AddCards(new Deck(Deck.Size.Medium, true, true, Suit.Clubs), 12);
             // 
             // deckViewer4
             // 
@@ -167,7 +168,7 @@ namespace Game
             this.panel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
-
+            this.Dock = DockStyle.Fill;
             
      
 

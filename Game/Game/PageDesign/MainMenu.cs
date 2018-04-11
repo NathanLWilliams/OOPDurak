@@ -22,57 +22,72 @@ namespace Game
             lblTitle.Font = new Font("Arial", 64, FontStyle.Bold);
             lblTitle.ForeColor = Color.LimeGreen;
             lblTitle.AutoSize = true;
-            lblTitle.Location = new Point(350, 150);
+            lblTitle.Location = new Point(-200, 150);
             lblTitle.BackColor = Color.Transparent;
+            lblTitle.Anchor = AnchorStyles.Top;
+            lblTitle.TextAlign = ContentAlignment.MiddleCenter;
             this.Controls.Add(lblTitle);
 
-            const int buttonStartY = 310;
+            const int buttonStartY = 370;
+            const int buttonX = -50;
 
             //Instantiate the controls
             Button start = new Button();
             start.Text = "Start";
             start.Size = buttonSize;
-            start.Location = new Point(450, buttonStartY);
+            start.Location = new Point(buttonX, buttonStartY);
             start.Font = buttonFont;
             start.BackColor = buttonColor;
             start.FlatStyle = FlatStyle.Popup;
             start.Click += Start_Click;
             start.TabIndex = 1;
-            start.Name = "start";
+            //start.Name = "start";
+            start.AutoSize = true;
+            start.TextAlign = ContentAlignment.MiddleCenter;
+            start.Anchor = AnchorStyles.Top;
             this.Controls.Add(start);
 
             Button instructions = new Button();
             instructions.Text = "Instructions";
             instructions.Size = buttonSize;
-            instructions.Location = new Point(450, buttonStartY + 25 + buttonSize.Height);
+            instructions.Location = new Point(buttonX, buttonStartY + 25 + buttonSize.Height);
             instructions.Font = buttonFont;
             instructions.BackColor = buttonColor;
             instructions.FlatStyle = FlatStyle.Popup;
             instructions.Click += Instructions_Click;
             instructions.TabIndex = 2;
+            instructions.AutoSize = true;
+            instructions.TextAlign = ContentAlignment.MiddleCenter;
+            instructions.Anchor = AnchorStyles.Top;
             this.Controls.Add(instructions);
 
             Button statistics = new Button();
             statistics.Text = "Statistics";
             statistics.Size = buttonSize;
-            statistics.Location = new Point(450, buttonStartY + 50 + buttonSize.Height*2);
+            statistics.Location = new Point(buttonX, buttonStartY + 50 + buttonSize.Height*2);
             statistics.Font = buttonFont;
             statistics.BackColor = buttonColor;
             statistics.FlatStyle = FlatStyle.Popup;
             statistics.Click += Statistics_Click;
             statistics.TabIndex = 3;
+            statistics.AutoSize = true;
+            statistics.TextAlign = ContentAlignment.MiddleCenter;
+            statistics.Anchor = AnchorStyles.Top;
             this.Controls.Add(statistics);
 
             Button exit = new Button();
             exit.Text = "Exit";
             exit.Size = buttonSize;
-            exit.Location = new Point(450, buttonStartY + 75 + buttonSize.Height*3);
+            exit.Location = new Point(buttonX, buttonStartY + 75 + buttonSize.Height*3);
             exit.Font = buttonFont;
             exit.BackColor = buttonColor;
             exit.FlatStyle = FlatStyle.Popup;
             exit.Click += Exit_Click;
             exit.TabIndex = 4;
             exit.Name = "exit";
+            exit.AutoSize = true;
+            exit.TextAlign = ContentAlignment.MiddleCenter;
+            exit.Anchor = AnchorStyles.Top;
             this.Controls.Add(exit);
 
             this.BackgroundImage = Properties.Resources.mainMenuCombinedBackground;
