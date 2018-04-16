@@ -6,6 +6,7 @@
  *  of the book called: Beginning Visual C# 2012 Programming
  * this library was created.
  * 
+ * @author       Qasim Iqbal
  * @author       Nathan Williams
  * @author       Karli Watson (author of the book)
  * @version      4.0
@@ -13,13 +14,14 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace CardGame
 {
-    public class Deck  : ICloneable
+    public class Deck  : Cards
     {
         public enum Size
         {
@@ -27,7 +29,7 @@ namespace CardGame
             Medium,
             Large
         }
-        private Cards cards = new Cards();
+        //private Cards cards = new Cards();
         public event EventHandler LastCardDrawn;
 
         #region Constructors
@@ -49,10 +51,10 @@ namespace CardGame
             {
                 for(int rankVal = minRank; rankVal < 14; rankVal++)
                 {
-                    cards.Add(new Card((Suit)suitVal, (Rank)rankVal));
+                    this.Add(new Card((Suit)suitVal, (Rank)rankVal));
                 }
                 if(isAceHigh)
-                    cards.Add(new Card((Suit)suitVal, Rank.Ace));
+                    this.Add(new Card((Suit)suitVal, Rank.Ace));
             }
 
             Card.isAceHigh = isAceHigh;
@@ -62,7 +64,7 @@ namespace CardGame
 
         private Deck(Cards newCards)
         {
-            cards = newCards;
+            newCards.CopyTo(this); // not sure if this works
         }
         #endregion
 
@@ -100,16 +102,16 @@ namespace CardGame
             {
                 if ((cardNum == 51) && (LastCardDrawn != null))
                     LastCardDrawn(this, EventArgs.Empty);
-                return cards[cardNum];
+                return this[cardNum];
             }
             else
-                throw new CardOutOfRangeException((Cards)cards.Clone());
+                throw new CardOutOfRangeException((Cards)this.Clone());
         }
 
         public Card DrawCard()
         {
-            Card card = (Card)GetCard(cards.Count - 1).Clone();
-            this.cards.RemoveAt(cards.Count - 1);
+            Card card = (Card)GetCard(this.Count - 1).Clone();
+            this.RemoveAt(this.Count - 1);
             return card;
         }
 
@@ -129,16 +131,11 @@ namespace CardGame
                         foundCard = true;
                 }
                 assigned[sourceCard] = true;
-                newDeck.Add(cards[sourceCard]);
+                newDeck.Add(this[sourceCard]);
             }
-            newDeck.CopyTo(cards);
+            newDeck.CopyTo(this);
         }
 
-        public object Clone()
-        {
-            Deck newDeck = new Deck(cards.Clone() as Cards);
-            return newDeck;
-        }
-
+      
     }
 }
