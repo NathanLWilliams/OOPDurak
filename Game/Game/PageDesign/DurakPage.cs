@@ -137,7 +137,8 @@ namespace Game
             this.deckViewer1.Name = "deckViewer1";
             this.deckViewer1.Size = new System.Drawing.Size(1171, 250);
             this.deckViewer1.TabIndex = 11;
-            this.deckViewer1.AddCards(new Deck(Deck.Size.Medium, true, true, Suit.Clubs), 12);
+            //TODO: Instantiate the deck separately using Settings.deckSize
+            this.deckViewer1.AddCards(new Deck(Settings.deckSize, true, true, Suit.Clubs), 6);
             // 
             // deckViewer4
             // 

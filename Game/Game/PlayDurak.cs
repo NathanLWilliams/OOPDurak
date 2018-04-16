@@ -63,7 +63,7 @@ namespace Game
             winPage.Visible = false;
 
             SetScreen(Screen.MainMenu);
-            //this.deckViewer1.AddCards(new CardGame.Deck(CardGame.Deck.Size.Small), 5);
+
         }
 
         /// <summary>
