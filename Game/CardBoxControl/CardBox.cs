@@ -93,12 +93,12 @@ namespace CardBoxControl
         private const float CARD_POP_SIZE = 1.1f;
 
         //for tracking where to place the card when popping the card forward or back upon mouse over
-        private int lastZIndex = 0;
+        //private int lastZIndex = 0;
 
         private bool isEnlarged = false;
         private Size smallSize;
         private Size bigSize;
-        private Point previousLocation;
+        //private Point previousLocation;
 
         #endregion
         #region Constructor
@@ -128,7 +128,7 @@ namespace CardBoxControl
             UpdateCardImage(); // update card image();
             this.smallSize = this.Size;
             this.bigSize = new Size((int)(this.Size.Width * CARD_POP_SIZE), (int)(this.Size.Height * CARD_POP_SIZE));
-            this.previousLocation = this.Location;
+            //this.previousLocation = this.Location;
         }
 
 
@@ -141,7 +141,8 @@ namespace CardBoxControl
             double widthDivider = (2 + this.Parent.Controls.Count / 3);
 
             //Grow if the visible portion of the card is being moused over
-            if (this.Parent.PointToClient(Cursor.Position).X < this.previousLocation.X + (int)(smallSize.Width / widthDivider)
+            //this.Location.X should be the X value before popping if the card is being popped forward
+            if (this.Parent.PointToClient(Cursor.Position).X < this.Location.X + (int)(Width / widthDivider)
                 || this.Name == "lastCardInView")
             {
                 Grow();
@@ -157,9 +158,12 @@ namespace CardBoxControl
         {
             if (this.isEnlarged && this.Parent != null)
             {
-                this.Parent.Controls.SetChildIndex(this, lastZIndex);
-                this.Location = new Point(this.Location.X - (bigSize.Width - smallSize.Width) / 2, this.Location.Y - (bigSize.Height - smallSize.Height) + 90 / 2);
-                this.Size = smallSize;
+                //Commented out code is for popping the card forward
+
+                //this.Parent.Controls.SetChildIndex(this, lastZIndex);
+                //this.Location = new Point(this.Location.X + (bigSize.Width - smallSize.Width) / 2, this.Location.Y + (bigSize.Height - smallSize.Height) + 90 / 2);
+                this.Location = new Point(this.Location.X, this.Location.Y + 20);
+                //this.Size = smallSize;
                 this.isEnlarged = false;
                 //this.Parent.Refresh();
             }
@@ -168,13 +172,14 @@ namespace CardBoxControl
         {
             if (this.isEnlarged == false)
             {
-                lastZIndex = this.Parent.Controls.GetChildIndex(this);
-                this.Size = bigSize;
-                this.previousLocation = this.Location;
-                this.Location = new Point(this.Location.X + (bigSize.Width - smallSize.Width) / 2, this.Location.Y + (bigSize.Height - smallSize.Height) - 90 / 2);
-                //this.Location = new Point(this.Location.X, this.Location.Y - (bigSize.Height - smallSize.Height) + 90 / 2);
+                //Commented out code is for popping the card forward
 
-                // this.BringToFront();
+                //lastZIndex = this.Parent.Controls.GetChildIndex(this);
+                //this.Size = bigSize;
+                //this.previousLocation = this.Location;
+                //this.Location = new Point(this.Location.X - (bigSize.Width - smallSize.Width) / 2, this.Location.Y - (bigSize.Height - smallSize.Height) - 90 / 2);
+                this.Location = new Point(this.Location.X, this.Location.Y - 20);
+                //this.BringToFront();
                 this.isEnlarged = true;
                 //this.Parent.Refresh();
             }
