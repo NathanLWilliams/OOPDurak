@@ -25,10 +25,10 @@ namespace CardGame
            
         }
 
-        private void InitializeDeck(int DeckSize)
+        private void InitializeDeck(Deck.Size DeckSize)
         {
             // gets deck size from playing options page
-            // and initializes deck on left deckviewer() with trum card in horizontal position
+            // and initializes deck on left deckviewer() with trump card in horizontal position
         }
         
         private void SetUpPlayerHand()

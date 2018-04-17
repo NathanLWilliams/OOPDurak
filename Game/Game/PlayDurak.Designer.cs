@@ -47,7 +47,7 @@ namespace Game
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.87037F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.12963F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1579, 1063);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 862);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // toolbar1
@@ -59,18 +59,17 @@ namespace Game
             this.toolbar1.Location = new System.Drawing.Point(0, 0);
             this.toolbar1.Margin = new System.Windows.Forms.Padding(0);
             this.toolbar1.Name = "toolbar1";
-            this.toolbar1.Size = new System.Drawing.Size(1579, 83);
+            this.toolbar1.Size = new System.Drawing.Size(1184, 67);
             this.toolbar1.TabIndex = 0;
             // 
             // PlayDurak
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1579, 1063);
+            this.ClientSize = new System.Drawing.Size(1184, 862);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "PlayDurak";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

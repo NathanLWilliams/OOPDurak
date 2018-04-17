@@ -220,19 +220,6 @@ namespace Game
         {
             PictureBox pbDeckSelected = sender as PictureBox;
 
-            switch(pbDeckSelected.Name)
-            {
-                case "pbSmallDeck":
-                    Settings.deckSize = CardGame.Deck.Size.Small;
-                    break;
-                case "pbMediumDeck":
-                    Settings.deckSize = CardGame.Deck.Size.Medium;
-                    break;
-                case "pbLargeDeck":
-                    Settings.deckSize = CardGame.Deck.Size.Large;
-                    break;
-            }
-
             if (pbDeckSelected.BorderStyle == BorderStyle.Fixed3D)
                 pbDeckSelected.BorderStyle = BorderStyle.None;
             else

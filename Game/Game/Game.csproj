@@ -74,7 +74,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
     <EmbeddedResource Include="PlayDurak.resx">
       <DependentUpon>PlayDurak.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,9 +125,9 @@
       <Project>{6C0E076B-CA37-4678-8131-EE84037157B7}</Project>
       <Name>CardGame</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DeckViewerTester\DeckViewer.csproj">
+    <ProjectReference Include="..\DeckViewerTester\DeckViewers.csproj">
       <Project>{32FE9CC6-6F3A-42AF-9708-7CFFE6F02C6E}</Project>
-      <Name>DeckViewer</Name>
+      <Name>DeckViewers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

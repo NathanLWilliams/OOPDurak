@@ -37,7 +37,7 @@ namespace CardGame
         {
             playerHand.Add(card);
             //keep track of how many cards are in hand
-            numberOfCardsInHand = playerHand.Count();
+            numberOfCardsInHand = playerHand.Count;
         }
 
         //Add Many Cards to Hand- during end of round
@@ -45,16 +45,16 @@ namespace CardGame
         public void RefillCards(Cards cards)
         {
            
-            for (int i=0; i < cards.Count(); i++)
+            for (int i=0; i < cards.Count; i++)
             {//as long as cards in player's hand less than 6
-                if (playerHand.Count() < 6)
+                if (playerHand.Count < 6)
                 {
                     playerHand.Add(cards[i]);
                 }
                
             }
             //keeping track of the number of cards in hand
-            numberOfCardsInHand = playerHand.Count();
+            numberOfCardsInHand = playerHand.Count;
         }
 
         // Remove a card from hand
@@ -62,7 +62,7 @@ namespace CardGame
         {
             playerHand.Remove(card);
             //keeping track of the number of cards in hand
-            numberOfCardsInHand = playerHand.Count();
+            numberOfCardsInHand = playerHand.Count;
         }
     }
 }

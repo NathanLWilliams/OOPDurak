@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using CardBoxControl;
 using CardGame;
+using DeckViewerTester;
 
 namespace Game
 {
@@ -28,6 +29,10 @@ namespace Game
         public DeckViewer(Deck deck, int numberOfCards) : this()
         {
             this.AddCards(deck, numberOfCards);
+        }
+        public DeckViewer(Deck deck)
+        {
+            this.AddCards(deck, deck.Count);
         }
         public void AddCards(Deck deck, int numberOfCards)
         {
@@ -61,13 +66,13 @@ namespace Game
             this.RemoveCard(index);
             return temp;
         }
-        public void UpdateCardBoxes()
+        public void UpdateCardBoxes(bool willCardsPop)
         {
             this.Controls.Clear();
 
             foreach(Card c in cards)
             {
-                CardBox cardBox = new CardBox(c, true);
+                CardBox cardBox = new CardBox(c, willCardsPop);
                 cardBox.Size = standardCardSize;
                 this.Controls.Add(cardBox);
             }
@@ -76,7 +81,7 @@ namespace Game
                 this.Controls[this.Controls.Count - 1].Name = "lastCardInView";
         }
         //public void AdjustCards(object source, EventArgs args)
-        public void AdjustCards()
+        public virtual void AdjustCards()
         {
             /*for(int i = 0; i < this.panel1.Controls.Count; i++)
             {
@@ -102,7 +107,7 @@ namespace Game
                     this.panel1.Controls[i].BringToFront();
                 }
             }*/
-            UpdateCardBoxes();
+            UpdateCardBoxes(true);
             for (int i = 0; i < this.Controls.Count; i++)
             {
                 double widthDivider = (2 + this.Controls.Count / 3);
@@ -114,12 +119,16 @@ namespace Game
                 this.Controls[i].BringToFront();
             }
         }
-        public void DeckViewer_DragEnter(object sender, DragEventArgs e)
+        public virtual void DeckViewer_DragEnter(object sender, DragEventArgs e)
         {
-            if(e.Data.GetData(typeof(CardBox)) != null)
-                e.Effect = DragDropEffects.Move;
+            if (e.Data.GetData(typeof(CardBox)) != null)
+            {
+                CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
+                if (draggedCard.Parent.GetType() == typeof(DeckPileViewer))
+                    e.Effect = DragDropEffects.Move;
+            }
         }
-        public void DeckViewer_DragDrop(object sender, DragEventArgs e)
+        public virtual void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetData(typeof(CardBox)) != null)
             {
@@ -129,7 +138,7 @@ namespace Game
                 //Card draggedCard = new Card(cardHashCode);
                 CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
 
-                if(draggedCard !=null)
+                if(draggedCard != null && draggedCard.Parent.GetType() == typeof(DeckPileViewer))
                 {
                     DeckViewer fromPanel = draggedCard.Parent as DeckViewer;
                     DeckViewer toPanel = sender as DeckViewer;
@@ -151,8 +160,6 @@ namespace Game
 
 
             }
-
-            
         }
     }
 }

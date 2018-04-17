@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoutViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DeckPileViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DeckViewer.cs">
       <SubType>Component</SubType>
     </Compile>
