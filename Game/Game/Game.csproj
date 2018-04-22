@@ -51,9 +51,6 @@
     <Compile Include="PageDesign\InstructionsPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PageDesign\Toolbar.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="PageDesign\MainMenu.cs">
       <SubType>Component</SubType>
     </Compile>

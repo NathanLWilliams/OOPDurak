@@ -237,7 +237,6 @@ namespace Game
             //Goto instructions
             if (this.Parent is Form)
                 (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Playing);
-            CardGame.DurakGame();
         }
 
 
