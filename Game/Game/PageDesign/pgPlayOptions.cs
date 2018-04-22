@@ -293,7 +293,7 @@ namespace Game
                 // border style tells us if box is selected
                 if (pbDeckSize.BorderStyle == BorderStyle.Fixed3D)
                 {   
-                    gameDeck = new Deck((Deck.Size)pbDeckSize.Tag, false, true, Suit.Diamonds);
+                    gameDeck = new Deck((Deck.Size)pbDeckSize.Tag, true, true, Suit.Diamonds);
                 }
             }
             

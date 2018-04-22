@@ -50,10 +50,10 @@ namespace Game
         }
         public void AddCard(Card card , bool adjust = true)
         {
-            //this.panel1.Controls.Add(new CardBox(card));
             cards.Add(card);
-            AdjustCards();
-            System.Console.WriteLine("Add Card");
+
+            if(adjust == true)
+                AdjustCards();
         }
         public void RemoveCard(int index)
         {
@@ -145,7 +145,7 @@ namespace Game
 
                 if(draggedCard != null && draggedCard.Parent.GetType() == typeof(DeckPileViewer))
                 {
-                    DeckViewer fromPanel = draggedCard.Parent as DeckViewer;
+                    DeckViewer fromPanel = draggedCard.Parent as DeckPileViewer;
                     DeckViewer toPanel = sender as DeckViewer;
 
                     if(toPanel !=null && fromPanel!=null)

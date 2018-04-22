@@ -46,7 +46,7 @@ namespace Game
             Initialize();  
             InitializeDeck(deck);
             SetUpPlayers(humanPlayer, aiPlayer);
-
+            
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Game
             this.panel9 = new System.Windows.Forms.Panel();
             this.pbEnemyPlayerImage = new System.Windows.Forms.PictureBox();
             this.boutDeckViewer = new BoutViewer();
-            this.drawDeckViewer = new DeckPileViewer();
+            //this.drawDeckViewer = new DeckPileViewer();
             this.playerDeckViewer = new DeckViewer();
             this.enemyDeckViewer = new DeckViewer();
             this.enemyDeckViewer.AllowDrop = false;
@@ -238,12 +238,12 @@ namespace Game
             // 
             // drawDeckViewr
             // 
-            this.drawDeckViewer.BackColor = System.Drawing.Color.Lime;
-            this.drawDeckViewer.Location = new System.Drawing.Point(11, 211);
-            this.drawDeckViewer.Margin = new System.Windows.Forms.Padding(2);
-            this.drawDeckViewer.Name = "deckViewer2";
-            this.drawDeckViewer.Size = new System.Drawing.Size(200, 287);
-            this.drawDeckViewer.TabIndex = 10;
+            //this.drawDeckViewer.BackColor = System.Drawing.Color.Lime;
+            //this.drawDeckViewer.Location = new System.Drawing.Point(11, 211);
+            //this.drawDeckViewer.Margin = new System.Windows.Forms.Padding(2);
+            //this.drawDeckViewer.Name = "deckViewer2";
+            //this.drawDeckViewer.Size = new System.Drawing.Size(200, 287);
+            //this.drawDeckViewer.TabIndex = 10;
             // 
             // deckViewer1
             // 
@@ -277,7 +277,7 @@ namespace Game
             this.Controls.Add(this.lbEnemyPlayerHandCount);
 
             this.Controls.Add(this.playerDeckViewer);
-            this.Controls.Add(this.drawDeckViewer);
+            
             this.Controls.Add(this.boutDeckViewer);
             this.Controls.Add(this.panel9);
             this.Controls.Add(this.panel1);
@@ -303,8 +303,14 @@ namespace Game
         private void InitializeDeck(Deck deck)
         {
             drawDeckViewer = new DeckPileViewer(deck);
-           // drawDeckViewer.AddCards(deck, deck.Count); // also in DeckPile viewer class need to make adjustments for TrumpCard to show horizontally and do something with deck
-
+            // drawDeckViewer.AddCards(deck, deck.Count); // also in DeckPile viewer class need to make adjustments for TrumpCard to show horizontally and do something with deck
+            this.drawDeckViewer.BackColor = System.Drawing.Color.Lime;
+            this.drawDeckViewer.Location = new System.Drawing.Point(11, 211);
+            this.drawDeckViewer.Margin = new System.Windows.Forms.Padding(2);
+            this.drawDeckViewer.Name = "deckViewer2";
+            this.drawDeckViewer.Size = new System.Drawing.Size(200, 287);
+            this.drawDeckViewer.TabIndex = 10;
+            this.Controls.Add(this.drawDeckViewer);
         }
         private void SetUpPlayers(HumanPlayer myPlayer, AiPlayer enemyPlayer)
         {
