@@ -6,7 +6,7 @@
  *  of the book called: Beginning Visual C# 2012 Programming
  * this library was created.
  * 
- * @authro       Qasim Iqbal
+ * @author       Qasim Iqbal
  * @author       Nathan Williams
  * @author       Karli Watson (author of the book)
  * @version      3.0
@@ -60,6 +60,7 @@ namespace CardGame
                 targetCards[index] = this[index];
             }
         }
+
 
     }
 

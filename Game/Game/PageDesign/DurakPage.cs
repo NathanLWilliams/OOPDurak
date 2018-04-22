@@ -56,11 +56,15 @@ namespace Game
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(11, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(63, 56);
+            this.pictureBox1.Location = new System.Drawing.Point(11, 28);
+            this.pictureBox1.Name = "pbGameMenu";
+            this.pictureBox1.Size = new System.Drawing.Size(88, 88);
             this.pictureBox1.TabIndex = 4;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Image = Properties.Resources.menu_lime_t;
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.BackColor = Color.Transparent;
+
             // 
             // panel1
             // 

@@ -102,20 +102,20 @@ namespace Game
         private void Start_Click(object sender, EventArgs e)
         {
             //Goto play options
-            if(this.Parent.Parent is Form)
-                (this.Parent.Parent as PlayDurak).SetScreen(PlayDurak.Screen.PlayOptions);
+            if(this.Parent is Form)
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.PlayOptions);
         }
         private void Statistics_Click(object sender, EventArgs e)
         {
             //Goto statistics
-            if (this.Parent.Parent is Form)
-                (this.Parent.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Statistics);
+            if (this.Parent is Form)
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Statistics);
         }
         private void Instructions_Click(object sender, EventArgs e)
         {
             //Goto instructions
-            if (this.Parent.Parent is Form)
-                (this.Parent.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Instructions);
+            if (this.Parent is Form)
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Instructions);
         }
 
     }

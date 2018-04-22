@@ -41,19 +41,19 @@ namespace Game
             instructionsPage = new InstructionsPage();
             winPage = new Win();
 
-            this.tableLayoutPanel1.Controls.Add(menu);
-            this.tableLayoutPanel1.Controls.Add(playOptions);
-            this.tableLayoutPanel1.Controls.Add(stats);
-            this.tableLayoutPanel1.Controls.Add(durakPage);
-            this.tableLayoutPanel1.Controls.Add(instructionsPage);
-            this.tableLayoutPanel1.Controls.Add(winPage);
+            this.Controls.Add(menu);
+            this.Controls.Add(playOptions);
+            this.Controls.Add(stats);
+            this.Controls.Add(durakPage);
+            this.Controls.Add(instructionsPage);
+            this.Controls.Add(winPage);
 
-            this.tableLayoutPanel1.SetRow(menu, 1);
-            this.tableLayoutPanel1.SetRow(playOptions, 1);
-            this.tableLayoutPanel1.SetRow(stats, 1);
-            this.tableLayoutPanel1.SetRow(durakPage, 1);
-            this.tableLayoutPanel1.SetRow(instructionsPage, 1);
-            this.tableLayoutPanel1.SetRow(winPage, 1);
+            //this.SetRow(menu, 1);
+            //this.SetRow(playOptions, 1);
+            //this.SetRow(stats, 1);
+            //this.SetRow(durakPage, 1);
+            //this.SetRow(instructionsPage, 1);
+            //this.SetRow(winPage, 1);
 
             menu.Visible = false;
             playOptions.Visible = false;
