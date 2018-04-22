@@ -22,6 +22,9 @@ namespace CardGame
             set { action = value; }
         }
 
+                public void Pass()
+        {
 
+        }
     }
 }

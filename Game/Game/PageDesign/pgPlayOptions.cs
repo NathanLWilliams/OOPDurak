@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CardGame;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,8 +9,12 @@ using System.Windows.Forms;
 
 namespace Game
 {
+
     public class pgPlayOptions : Panel
     {
+        private DurakPage durakPage;
+
+        private PictureBox pbBackScreen;
         private Label lblTitle;
         private PictureBox pbSmallDeck;
         private Label lblPromptDeckSize;
@@ -26,7 +31,7 @@ namespace Game
         public pgPlayOptions()
         {
             //changeBorderStyle();
-
+            this.pbBackScreen = new PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pbSmallDeck = new System.Windows.Forms.PictureBox();
             this.lblPromptDeckSize = new System.Windows.Forms.Label();
@@ -39,11 +44,24 @@ namespace Game
             this.rdNormalMode = new System.Windows.Forms.RadioButton();
             this.btPlay = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBackScreen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSmallDeck)).BeginInit();
             this.gbGameMode.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMediumDeck)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbLargeDeck)).BeginInit();
             this.SuspendLayout();
+            //
+            // BackScreenPictureBox
+            //
+            this.pbBackScreen.BackColor = System.Drawing.Color.Transparent;
+            this.pbBackScreen.Image = Properties.Resources.goback;
+            this.pbBackScreen.Location = new System.Drawing.Point(35,40);
+            this.pbBackScreen.Name = "pbBackScreen";
+            this.pbBackScreen.Size = new System.Drawing.Size(88, 83);
+            this.pbBackScreen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbBackScreen.TabIndex = 4;
+            this.pbBackScreen.TabStop = false;
+            this.pbBackScreen.Click += PbBackScreen_Click;
             // 
             // lblTitle
             // 
@@ -68,6 +86,7 @@ namespace Game
             this.pbSmallDeck.Image = Properties.Resources.small_deck;
             this.pbSmallDeck.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pbSmallDeck.Click += PbDeckSize_Click;
+            this.pbSmallDeck.Tag = Deck.Size.Small;
             // 
             // lblPromptDeckSize
             // 
@@ -129,6 +148,7 @@ namespace Game
             this.pbMediumDeck.Image = Properties.Resources.medium_deck;
             this.pbMediumDeck.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pbMediumDeck.Click += PbDeckSize_Click;
+            this.pbMediumDeck.Tag = Deck.Size.Medium;
 
             // 
             // pbLargeDeck
@@ -141,6 +161,7 @@ namespace Game
             this.pbLargeDeck.Image = Properties.Resources.large_deck;
             this.pbLargeDeck.SizeMode = PictureBoxSizeMode.StretchImage;
             this.pbLargeDeck.Click += PbDeckSize_Click;
+            this.pbLargeDeck.Tag = Deck.Size.Large;
 
             // 
             // rdNewbieMode
@@ -195,6 +216,7 @@ namespace Game
             // Panel PlayOptions
             // 
             this.ClientSize = new System.Drawing.Size(1184, 761);
+            this.Controls.Add(this.pbBackScreen);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.btPlay);
             this.Controls.Add(this.pbLargeDeck);
@@ -205,10 +227,26 @@ namespace Game
             this.Controls.Add(this.lblPromptDeckSize);
             this.Controls.Add(this.pbSmallDeck);
             this.Controls.Add(this.lblTitle);
-
+            this.Name = "pnlPlayOptions";
             this.BackgroundImage = Properties.Resources.mainMenuCombinedBackground;
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.Dock = DockStyle.Fill;
+           
+            ((System.ComponentModel.ISupportInitialize)(this.pbSmallDeck)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLargeDeck)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMediumDeck)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbBackScreen)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        private void PbBackScreen_Click(object sender, EventArgs e)
+        {
+            //Goto Main Menu options
+            if (this.Parent is Form)
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.MainMenu);
+            this.Visible = false;
         }
 
         /// <summary>
@@ -234,9 +272,63 @@ namespace Game
 
         private void BtPlay_Click(object sender, EventArgs e)
         {
-            //Goto instructions
-            if (this.Parent is Form)
-                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Playing);
+            if (IsDeckSizeSelected())
+            {
+                durakPage = new DurakPage(GetHumanPlayer(), GetEnemyPlayer(), GetPlayerSelectedDeck());
+                this.Parent.Controls.Add(durakPage);
+                PlayDurak.SetScreenVisible(this.Parent.Controls, durakPage);
+            }
+            else
+            {
+                MessageBox.Show("Error! Deck size must be selected");
+            }
+
+            
+        }
+        private Deck GetPlayerSelectedDeck()
+        {
+            Deck gameDeck = new Deck(Deck.Size.Medium); // by defualt its medium
+            foreach (PictureBox pbDeckSize in Controls.OfType<PictureBox>())
+            {
+                // border style tells us if box is selected
+                if (pbDeckSize.BorderStyle == BorderStyle.Fixed3D)
+                {   
+                    gameDeck = new Deck((Deck.Size)pbDeckSize.Tag, false, true, Suit.Diamonds);
+                }
+            }
+            
+            return gameDeck;
+        }
+        private AiPlayer GetEnemyPlayer()
+        {
+            AiPlayer enemyPlayer = new AiPlayer();
+            enemyPlayer.Image = Properties.Resources.robot;
+            enemyPlayer.Name = "Computer";
+            enemyPlayer.Score = 1000; // score could be seperate class
+
+            return enemyPlayer;
+        }
+        private HumanPlayer GetHumanPlayer()
+        {
+            HumanPlayer myPlayer = new HumanPlayer();
+            myPlayer.Image = Properties.Resources.user;
+            myPlayer.Name = "John Wick"; // maybe add text box in play options page to get these name like values
+             myPlayer.Score = 1000; // score could be seperate class
+
+            return myPlayer;
+        }
+        private bool IsDeckSizeSelected()
+        {
+            bool isDeckSizeSelected = false;
+            foreach (PictureBox pbDeckSize in Controls.OfType<PictureBox>())
+            {
+                // border style tells us if box is selected
+                if (pbDeckSize.BorderStyle == BorderStyle.Fixed3D)
+                {
+                    isDeckSizeSelected = true;
+                }
+            }
+            return isDeckSizeSelected;
         }
 
 

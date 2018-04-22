@@ -1,5 +1,6 @@
-﻿using System.Windows.Forms;
-
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
+using CardGame;
 namespace Game
 {
     public partial class PlayDurak : Form
@@ -35,7 +36,7 @@ namespace Game
             menu = new MainMenu();
             playOptions = new pgPlayOptions();
             stats = new StatisticsPage();
-            durakPage = new DurakPage();
+            //durakPage = new DurakPage(); //- removed it from here as we need its instance after play options page sets game options
             instructionPage = new InstructionsPage();
             winPage = new Win();
 
@@ -43,18 +44,16 @@ namespace Game
             this.Controls.Add(menu);
             this.Controls.Add(playOptions);
             this.Controls.Add(stats);
-            this.Controls.Add(durakPage);
+            //this.Controls.Add(durakPage);
             this.Controls.Add(instructionPage);
             this.Controls.Add(winPage);
 
             menu.Visible = true;
             playOptions.Visible = false;
             stats.Visible = false;
-            durakPage.Visible = false;
+            //durakPage.Visible = false;
             instructionPage.Visible = false;
             winPage.Visible = false;
-
-            SetScreen(Screen.PlayOptions);
 
         }
 
@@ -68,33 +67,49 @@ namespace Game
             switch(screen)
             {
                 case Screen.MainMenu:
-                    menu.Visible = true;
+                    SetScreenVisible(this.Controls,menu);
                     this.AcceptButton = (Button)menu.Controls["start"];
                     this.CancelButton = (Button)menu.Controls["exit"];
                     break;
                 case Screen.Instructions:
-                    menu.Visible = false;
-                    instructionPage.Visible = true;
+                    SetScreenVisible(this.Controls, instructionPage);
                     break;
                 case Screen.Statistics:
-                    menu.Visible = false;
-                    stats.Visible = true;
+                    SetScreenVisible(this.Controls, stats);
                     break;
                 case Screen.Playing:
-                    playOptions.Visible = false;
-                    durakPage.Visible = true;
+                   // SetScreenVisible(this.Controls,;
                     break;
                 case Screen.PlayOptions:
-                    menu.Visible = false;
-                    playOptions.Visible = true;
+                    SetScreenVisible(this.Controls, playOptions);
                     break;
                 case Screen.GameResults:
-                    
-                    durakPage.Visible = true;
-                    winPage.Visible = true;
                     break;
                 default:
                     break;
+            }
+        }
+        /// <summary>
+        /// Makes every screen invisible except the screen that is not suppose to be
+        /// </summary>
+        /// <param name="passedPanel"></param>
+        public static void SetScreenVisible(Control.ControlCollection panelCollection ,Panel passedPanel)
+        {
+            
+
+            foreach (Control panelItem in panelCollection)
+            {
+                if (panelItem is Panel)
+                {
+                    if(panelItem.Name == passedPanel.Name)
+                    {
+                        panelItem.Visible = true;
+                    }
+                    else
+                    {
+                        panelItem.Visible = false;
+                    }
+                }
             }
         }
     }
