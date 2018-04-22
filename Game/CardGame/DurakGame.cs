@@ -15,7 +15,6 @@ namespace CardGame
             this.SetUpPlayerInformation();
             this.SetUpPlayerHand();
             this.InitializeDeck((int) Deck.Size.Small);
-          
         }
         private void SetUpPlayerInformation()
         {
