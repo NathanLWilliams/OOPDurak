@@ -32,6 +32,11 @@ namespace Game
         }
         public DeckViewer(Deck deck)
         {
+            InitializeComponent();
+            cards = new Cards();
+            this.AllowDrop = true;
+            this.DragEnter += new DragEventHandler(this.DeckViewer_DragEnter);
+            this.DragDrop += new DragEventHandler(this.DeckViewer_DragDrop);
             this.AddCards(deck, deck.Count);
         }
         public void AddCards(Deck deck, int numberOfCards)

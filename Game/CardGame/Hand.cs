@@ -6,31 +6,31 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
-    public class Hand : ICloneable
+    public class Hand : Cards
     {
 
         //Instance attribute- should be card collection
-        Cards playerHand = new Cards();
+        Hand playerHand;
         private int numberOfCardsInHand = 0;
         //default constructor
         public Hand()
         {
-
+           playerHand = new Hand();
         }
 
         //parameterized constructor
 
-        public Hand(Cards newHand)
+        public Hand(Hand newHand)
         {
             playerHand = newHand;
         }
 
         //clone method
-        public object Clone()
-        {
-            Hand newHand = new Hand(playerHand.Clone() as Cards);
-            return newHand;
-        }
+        //public object Clone()
+        //{
+        //    Hand newHand = new Hand(playerHand.Clone() as Cards);
+        //    return newHand;
+        //}
 
         //Add Card to player hands method
         public void AddCard(Card card)
@@ -45,7 +45,7 @@ namespace CardGame
         public void RefillCards(Cards cards)
         {
            
-            for (int i=0; i < cards.Count; i++)
+            for (int i=0; i < cards .Count; i++)
             {//as long as cards in player's hand less than 6
                 if (playerHand.Count < 6)
                 {

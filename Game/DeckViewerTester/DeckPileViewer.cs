@@ -19,7 +19,6 @@ namespace DeckViewerTester
         }
         public DeckPileViewer(Deck deck) : base(deck)
         {
-         
         }
         public override void AdjustCards()
         {

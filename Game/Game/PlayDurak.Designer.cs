@@ -30,59 +30,58 @@ namespace Game
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolbar1 = new Game.Toolbar();
-            this.tableLayoutPanel1.SuspendLayout();
+            //this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            //this.toolbar1 = new Game.Toolbar();
+            //this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.toolbar1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.87037F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.12963F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1184, 862);
-            this.tableLayoutPanel1.TabIndex = 0;
+            //this.ColumnCount = 1;
+            //this.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            //this.Controls.Add(this.toolbar1, 0, 0);
+            //this.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.Location = new System.Drawing.Point(0, 0);
+            //this.Margin = new System.Windows.Forms.Padding(0);
+            //this.Name = "tableLayoutPanel1";
+            //this.RowCount = 2;
+            //this.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.87037F));
+            //this.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.12963F));
+            //this.Size = new System.Drawing.Size(1579, 1063);
+            //this.TabIndex = 0;
             // 
             // toolbar1
             // 
-            this.toolbar1.AutoSize = true;
-            this.toolbar1.BackColor = System.Drawing.Color.Goldenrod;
-            this.toolbar1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolbar1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolbar1.Location = new System.Drawing.Point(0, 0);
-            this.toolbar1.Margin = new System.Windows.Forms.Padding(0);
-            this.toolbar1.Name = "toolbar1";
-            this.toolbar1.Size = new System.Drawing.Size(1184, 67);
-            this.toolbar1.TabIndex = 0;
+            //this.toolbar1.AutoSize = true;
+            //this.toolbar1.BackColor = System.Drawing.Color.Goldenrod;
+            //this.toolbar1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            //this.toolbar1.Dock = System.Windows.Forms.DockStyle.Fill;
+            //this.toolbar1.Location = new System.Drawing.Point(0, 0);
+            //this.toolbar1.Margin = new System.Windows.Forms.Padding(0);
+            //this.toolbar1.Name = "toolbar1";
+            //this.toolbar1.Size = new System.Drawing.Size(1579, 83);
+            //this.toolbar1.TabIndex = 0;
             // 
             // PlayDurak
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1184, 862);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.ClientSize = new System.Drawing.Size(1200, 800);
+
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.Name = "PlayDurak";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Play Durak";
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
+
 
         }
 
         #endregion
-        private Toolbar toolbar1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+
     }
 }
 

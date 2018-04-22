@@ -25,9 +25,9 @@ namespace CardGame
     {
         public enum Size
         {
-            Small,
-            Medium,
-            Large
+            Small = 20,
+            Medium = 36,
+            Large = 52
         }
         //private Cards cards = new Cards();
         public event EventHandler LastCardDrawn;

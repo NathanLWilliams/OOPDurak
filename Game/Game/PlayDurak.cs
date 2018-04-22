@@ -1,10 +1,15 @@
-﻿using System.Windows.Forms;
-
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
+using CardGame;
 namespace Game
 {
     public partial class PlayDurak : Form
     {
+        //BUGS:
+
         //TODO: Maybe add some static font sizes or buttons sizes which are shared and consistent between each layout/state
+
+        //Separate the different sets of controls/layouts into panels so we can easily loop through in code to set visible or invisible
 
         public enum Screen
         {
@@ -16,13 +21,11 @@ namespace Game
             GameResults
         }
 
-        public static Screen currentScreen = Screen.MainMenu;
-
         static MainMenu menu;
         static pgPlayOptions playOptions;
         static StatisticsPage stats;
         static DurakPage durakPage;
-        static InstructionsPage instructionsPage;
+        static InstructionsPage instructionPage;
         static Win winPage;
 
         public PlayDurak()
@@ -33,32 +36,24 @@ namespace Game
             menu = new MainMenu();
             playOptions = new pgPlayOptions();
             stats = new StatisticsPage();
-            durakPage = new DurakPage();
-            instructionsPage = new InstructionsPage();
+            //durakPage = new DurakPage(); //- removed it from here as we need its instance after play options page sets game options
+            instructionPage = new InstructionsPage();
             winPage = new Win();
 
-            this.tableLayoutPanel1.Controls.Add(menu);
-            this.tableLayoutPanel1.Controls.Add(playOptions);
-            this.tableLayoutPanel1.Controls.Add(stats);
-            this.tableLayoutPanel1.Controls.Add(durakPage);
-            this.tableLayoutPanel1.Controls.Add(instructionsPage);
-            this.tableLayoutPanel1.Controls.Add(winPage);
 
-            this.tableLayoutPanel1.SetRow(menu, 1);
-            this.tableLayoutPanel1.SetRow(playOptions, 1);
-            this.tableLayoutPanel1.SetRow(stats, 1);
-            this.tableLayoutPanel1.SetRow(durakPage, 1);
-            this.tableLayoutPanel1.SetRow(instructionsPage, 1);
-            this.tableLayoutPanel1.SetRow(winPage, 1);
+            this.Controls.Add(menu);
+            this.Controls.Add(playOptions);
+            this.Controls.Add(stats);
+            //this.Controls.Add(durakPage);
+            this.Controls.Add(instructionPage);
+            this.Controls.Add(winPage);
 
-            menu.Visible = false;
+            menu.Visible = true;
             playOptions.Visible = false;
             stats.Visible = false;
-            durakPage.Visible = false;
-            instructionsPage.Visible = false;
+            //durakPage.Visible = false;
+            instructionPage.Visible = false;
             winPage.Visible = false;
-
-            SetScreen(Screen.MainMenu);
 
         }
 
@@ -69,44 +64,53 @@ namespace Game
         /// <param name="screen"></param>
         public void SetScreen(Screen screen)
         {
-            menu.Visible = false;
-            playOptions.Visible = false;
-            stats.Visible = false;
-            durakPage.Visible = false;
-            instructionsPage.Visible = false;
-            winPage.Visible = false;
-            
-            switch (screen)
+            switch(screen)
             {
                 case Screen.MainMenu:
-                    menu.Visible = true;
+                    SetScreenVisible(this.Controls,menu);
                     this.AcceptButton = (Button)menu.Controls["start"];
                     this.CancelButton = (Button)menu.Controls["exit"];
                     break;
                 case Screen.Instructions:
-                    menu.Visible = false;
-                    instructionsPage.Visible = true;
+                    SetScreenVisible(this.Controls, instructionPage);
                     break;
                 case Screen.Statistics:
-                    menu.Visible = false;
-                    stats.Visible = true;
+                    SetScreenVisible(this.Controls, stats);
                     break;
                 case Screen.Playing:
-                    playOptions.Visible = false;
-                    durakPage.Visible = true;
+                   // SetScreenVisible(this.Controls,;
                     break;
                 case Screen.PlayOptions:
-                    menu.Visible = false;
-                    playOptions.Visible = true;
+                    SetScreenVisible(this.Controls, playOptions);
                     break;
                 case Screen.GameResults:
-                    durakPage.Visible = false;
-                    winPage.Visible = false;
                     break;
                 default:
                     break;
             }
-            PlayDurak.currentScreen = screen;
+        }
+        /// <summary>
+        /// Makes every screen invisible except the screen that is not suppose to be
+        /// </summary>
+        /// <param name="passedPanel"></param>
+        public static void SetScreenVisible(Control.ControlCollection panelCollection ,Panel passedPanel)
+        {
+            
+
+            foreach (Control panelItem in panelCollection)
+            {
+                if (panelItem is Panel)
+                {
+                    if(panelItem.Name == passedPanel.Name)
+                    {
+                        panelItem.Visible = true;
+                    }
+                    else
+                    {
+                        panelItem.Visible = false;
+                    }
+                }
+            }
         }
     }
 }

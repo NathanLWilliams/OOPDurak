@@ -8,26 +8,10 @@ namespace CardGame
 {
     public class HumanPlayer : Player
     {
-        private string name;
 
-        public string Name
+        public void Pass()
         {
-            get { return name; }
-            set { name = value; }
+            // some functionality only available to player maybe?
         }
-
-        private string image;
-
-        public string Image
-        {
-            get { return image; }
-            set { image = value; }
-        }
-
-        public override Card PlayCard(Card card)
-        {
-            return base.PlayCard(card);
-        }
-
     }
 }
