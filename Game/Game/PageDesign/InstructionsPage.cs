@@ -96,15 +96,20 @@ namespace Game
                 this.lblDefend.Size = new System.Drawing.Size(231, 42);
                 this.lblDefend.TabIndex = 1;
                 this.lblDefend.Text = "HOW TO Defend";
-                
-                // 
-                // lblDefendDescript
-                // 
+
+            // 
+            // lblDefendDescript
+            // 
+                this.lblDefendDescript.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.lblDefendDescript.Location = new System.Drawing.Point(3, 63);
                 this.lblDefendDescript.Name = "lblDefendDescript";
                 this.lblDefendDescript.Size = new System.Drawing.Size(692, 201);
                 this.lblDefendDescript.TabIndex = 2;
-                this.lblDefendDescript.Text = "Description goes here";
+                this.lblDefendDescript.Text = "The Defender must defend against the attacker's attack.  "
+                                              +"To do this, the defender must place a higher face value card of the same suit as the attacking card.  "
+                                              +"If the defender does not have a higher face value card of the same suit, the only other option for a successful defense is to play a trump card. "
+                                              +"The face value of the trump card does not matter.  However, if the attacker attacks with a card of the trump suit, then the defender must defend with a higher face value card as the trump suit has been nullified.  "
+                                              +"If the defender successfully defends the attacker's attack then the round is over and the cards in the main bout is discarded.  ";
                 // 
                 // lblAttack
                 // 
@@ -119,9 +124,13 @@ namespace Game
                 // 
                 this.lblAttackDescrip.Location = new System.Drawing.Point(3, 45);
                 this.lblAttackDescrip.Name = "lblAttackDescrip";
+                this.lblAttackDescrip.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.lblAttackDescrip.Size = new System.Drawing.Size(692, 228);
                 this.lblAttackDescrip.TabIndex = 3;
-                this.lblAttackDescrip.Text = "Description goes here";
+                this.lblAttackDescrip.Text = "The goal of the attacker is to select a card in which the defender can not beat.  "
+                                              +"If the attack is successful the cards in the main bout are placed into the defender's hand.  "
+                                              +"If the defender is able to defend, the attacker can perform another attack, IF he has a card of the same face value of any cards in the main bout.  "
+                                              +"The attacker may attack up to a maximum of six times.  The round ends if the attacker can't or chooses not to attack again. ";
                 // 
                 // lblRules
                 // 
@@ -131,14 +140,22 @@ namespace Game
                 this.lblRules.Size = new System.Drawing.Size(389, 42);
                 this.lblRules.TabIndex = 2;
                 this.lblRules.Text = "General Rules";
-                // 
-                // lblRulesDescription
-                // 
+            // 
+            // lblRulesDescription
+            // 
+                this.lblRulesDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                 this.lblRulesDescription.Location = new System.Drawing.Point(9, 45);
                 this.lblRulesDescription.Name = "lblRulesDescription";
                 this.lblRulesDescription.Size = new System.Drawing.Size(692, 218);
                 this.lblRulesDescription.TabIndex = 4;
-                this.lblRulesDescription.Text = "Description goes here";
+                this.lblRulesDescription.Text = "The Goal of Durak is to be the person remaining with cards in their hand.  The first person to have an empty hand is called Durak,"+" which is the loser.  There are two roles, the players take (The attacker and Defender). "
+                                                +"The person who begins the game with the lowest trump card is the attacker while the other player is the defender. "
+                                                +"The attacker goes first and plays a card , the defender must be able to defend the attack or else the played card goes into the defenders hand.  "
+                                                +"Once the attacker can not attack again or the defender can't defend then the round is finshed and the roles are switched,  "
+                                                +"If the players hand has less than six cards then they must draw cards from the deck until they have six.  "
+                                                +"If they have more than six cards at the end of the round, then there is no need to draw more cards.  "
+                                                +"The game continues until the deck is empty which symbolizes the final set of rounds in which the person to lose all the cards in their hand "
+                                                +"is declared the Durak.";
                 // 
                 // tbVideo
                 // 

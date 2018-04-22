@@ -20,13 +20,11 @@ namespace Game
             GameResults
         }
 
-        public static Screen currentScreen = Screen.MainMenu;
-
         static MainMenu menu;
         static pgPlayOptions playOptions;
         static StatisticsPage stats;
         static DurakPage durakPage;
-        static InstructionsPage instructionsPage;
+        static InstructionsPage instructionPage;
         static Win winPage;
 
         public PlayDurak()
@@ -38,32 +36,26 @@ namespace Game
             playOptions = new pgPlayOptions();
             stats = new StatisticsPage();
             durakPage = new DurakPage();
-            instructionsPage = new InstructionsPage();
+            instructionPage = new InstructionsPage();
             winPage = new Win();
+
 
             this.Controls.Add(menu);
             this.Controls.Add(playOptions);
             this.Controls.Add(stats);
             this.Controls.Add(durakPage);
-            this.Controls.Add(instructionsPage);
+            this.Controls.Add(instructionPage);
             this.Controls.Add(winPage);
 
-            //this.SetRow(menu, 1);
-            //this.SetRow(playOptions, 1);
-            //this.SetRow(stats, 1);
-            //this.SetRow(durakPage, 1);
-            //this.SetRow(instructionsPage, 1);
-            //this.SetRow(winPage, 1);
-
-            menu.Visible = false;
+            menu.Visible = true;
             playOptions.Visible = false;
             stats.Visible = false;
             durakPage.Visible = false;
-            instructionsPage.Visible = false;
+            instructionPage.Visible = false;
             winPage.Visible = false;
 
-            SetScreen(Screen.MainMenu);
-            //this.deckViewer1.AddCards(new CardGame.Deck(CardGame.Deck.Size.Small), 5);
+            SetScreen(Screen.PlayOptions);
+            this.deckViewer1.AddCards(new CardGame.Deck(CardGame.Deck.Size.Small), 5);
         }
 
         /// <summary>
@@ -73,14 +65,7 @@ namespace Game
         /// <param name="screen"></param>
         public void SetScreen(Screen screen)
         {
-            menu.Visible = false;
-            playOptions.Visible = false;
-            stats.Visible = false;
-            durakPage.Visible = false;
-            instructionsPage.Visible = false;
-            winPage.Visible = false;
-            
-            switch (screen)
+            switch(screen)
             {
                 case Screen.MainMenu:
                     menu.Visible = true;
@@ -89,7 +74,7 @@ namespace Game
                     break;
                 case Screen.Instructions:
                     menu.Visible = false;
-                    instructionsPage.Visible = true;
+                    instructionPage.Visible = true;
                     break;
                 case Screen.Statistics:
                     menu.Visible = false;
@@ -104,13 +89,13 @@ namespace Game
                     playOptions.Visible = true;
                     break;
                 case Screen.GameResults:
-                    durakPage.Visible = false;
-                    winPage.Visible = false;
+                    
+                    durakPage.Visible = true;
+                    winPage.Visible = true;
                     break;
                 default:
                     break;
             }
-            PlayDurak.currentScreen = screen;
         }
     }
 }
