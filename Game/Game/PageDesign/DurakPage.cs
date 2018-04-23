@@ -27,10 +27,18 @@ namespace Game
         private System.Windows.Forms.PictureBox pbEnemyPlayerImage;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private Label lblCurrentTurn;
         private DeckViewer enemyDeckViewer;
         private DeckViewer boutDeckViewer;
         private DeckViewer drawDeckViewer;
         private DeckViewer playerDeckViewer;
+        private bool isAttackerTurn;
+
+        public bool IsAttackerTurn
+        {
+            get { return isAttackerTurn; }
+            set { isAttackerTurn = value; }
+        }
 
         //private CardBox dragCard;
 
@@ -62,6 +70,7 @@ namespace Game
             this.lbEnemyPlayerHandCount = new Label();
             this.lbMyPlayerHandCount = new Label();
             this.pbMenuOptions = new PictureBox();
+            this.lblCurrentTurn = new Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -143,6 +152,21 @@ namespace Game
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(292, 160);
             this.panel9.TabIndex = 7;
+
+            // 
+            // lblCurrentTurn
+            // 
+            this.lblCurrentTurn.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblCurrentTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentTurn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lblCurrentTurn.Location = new System.Drawing.Point(762, 676);
+            this.lblCurrentTurn.Name = "lblCurrentTurn";
+            this.lblCurrentTurn.Size = new System.Drawing.Size(100, 23);
+            this.lblCurrentTurn.TabIndex = 13;
+            this.lblCurrentTurn.Text = "Attacker";
+            this.lblCurrentTurn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
+
             // 
             // pbEnemyPlyerImage
             // 
@@ -233,6 +257,7 @@ namespace Game
             this.boutDeckViewer.Name = "deckViewer3";
             this.boutDeckViewer.Size = new System.Drawing.Size(967, 287);
             this.boutDeckViewer.TabIndex = 9;
+            this.boutDeckViewer.ControlAdded += UpdateCurrentTurn;
             // 
             // drawDeckViewr
             // 
@@ -253,7 +278,6 @@ namespace Game
             this.playerDeckViewer.TabIndex = 11;
             this.playerDeckViewer.ControlAdded += UpdatePlayersHandCount;
             this.playerDeckViewer.ControlRemoved += UpdatePlayersHandCount;
-            //TODO: Instantiate the deck separately using Settings.deckSize
             //this.playerDeckViewer.AddCards(new Deck(Deck.Size.Medium, true, true, Suit.Clubs), 6);
             // 
             // deckViewer4
@@ -277,6 +301,7 @@ namespace Game
             this.Controls.Add(this.lbMyPlayerScore);
             this.Controls.Add(this.lbMyPlayerHandCount);
             this.Controls.Add(this.lbEnemyPlayerHandCount);
+            this.Controls.Add(this.lblCurrentTurn);
 
             this.Controls.Add(this.playerDeckViewer);
             
@@ -301,7 +326,13 @@ namespace Game
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
             lbEnemyPlayerHandCount.Text = enemyDeckViewer.Controls.Count.ToString();
         }
-       
+        private void UpdateCurrentTurn(object sender, ControlEventArgs e)
+        {
+            isAttackerTurn = isAttackerTurn ? false : true;
+            lblCurrentTurn.Text = isAttackerTurn ? "Attacker" : "Defender";
+            (boutDeckViewer as BoutViewer).IsAttackerTurn = isAttackerTurn;
+            //TODO: Figure out why attacker or defender gets two turns before switching
+        }
 
         private void LbEnemyPlayerHandCount_Click(object sender, EventArgs e)
         {

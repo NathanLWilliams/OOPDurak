@@ -13,6 +13,14 @@ namespace DeckViewerTester
 {
     public class BoutViewer : DeckViewer
     {
+        //TODO: Remove this. Tried to get the parent of BoutViewer (DurakPage) in order to get the isAttackerTurn variable there (so we don't need two of them),
+        //yet for some reason I can't reference DurakPage with "(this.Parent as DurakPage).IsAttackerTurn"
+        bool isAttackerTurn = true;
+        public bool IsAttackerTurn
+        {
+            get { return isAttackerTurn; }
+            set { isAttackerTurn = value; }
+        }
         public BoutViewer() : base()
         {
         }
@@ -42,14 +50,17 @@ namespace DeckViewerTester
                 if (draggedCard != null && draggedCard.Parent.GetType() == typeof(DeckViewer))
                 {
                     DeckViewer fromPanel = draggedCard.Parent as DeckViewer;
-                    DeckViewer toPanel = sender as DeckViewer;
+                    BoutViewer toPanel = sender as BoutViewer;
 
                     if (toPanel != null && fromPanel != null)
                     {
                         if (toPanel != fromPanel)
                         {
-                            fromPanel.RemoveCard(draggedCard.Card);
-                            toPanel.AddCard(draggedCard.Card);
+                            if(toPanel.canPlaceCard(draggedCard.Card))
+                            {
+                                fromPanel.RemoveCard(draggedCard.Card);
+                                toPanel.AddCard(draggedCard.Card);
+                            }
                         }
                     }
 
@@ -63,6 +74,46 @@ namespace DeckViewerTester
             }
 
 
+        }
+        /// <summary>
+        /// Determines whether either an attacker or defender can place a card in the bout
+        /// </summary>
+        /// <param name="c">The card to put in the bout</param>
+        /// <param name="isAttacker">Whether this is an attacking or defending move</param>
+        /// <returns></returns>
+        public bool canPlaceCard(Card c)
+        {
+            bool canPlace = false;
+
+            if(isAttackerTurn)
+            {
+                if(this.cards.Count == 0)
+                {
+                    canPlace = true;
+                }
+                else
+                {
+                    foreach (Card boutCard in this.cards)
+                    {
+                        if (c.Rank == boutCard.Rank)
+                        {
+                            canPlace = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Card lastCard = this.cards[this.cards.Count - 1];
+                
+                //TODO: Confirm this is okay
+                if ((c.Suit == lastCard.Suit && ((c.Rank > lastCard.Rank && lastCard.Rank != Rank.Ace) || c.Rank == Rank.Ace)) || (c.Suit == Card.trump && lastCard.Suit != Card.trump))
+                {
+                    canPlace = true;
+                }
+            }
+            
+            return canPlace;
         }
         public override void AdjustCards()
         {

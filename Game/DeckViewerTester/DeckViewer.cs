@@ -15,7 +15,7 @@ namespace Game
 {
     public partial class DeckViewer : Panel
     {
-        Cards cards;
+        protected Cards cards;
         Size standardCardSize = new Size(87, 141);
         bool IsEnemyView = false;
         public DeckViewer(bool isEnemy = false)

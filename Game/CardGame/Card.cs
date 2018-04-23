@@ -192,6 +192,7 @@ namespace CardGame
             }
             else
             {
+                //TODO: Fix this
                 if (useTrumps && (card2.suit == Card.trump))
                     return false;
                 else
