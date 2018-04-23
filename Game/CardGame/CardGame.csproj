@@ -70,6 +70,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram2.cd" />
     <None Include="Resources\back.jpg" />
   </ItemGroup>
   <ItemGroup>

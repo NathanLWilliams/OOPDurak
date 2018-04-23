@@ -48,6 +48,7 @@ namespace Game
             }
             AdjustCards();
         }
+
         public void AddCard(Card card , bool adjust = true)
         {
             cards.Add(card);

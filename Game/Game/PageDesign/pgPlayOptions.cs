@@ -313,8 +313,8 @@ namespace Game
             HumanPlayer myPlayer = new HumanPlayer();
             myPlayer.Image = Properties.Resources.user;
             myPlayer.Name = "John Wick"; // maybe add text box in play options page to get these name like values
-             myPlayer.Score = 1000; // score could be seperate class
-
+            myPlayer.Score = 1000; // score could be seperate class
+           
             return myPlayer;
         }
         private bool IsDeckSizeSelected()

@@ -43,10 +43,10 @@ namespace Game
         // might change AiPlayer class name to enemyPlayer
         public DurakPage(HumanPlayer humanPlayer, AiPlayer aiPlayer, Deck deck)
         {
-            Initialize();  
+            Initialize();
+            SetUpPlayers(humanPlayer, aiPlayer, deck);
             InitializeDeck(deck);
-            SetUpPlayers(humanPlayer, aiPlayer);
-            
+
         }
 
         /// <summary>
@@ -254,7 +254,7 @@ namespace Game
             this.playerDeckViewer.Size = new System.Drawing.Size(1171, 167);
             this.playerDeckViewer.TabIndex = 11;
             //TODO: Instantiate the deck separately using Settings.deckSize
-            this.playerDeckViewer.AddCards(new Deck(Deck.Size.Medium, true, true, Suit.Clubs), 6);
+            //this.playerDeckViewer.AddCards(new Deck(Deck.Size.Medium, true, true, Suit.Clubs), 6);
             // 
             // deckViewer4
             // 
@@ -312,14 +312,18 @@ namespace Game
             this.drawDeckViewer.TabIndex = 10;
             this.Controls.Add(this.drawDeckViewer);
         }
-        private void SetUpPlayers(HumanPlayer myPlayer, AiPlayer enemyPlayer)
+        private void SetUpPlayers(HumanPlayer myPlayer, AiPlayer enemyPlayer, Deck deck)
         {
            // set up enemplayer object
             pbEnemyPlayerImage.Image = enemyPlayer.Image;
             lbEnemyPlayerName.Text = enemyPlayer.Name;
             lbEnemyPlayerScore.Text = enemyPlayer.Score.ToString();
 
-            // set up myPlyaer object
+            enemyDeckViewer.AddCards(deck, 6);
+
+            playerDeckViewer.AddCards(deck, 6);
+         
+            // set up myPlayer object
             pbMyPlayerImage.Image = myPlayer.Image;
             lbMyPlayerName.Text = myPlayer.Name;
             lbMyPlayerScore.Text = myPlayer.Score.ToString();

@@ -4,19 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace CardGame
 {
     public class Hand : Cards
     {
 
         //Instance attribute- should be card collection
-        Hand playerHand;
+        Cards playerHand = new Cards();
         private int numberOfCardsInHand = 0;
-        //default constructor
-        public Hand()
+        //default constructor for cards
+        public Hand(ref Cards cardCollection, int cardsToTake)
         {
-           playerHand = new Hand();
+            for (int i = 0; i < cardsToTake; i++)
+            {
+                playerHand.Add(cardCollection[i]);
+            }
         }
+        //default constructor for cards
+        public Hand(Cards cardCollection)
+        {
+            foreach (Card card in cardCollection)
+            {
+                playerHand.Add(card);
+            }
+        }
+        //default constructor
+        //public Hand(ref Cards cardCollection, int cardsToTake)
+        //{
+        //    for (int i = 0; i < cardsToTake; i++)
+        //    {
+        //        playerHand.Add(cardCollection[i]);
+        //    }
+        //}
 
         //parameterized constructor
 
