@@ -25,7 +25,7 @@ namespace DeckViewerTester
             if (e.Data.GetData(typeof(CardBox)) != null && this.Controls.Count < 12)
             {
                 CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
-                if(draggedCard.Parent.GetType() == typeof(DeckViewer))
+                if (draggedCard.Parent.GetType() == typeof(DeckViewer) && (string)draggedCard.Parent.Tag != "enemyDeck")
                     e.Effect = DragDropEffects.Move;
             }
         }

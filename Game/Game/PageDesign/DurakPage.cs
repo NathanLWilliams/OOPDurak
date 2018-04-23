@@ -71,7 +71,8 @@ namespace Game
             this.boutDeckViewer = new BoutViewer();
             //this.drawDeckViewer = new DeckPileViewer();
             this.playerDeckViewer = new DeckViewer();
-            this.enemyDeckViewer = new DeckViewer();
+            this.enemyDeckViewer = new DeckViewer(true);
+            this.enemyDeckViewer.Tag = "enemyDeck";
             this.enemyDeckViewer.AllowDrop = false;
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuOptions)).BeginInit();
@@ -173,7 +174,7 @@ namespace Game
             this.lbMyPlayerHandCount.Name = "lbMyPlayerHandCount";
             this.lbMyPlayerHandCount.Size = new System.Drawing.Size(100, 23);
             this.lbMyPlayerHandCount.TabIndex = 13;
-            this.lbMyPlayerHandCount.Text = "6";
+            this.lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
             this.lbMyPlayerHandCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbMyPlayerScore
@@ -185,7 +186,6 @@ namespace Game
             this.lbMyPlayerScore.Name = "lbPlayerScore";
             this.lbMyPlayerScore.Size = new System.Drawing.Size(100, 23);
             this.lbMyPlayerScore.TabIndex = 14;
-            this.lbMyPlayerScore.Text = " ";
             this.lbMyPlayerScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbEnemyPlayerName
@@ -199,7 +199,6 @@ namespace Game
             this.lbEnemyPlayerName.TabIndex = 14;
             this.lbEnemyPlayerName.Text = "Computer";
             this.lbEnemyPlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lbEnemyPlayerHandCount.Click += LbEnemyPlayerHandCount_Click;
             // 
             // 
             // lbEnemyPlayerHandCount
@@ -211,7 +210,6 @@ namespace Game
             this.lbEnemyPlayerHandCount.Name = "lbEnemyPlayerHandCount";
             this.lbEnemyPlayerHandCount.Size = new System.Drawing.Size(88, 23);
             this.lbEnemyPlayerHandCount.TabIndex = 14;
-            this.lbEnemyPlayerHandCount.Text = "8";
             this.lbEnemyPlayerHandCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbEnememyPlayerScore
@@ -253,6 +251,8 @@ namespace Game
             this.playerDeckViewer.Name = "deckViewer1";
             this.playerDeckViewer.Size = new System.Drawing.Size(1171, 167);
             this.playerDeckViewer.TabIndex = 11;
+            this.playerDeckViewer.ControlAdded += UpdatePlayersHandCount;
+            this.playerDeckViewer.ControlRemoved += UpdatePlayersHandCount;
             //TODO: Instantiate the deck separately using Settings.deckSize
             //this.playerDeckViewer.AddCards(new Deck(Deck.Size.Medium, true, true, Suit.Clubs), 6);
             // 
@@ -264,6 +264,8 @@ namespace Game
             this.enemyDeckViewer.Name = "deckViewer4";
             this.enemyDeckViewer.Size = new System.Drawing.Size(292, 66);
             this.enemyDeckViewer.TabIndex = 10;
+            this.enemyDeckViewer.ControlAdded += UpdatePlayersHandCount;
+            this.enemyDeckViewer.ControlRemoved += UpdatePlayersHandCount;
             // 
             // DurakDeck
             // 
@@ -294,6 +296,12 @@ namespace Game
             this.ResumeLayout(false);
             //SetUpPlayer();
         }
+        private void UpdatePlayersHandCount(object sender, ControlEventArgs e)
+        {
+            lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
+            lbEnemyPlayerHandCount.Text = enemyDeckViewer.Controls.Count.ToString();
+        }
+       
 
         private void LbEnemyPlayerHandCount_Click(object sender, EventArgs e)
         {
@@ -327,6 +335,8 @@ namespace Game
             pbMyPlayerImage.Image = myPlayer.Image;
             lbMyPlayerName.Text = myPlayer.Name;
             lbMyPlayerScore.Text = myPlayer.Score.ToString();
+
+            lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
         }
 
 
