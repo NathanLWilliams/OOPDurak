@@ -18,6 +18,7 @@ namespace Game
         protected Cards cards;
         Size standardCardSize = new Size(87, 141);
         bool IsEnemyView = false;
+
         public DeckViewer(bool isEnemy = false)
         {
             IsEnemyView = isEnemy;
@@ -56,7 +57,7 @@ namespace Game
         {
             return this.cards;
         }
-        public void AddCard(Card card, bool adjust = true)
+        public virtual void AddCard(Card card, bool adjust = true)
         {
             cards.Add(card);
 
@@ -83,18 +84,19 @@ namespace Game
         {
             this.Controls.Clear();
 
-            foreach (Card c in cards)
+            for(int i = cards.Count - 1; i >= 0; i--)
             {
                 if (IsEnemyView == true)
                 {
                     standardCardSize = new Size(42, 70);
-                    CardBox cardBox = new CardBox(c);
+                    CardBox cardBox = new CardBox(cards[i]);
                     cardBox.Size = standardCardSize;
                     this.Controls.Add(cardBox);
                 }
                 else
                 {
-                    CardBox cardBox = new CardBox(c, willCardsPop);
+                    System.Console.WriteLine(i + " Count: " + cards.Count);
+                    CardBox cardBox = new CardBox(cards[i], willCardsPop);
                     cardBox.Size = standardCardSize;
                     this.Controls.Add(cardBox);
                 }

@@ -252,7 +252,7 @@ namespace Game
             this.boutDeckViewer.Name = "deckViewer3";
             this.boutDeckViewer.Size = new System.Drawing.Size(967, 287);
             this.boutDeckViewer.TabIndex = 9;
-            this.boutDeckViewer.ControlAdded += NextTurn;
+            this.boutDeckViewer.CardAdded += NextTurn;
             // 
             // drawDeckViewr
             // 
@@ -327,7 +327,7 @@ namespace Game
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NextTurn(object sender, ControlEventArgs e)
+        private void NextTurn(object sender, EventArgs e)
         {
             //Check if it's the player's turn or the Ai's turn
             if(isPlayerTurn)
@@ -354,7 +354,7 @@ namespace Game
                 else
                 {
                     //The AI plays a card
-                    boutDeckViewer.AddCard((Card)cardToPlay.Clone());
+                    boutDeckViewer.AddCard((Card)cardToPlay.Clone(), true, false); //TODO: Fix this, it is what is causing the exception
                     enemyDeckViewer.RemoveCard(cardToPlay);
                 }
 

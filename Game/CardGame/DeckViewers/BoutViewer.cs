@@ -18,12 +18,22 @@ namespace DeckViewerTester
             get { return isAttackerTurn; }
             set { isAttackerTurn = value; }
         }
+        public event EventHandler CardAdded;
+
         public BoutViewer() : base()
         {
         }
         public void AddDeck(Deck deck)
         {
             this.AddCards(deck, deck.Count);
+        }
+        public void AddCard(Card c, bool adjust = true, bool willTriggerTurn = false)
+        {
+            Console.WriteLine("ADDED CARD");
+            base.AddCard(c, adjust);
+
+            if(willTriggerTurn)
+                CardAdded(this, new EventArgs());
         }
         public override void DeckViewer_DragEnter(object sender, DragEventArgs e)
         {
@@ -56,7 +66,7 @@ namespace DeckViewerTester
                             if(toPanel.canPlaceCard(draggedCard.Card))
                             {
                                 fromPanel.RemoveCard(draggedCard.Card);
-                                toPanel.AddCard(draggedCard.Card);
+                                toPanel.AddCard(draggedCard.Card, true, true);
                             }
                         }
                     }
@@ -84,16 +94,20 @@ namespace DeckViewerTester
             
             if(isAttackerTurn)
             {
+                //No cards in bout currently, attacker can play any card
                 if(this.cards.Count == 0)
                 {
                     canPlace = true;
                 }
                 else
                 {
+                    //There are cards in the bout currently, check if there
+                    //is the passed card matches any of their ranks
                     foreach (Card boutCard in this.cards)
                     {
                         if (c.Rank == boutCard.Rank)
                         {
+                            //A matching rank is found, the card can be played
                             canPlace = true;
                         }
                     }
@@ -101,13 +115,26 @@ namespace DeckViewerTester
             }
             else
             {
-                Card lastCard = this.cards[this.cards.Count - 1];
-                
-                //TODO: Confirm this is okay
-                if ((c.Suit == lastCard.Suit && ((c.Rank > lastCard.Rank && lastCard.Rank != Rank.Ace) || c.Rank == Rank.Ace)) || (c.Suit == Card.trump && lastCard.Suit != Card.trump))
+                if(this.cards.Count == 0)
                 {
-                    canPlace = true;
+                    //canPlace = true; Defender is never able to go first
                 }
+                else
+                {
+                    //There are cards in the bout for the defender to defend against
+
+                    //Get the last card played
+                    Card lastCard = this.cards[this.cards.Count - 1];
+
+                    //Check if the passed card is of a matching suit and higher rank, trumps are handled slightly differently
+                    //TODO: Confirm this is okay
+                    if ((c.Suit == lastCard.Suit && ((c.Rank > lastCard.Rank && lastCard.Rank != Rank.Ace) || c.Rank == Rank.Ace)) || (c.Suit == Card.trump && lastCard.Suit != Card.trump))
+                    {
+                        //The defender can play this card
+                        canPlace = true;
+                    }
+                }
+                
             }
             
             return canPlace;
