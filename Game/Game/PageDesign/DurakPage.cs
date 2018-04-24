@@ -354,7 +354,7 @@ namespace Game
                 else
                 {
                     //The AI plays a card
-                    boutDeckViewer.AddCard((Card)cardToPlay.Clone(), true, false); //TODO: Fix this, it is what is causing the exception
+                    boutDeckViewer.AddCard((Card)cardToPlay.Clone(), true, false);
                     enemyDeckViewer.RemoveCard(cardToPlay);
                 }
 
@@ -397,8 +397,6 @@ namespace Game
                 }
             }
 
-            //TODO: Use this elsewhere
-            //(boutDeckViewer as BoutViewer).IsAttackerTurn = isPlayerAttacking;
         }
 
         private void LbEnemyPlayerHandCount_Click(object sender, EventArgs e)
