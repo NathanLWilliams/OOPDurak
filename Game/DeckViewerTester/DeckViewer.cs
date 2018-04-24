@@ -161,6 +161,14 @@ namespace Game
 
             }
         }
+        /// <summary>
+        /// To assign cards to palyer hands. Might use this method later
+        /// </summary>
+        /// <param name="playerHand"></param>
+        public void AssignToDeckViewr(Hand playerHand)
+        {
+            
+        }
         public virtual void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetData(typeof(CardBox)) != null)
@@ -186,11 +194,6 @@ namespace Game
                     }
 
                 }
-                //this.AddCard(draggedCard);
-                //Card newCard = (Card)draggedCard.Card.Clone();
-                //(draggedCard.Parent as DeckViewer).RemoveCard(draggedCard.Card);
-                //this.AddCard(newCard);
-
 
             }
         }

@@ -19,6 +19,8 @@ namespace Game
         private Label lbEnemyPlayerName;
         private Label lbEnemyPlayerScore;
         private Label lbEnemyPlayerHandCount;
+
+        private CardBox cdbTrumCard;
         
         private System.Windows.Forms.Panel panel1;
         private PictureBox pbMenuOptions;
@@ -45,7 +47,9 @@ namespace Game
         {
             Initialize();
             SetUpPlayers(humanPlayer, aiPlayer, deck);
+            //SetUpTrumpCard(deck);
             InitializeDeck(deck);
+            
 
         }
 
@@ -319,6 +323,8 @@ namespace Game
             this.drawDeckViewer.Size = new System.Drawing.Size(200, 287);
             this.drawDeckViewer.TabIndex = 10;
             this.Controls.Add(this.drawDeckViewer);
+            this.Controls.Add(new CardBox(new Card(Card.trump, Rank.Ace), false, Orientation.Horizontal));
+            
         }
         private void SetUpPlayers(HumanPlayer myPlayer, AiPlayer enemyPlayer, Deck deck)
         {
@@ -326,6 +332,8 @@ namespace Game
             pbEnemyPlayerImage.Image = enemyPlayer.Image;
             lbEnemyPlayerName.Text = enemyPlayer.Name;
             lbEnemyPlayerScore.Text = enemyPlayer.Score.ToString();
+
+           // myPlayer.MyHand = enemyDeckViewer.AssignToDeckViewr(); - might use this method later if decided we'll use hand class
 
             enemyDeckViewer.AddCards(deck, 6);
 
@@ -338,7 +346,13 @@ namespace Game
 
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
         }
-
+        private void SetUpTrumpCard(Deck deck)
+        {
+            Random rnd = new Random();
+            int r = rnd.Next(deck.Count);
+            //cdbTrumCard.Card = new deck[r];
+            cdbTrumCard.FaceUp = true;
+        }
 
     }
 }
