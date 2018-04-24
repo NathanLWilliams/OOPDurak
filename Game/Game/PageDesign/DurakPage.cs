@@ -32,15 +32,15 @@ namespace Game
         private DeckViewer boutDeckViewer;
         private DeckViewer drawDeckViewer;
         private DeckViewer playerDeckViewer;
-        private bool isAttackerTurn;
+
+        private bool isPlayerAttacking;
+        private bool isPlayerTurn;
 
         public bool IsAttackerTurn
         {
-            get { return isAttackerTurn; }
-            set { isAttackerTurn = value; }
+            get { return isPlayerAttacking; }
+            set { isPlayerAttacking = value; }
         }
-
-        //private CardBox dragCard;
 
         private const int POP = 25;
 
@@ -328,10 +328,44 @@ namespace Game
         }
         private void UpdateCurrentTurn(object sender, ControlEventArgs e)
         {
-            isAttackerTurn = isAttackerTurn ? false : true;
-            lblCurrentTurn.Text = isAttackerTurn ? "Attacker" : "Defender";
-            (boutDeckViewer as BoutViewer).IsAttackerTurn = isAttackerTurn;
-            //TODO: Figure out why attacker or defender gets two turns before switching
+            isPlayerTurn = isPlayerTurn ? false : true;
+            //Prevent the player from dropping cards into the BoutViewer when it's not their turn
+            (boutDeckViewer as BoutViewer).AllowDrop = isPlayerTurn;
+        }
+
+        /// <summary>
+        /// Ends the bout by switching the roles of the attacker and defender, distributing cards to the loser,
+        /// and clearing the cards from the bout
+        /// </summary>
+        public void EndBout()
+        {
+            //Switch roles of attacker and defender
+            isPlayerAttacking = isPlayerAttacking ? false : true;
+            lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
+
+            if(!isPlayerAttacking)
+            {
+                //Player is currently defending, yet the bout has ended, therefore he has lost (he can't play a card)
+
+                //Take all the bout cards and add it to the players hand
+                for(int i = boutDeckViewer.Controls.Count; i > 0; i--)
+                {
+                    playerDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
+                }
+            }
+            else
+            {
+                //The AI has lost
+
+                //Take all the bout cards and add it to the AI hand
+                for (int i = boutDeckViewer.Controls.Count; i > 0; i--) //TODO: Make this a method maybe
+                {
+                    enemyDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
+                }
+            }
+
+            //TODO: Use this elsewhere
+            //(boutDeckViewer as BoutViewer).IsAttackerTurn = isPlayerAttacking;
         }
 
         private void LbEnemyPlayerHandCount_Click(object sender, EventArgs e)

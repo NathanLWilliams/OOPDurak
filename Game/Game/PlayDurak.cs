@@ -19,7 +19,7 @@ namespace Game
         static MainMenu menu;
         static pgPlayOptions playOptions;
         static StatisticsPage stats;
-        static DurakPage durakPage;
+        //static DurakPage durakPage;
         static InstructionsPage instructionPage;
         static Win winPage;
 
