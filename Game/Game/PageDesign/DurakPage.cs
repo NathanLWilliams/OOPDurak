@@ -321,11 +321,18 @@ namespace Game
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
             lbEnemyPlayerHandCount.Text = enemyDeckViewer.Controls.Count.ToString();
         }
+
+        /// <summary>
+        /// Processes the AI and human player's turn. Called when a card is added to the BoutDeckViewer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NextTurn(object sender, ControlEventArgs e)
         {
+            //Check if it's the player's turn or the Ai's turn
             if(isPlayerTurn)
             {
-
+                //Make it the AI player's turn
                 isPlayerTurn = false;
                 (boutDeckViewer as BoutViewer).AllowDrop = false;
 
@@ -335,10 +342,13 @@ namespace Game
             }
             else
             {
+                //The AI chooses what card to play
                 Card cardToPlay = enemyPlayer.ChooseAction(enemyDeckViewer, boutDeckViewer);
+
+                //Confirm the AI actually chose a card, and not the default null card
                 if (object.ReferenceEquals(cardToPlay, null))
                 {
-                    //The AI cannot play a card
+                    //The AI is unable to play any cards, so he loses the Bout
                     EndBout();
                 }
                 else
@@ -348,6 +358,7 @@ namespace Game
                     enemyDeckViewer.RemoveCard(cardToPlay);
                 }
 
+                //Make it the human player's turn
                 isPlayerTurn = true;
                 (boutDeckViewer as BoutViewer).AllowDrop = true;
             }
@@ -364,6 +375,7 @@ namespace Game
             isPlayerAttacking = isPlayerAttacking ? false : true;
             lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
 
+            //Check if the player is attacking or not and distribute cards in the bout depending on it
             if(!isPlayerAttacking)
             {
                 //Player is currently defending, yet the bout has ended, therefore he has lost (he can't play a card)

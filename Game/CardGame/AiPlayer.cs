@@ -41,11 +41,11 @@ namespace CardGame
                 //Find the lowest playable card and store it as the temporary card
                 if (bout.canPlaceCard(c))
                 {
-                    if(object.ReferenceEquals(tempCard, null))
+                    if(object.ReferenceEquals(tempCard, null)) // tempCard is currently null, so any card will work
                     {
                         tempCard = c;
                     }
-                    else if(c.Rank < tempCard.Rank)
+                    else if(c.Rank < tempCard.Rank) //A tempCard is being stored, so see if this one is better
                     {
                         tempCard = c;
                     }
