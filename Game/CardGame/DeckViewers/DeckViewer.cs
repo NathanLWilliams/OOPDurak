@@ -52,7 +52,10 @@ namespace Game
             }
             AdjustCards();
         }
-
+        public Cards GetCards()
+        {
+            return this.cards;
+        }
         public void AddCard(Card card, bool adjust = true)
         {
             cards.Add(card);

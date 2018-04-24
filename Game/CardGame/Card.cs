@@ -121,10 +121,10 @@ namespace CardGame
         {
             return !(card1 == card2);
         }
-        public override bool Equals(object card)
+        /*public override bool Equals(object card)
         {
             return this == (Card)card;
-        }
+        }*/
         public override int GetHashCode()
         {
             return (int)suit * 10 + (int)rank * 100 + ((this.FaceUp)?1:0);

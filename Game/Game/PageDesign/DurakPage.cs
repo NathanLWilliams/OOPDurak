@@ -29,18 +29,14 @@ namespace Game
         private System.Windows.Forms.PictureBox pictureBox4;
         private Label lblCurrentTurn;
         private DeckViewer enemyDeckViewer;
-        private DeckViewer boutDeckViewer;
+        private BoutViewer boutDeckViewer;
         private DeckViewer drawDeckViewer;
         private DeckViewer playerDeckViewer;
 
+        private AiPlayer enemyPlayer;
+        private HumanPlayer humanPlayer;
         private bool isPlayerAttacking;
         private bool isPlayerTurn;
-
-        public bool IsAttackerTurn
-        {
-            get { return isPlayerAttacking; }
-            set { isPlayerAttacking = value; }
-        }
 
         private const int POP = 25;
 
@@ -54,7 +50,6 @@ namespace Game
             Initialize();
             SetUpPlayers(humanPlayer, aiPlayer, deck);
             InitializeDeck(deck);
-
         }
 
         /// <summary>
@@ -257,7 +252,7 @@ namespace Game
             this.boutDeckViewer.Name = "deckViewer3";
             this.boutDeckViewer.Size = new System.Drawing.Size(967, 287);
             this.boutDeckViewer.TabIndex = 9;
-            this.boutDeckViewer.ControlAdded += UpdateCurrentTurn;
+            this.boutDeckViewer.ControlAdded += NextTurn;
             // 
             // drawDeckViewr
             // 
@@ -326,11 +321,37 @@ namespace Game
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
             lbEnemyPlayerHandCount.Text = enemyDeckViewer.Controls.Count.ToString();
         }
-        private void UpdateCurrentTurn(object sender, ControlEventArgs e)
+        private void NextTurn(object sender, ControlEventArgs e)
         {
-            isPlayerTurn = isPlayerTurn ? false : true;
-            //Prevent the player from dropping cards into the BoutViewer when it's not their turn
-            (boutDeckViewer as BoutViewer).AllowDrop = isPlayerTurn;
+            if(isPlayerTurn)
+            {
+
+                isPlayerTurn = false;
+                (boutDeckViewer as BoutViewer).AllowDrop = false;
+
+                //Since nothing currently triggers the AiPlayer's turn, recursively call
+                //this event handler in order to activate the AiPlayer's turn
+                NextTurn(sender, e);
+            }
+            else
+            {
+                Card cardToPlay = enemyPlayer.ChooseAction(enemyDeckViewer, boutDeckViewer);
+                if (object.ReferenceEquals(cardToPlay, null))
+                {
+                    //The AI cannot play a card
+                    EndBout();
+                }
+                else
+                {
+                    //The AI plays a card
+                    boutDeckViewer.AddCard((Card)cardToPlay.Clone());
+                    enemyDeckViewer.RemoveCard(cardToPlay);
+                }
+
+                isPlayerTurn = true;
+                (boutDeckViewer as BoutViewer).AllowDrop = true;
+            }
+
         }
 
         /// <summary>
@@ -387,6 +408,9 @@ namespace Game
         }
         private void SetUpPlayers(HumanPlayer myPlayer, AiPlayer enemyPlayer, Deck deck)
         {
+            this.enemyPlayer = enemyPlayer;
+            this.humanPlayer = myPlayer;
+
            // set up enemplayer object
             pbEnemyPlayerImage.Image = enemyPlayer.Image;
             lbEnemyPlayerName.Text = enemyPlayer.Name;
