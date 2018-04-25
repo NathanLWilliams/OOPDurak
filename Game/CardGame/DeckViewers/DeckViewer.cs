@@ -43,6 +43,11 @@ namespace Game
             this.DragDrop += new DragEventHandler(this.DeckViewer_DragDrop);
             this.AddCards(deck, deck.Count);
         }
+        public void Reset()
+        {
+            this.cards.Clear();
+            this.Controls.Clear();
+        }
         public void AddCards(Deck deck, int numberOfCards)
         {
 

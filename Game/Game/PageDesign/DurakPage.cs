@@ -30,7 +30,7 @@ namespace Game
         private Label lblCurrentTurn;
         private DeckViewer enemyDeckViewer;
         private BoutViewer boutDeckViewer;
-        private DeckViewer drawDeckViewer;
+        private DeckPileViewer drawDeckViewer;
         private DeckViewer playerDeckViewer;
 
         private AiPlayer enemyPlayer;
@@ -252,7 +252,7 @@ namespace Game
             this.boutDeckViewer.Name = "deckViewer3";
             this.boutDeckViewer.Size = new System.Drawing.Size(967, 287);
             this.boutDeckViewer.TabIndex = 9;
-            this.boutDeckViewer.CardAdded += NextTurn;
+            this.boutDeckViewer.CardAdded += OnNextTurn;
             // 
             // drawDeckViewr
             // 
@@ -327,18 +327,23 @@ namespace Game
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void NextTurn(object sender, EventArgs e)
+        private void OnNextTurn(object sender, EventArgs e)
+        {
+            NextTurn();
+        }
+        public void NextTurn()
         {
             //Check if it's the player's turn or the Ai's turn
-            if(isPlayerTurn)
+            if (isPlayerTurn)
             {
                 //Make it the AI player's turn
                 isPlayerTurn = false;
+                boutDeckViewer.IsAttackerTurn = isPlayerAttacking ? false : true;
                 (boutDeckViewer as BoutViewer).AllowDrop = false;
 
                 //Since nothing currently triggers the AiPlayer's turn, recursively call
                 //this event handler in order to activate the AiPlayer's turn
-                NextTurn(sender, e);
+                NextTurn();
             }
             else
             {
@@ -360,9 +365,9 @@ namespace Game
 
                 //Make it the human player's turn
                 isPlayerTurn = true;
+                boutDeckViewer.IsAttackerTurn = isPlayerAttacking ? true : false;
                 (boutDeckViewer as BoutViewer).AllowDrop = true;
             }
-
         }
 
         /// <summary>
@@ -371,32 +376,79 @@ namespace Game
         /// </summary>
         public void EndBout()
         {
-            //Switch roles of attacker and defender
-            isPlayerAttacking = isPlayerAttacking ? false : true;
-            lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
-
-            //Check if the player is attacking or not and distribute cards in the bout depending on it
-            if(!isPlayerAttacking)
+            if(isPlayerTurn)
             {
-                //Player is currently defending, yet the bout has ended, therefore he has lost (he can't play a card)
-
-                //Take all the bout cards and add it to the players hand
-                for(int i = boutDeckViewer.Controls.Count; i > 0; i--)
+                if(isPlayerAttacking)
                 {
-                    playerDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
+                    //The player loses the bout as the attacker
+                    boutDeckViewer.Reset();
+
+                }
+                else
+                {
+                    //Player loses the bout as the defender
+
+                    //Take all the bout cards and add it to the players hand
+                    for (int i = boutDeckViewer.Controls.Count - 1; i >= 0; i--)
+                    {
+                        playerDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
+                    }
                 }
             }
             else
             {
-                //The AI has lost
-
-                //Take all the bout cards and add it to the AI hand
-                for (int i = boutDeckViewer.Controls.Count; i > 0; i--) //TODO: Make this a method maybe
+                if (isPlayerAttacking)
                 {
-                    enemyDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
+                    //The AI loses the bout as the defender
+
+                    //Take all the bout cards and add it to the AI hand
+                    for (int i = boutDeckViewer.Controls.Count - 1; i >= 0; i--) //TODO: Make this a method maybe
+                    {
+                        enemyDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
+                    }
                 }
+                else
+                {
+                    //The AI loses the bout as the attacker
+                    boutDeckViewer.Reset();
+                }
+                
             }
 
+            //Calls a method to refill the player and AI hand to 6 cards minimum
+            RefillCards();
+
+            //Switch roles of attacker and defender
+            isPlayerAttacking = isPlayerAttacking ? false : true;
+            lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
+
+            //The AI is going to attack
+            if(isPlayerAttacking == false)
+            {
+                //The user can't trigger the AI's turn since it's the first
+                //card placed in the bout, therefore OnNextTurn is not triggered
+                //therefore, trigger it here.
+                boutDeckViewer.IsAttackerTurn = true;
+                NextTurn();
+            }
+
+        }
+
+        public void RefillCards()
+        {
+            //TODO: Make a constant for the num of cards minimum before refilling
+            while(enemyDeckViewer.GetCards().Count < 6)
+            {
+                enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+            }
+
+            while(playerDeckViewer.GetCards().Count < 6)
+            {
+                playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+            }
+
+            enemyDeckViewer.AdjustCards();
+            playerDeckViewer.AdjustCards();
         }
 
         private void LbEnemyPlayerHandCount_Click(object sender, EventArgs e)
@@ -420,6 +472,9 @@ namespace Game
         {
             this.enemyPlayer = enemyPlayer;
             this.humanPlayer = myPlayer;
+
+            isPlayerAttacking = true;
+            isPlayerTurn = true;
 
            // set up enemplayer object
             pbEnemyPlayerImage.Image = enemyPlayer.Image;

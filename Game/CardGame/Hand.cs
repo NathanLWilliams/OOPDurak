@@ -65,7 +65,7 @@ namespace CardGame
         public void RefillCards(Cards cards)
         {
            
-            for (int i=0; i < cards .Count; i++)
+            for (int i=0; i < cards.Count; i++)
             {//as long as cards in player's hand less than 6
                 if (playerHand.Count < 6)
                 {

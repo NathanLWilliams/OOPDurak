@@ -115,11 +115,7 @@ namespace DeckViewerTester
             }
             else
             {
-                if(this.cards.Count == 0)
-                {
-                    //canPlace = true; Defender is never able to go first
-                }
-                else
+                if (this.cards.Count != 0) //Defender is never able to go first
                 {
                     //There are cards in the bout for the defender to defend against
 
@@ -127,7 +123,7 @@ namespace DeckViewerTester
                     Card lastCard = this.cards[this.cards.Count - 1];
 
                     //Check if the passed card is of a matching suit and higher rank, trumps are handled slightly differently
-                    //TODO: Confirm this is okay
+                    //TODO: c.Rank > lastCard.Rank has problems with Aces being high, fix it
                     if ((c.Suit == lastCard.Suit && ((c.Rank > lastCard.Rank && lastCard.Rank != Rank.Ace) || c.Rank == Rank.Ace)) || (c.Suit == Card.trump && lastCard.Suit != Card.trump))
                     {
                         //The defender can play this card
