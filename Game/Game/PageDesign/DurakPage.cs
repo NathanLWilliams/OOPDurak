@@ -331,6 +331,8 @@ namespace Game
         {
             NextTurn();
         }
+
+        //TODO: Add functionality to end the bout if the maximum amount of cards in the bout is reached
         public void NextTurn()
         {
             //Check if it's the player's turn or the Ai's turn
@@ -370,6 +372,8 @@ namespace Game
             }
         }
 
+        //TODO: Add functionality to end the game when the DeckPile has no more cards and a player has run out
+        //TODO: Add functionality to EndBout through pressing the pass/surrender button
         /// <summary>
         /// Ends the bout by switching the roles of the attacker and defender, distributing cards to the loser,
         /// and clearing the cards from the bout

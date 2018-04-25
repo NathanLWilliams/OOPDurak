@@ -10,7 +10,7 @@ namespace DeckViewerTester
 {
     public class BoutViewer : DeckViewer
     {
-        //TODO: Remove this. Tried to get the parent of BoutViewer (DurakPage) in order to get the isAttackerTurn variable there (so we don't need two of them),
+        //TODO: Change this. Tried to get the parent of BoutViewer (DurakPage) in order to get the isAttackerTurn variable there (so we don't need two of them),
         //yet for some reason I can't reference DurakPage with "(this.Parent as DurakPage).IsAttackerTurn"
         bool isAttackerTurn = true;
         public bool IsAttackerTurn
