@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DeckViewerTester
+namespace Game
 {
     public class DeckPileViewer : DeckViewer
     {

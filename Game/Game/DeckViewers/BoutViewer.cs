@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace DeckViewerTester
+namespace Game
 {
     public class BoutViewer : DeckViewer
     {
@@ -160,17 +160,35 @@ namespace DeckViewerTester
         public override void AdjustCards()
         {
             UpdateCardBoxes(false);
-            for (int i = 0; i < this.Controls.Count; i++)
+            if(DurakPage.isPlayerAttacking)
             {
-                double widthDivider = (2 + this.Controls.Count / 3);
-                int firstCardX = this.Size.Width / 2 - (this.Controls[0].Width * (int)Math.Floor((double)this.Controls.Count / 2))/2;
-                int nextCardX = firstCardX + this.Controls[0].Width * (int)Math.Floor((double)i/2);
-                int cardYOffset = i % 2 == 0 ? -80 : 80;
+                for (int i = 0; i < this.Controls.Count; i++)
+                {
+                    double widthDivider = (2 + this.Controls.Count / 3);
+                    int firstCardX = this.Size.Width / 2 - (this.Controls[0].Width * (int)Math.Floor((double)this.Controls.Count / 2)) / 2;
+                    int nextCardX = firstCardX + this.Controls[0].Width * (int)Math.Floor((double)i / 2);
+                    int cardYOffset = i % 2 == 0 ? 80 : -80;
 
-                (this.Controls[i] as CardBox).FaceUp = true;
-                this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2 + cardYOffset);
-                this.Controls[i].BringToFront();
+                    (this.Controls[i] as CardBox).FaceUp = true;
+                    this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2 + cardYOffset);
+                    this.Controls[i].BringToFront();
+                }
             }
+            else
+            {
+                for (int i = 0; i < this.Controls.Count; i++)
+                {
+                    double widthDivider = (2 + this.Controls.Count / 3);
+                    int firstCardX = this.Size.Width / 2 - (this.Controls[0].Width * (int)Math.Floor((double)this.Controls.Count / 2)) / 2;
+                    int nextCardX = firstCardX + this.Controls[0].Width * (int)Math.Floor((double)i / 2);
+                    int cardYOffset = i % 2 == 0 ? -80 : 80;
+
+                    (this.Controls[i] as CardBox).FaceUp = true;
+                    this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2 + cardYOffset);
+                    this.Controls[i].BringToFront();
+                }
+            }
+            
         }
     }
 }

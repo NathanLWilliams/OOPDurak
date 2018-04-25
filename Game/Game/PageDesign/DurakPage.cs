@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using CardGame;
 using CardBoxControl;
 using System.Drawing;
-using DeckViewerTester;
+using Game;
 
 namespace Game
 {
@@ -35,8 +35,8 @@ namespace Game
 
         private AiPlayer enemyPlayer;
         private HumanPlayer humanPlayer;
-        private bool isPlayerAttacking;
-        private bool isPlayerTurn;
+        public static bool isPlayerAttacking;
+        public static bool isPlayerTurn;
 
         private const int POP = 25;
 
@@ -478,16 +478,22 @@ namespace Game
         public void RefillCards()
         {
             //TODO: Make a constant for the num of cards minimum before refilling
-            while (enemyDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
+            
+            if(isPlayerAttacking)
             {
-                enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+                while (enemyDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
+                {
+                    enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+                }
             }
-
-            while(playerDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
+            else
             {
-                playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+                while (playerDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
+                {
+                    playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+                }
             }
-
+            
             enemyDeckViewer.AdjustCards();
             playerDeckViewer.AdjustCards();
         }

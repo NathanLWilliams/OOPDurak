@@ -45,6 +45,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AiPlayer.cs" />
+    <Compile Include="DeckViewers\BoutViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DeckViewers\DeckPileViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DeckViewers\DeckViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DeckViewers\DeckViewer.Designer.cs">
+      <DependentUpon>DeckViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HumanPlayer.cs" />
     <Compile Include="PageDesign\DurakPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -69,8 +83,12 @@
     <Compile Include="PlayDurak.Designer.cs">
       <DependentUpon>PlayDurak.cs</DependentUpon>
     </Compile>
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DeckViewers\DeckViewer.resx">
+      <DependentUpon>DeckViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlayDurak.resx">
       <DependentUpon>PlayDurak.cs</DependentUpon>
     </EmbeddedResource>

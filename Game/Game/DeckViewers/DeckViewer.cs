@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using CardGame;
-using DeckViewerTester;
+using Game;
 using CardBoxControl;
 
 namespace Game
@@ -47,6 +47,7 @@ namespace Game
         {
             this.cards.Clear();
             this.Controls.Clear();
+            AdjustCards();
         }
         public void AddCards(Deck deck, int numberOfCards)
         {
@@ -172,7 +173,8 @@ namespace Game
         }
         public virtual void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(typeof(CardBox)) != null)
+            //Commented out temporarily as the cards in a hands are auto refilled currently when a bout ends
+            /*if (e.Data.GetData(typeof(CardBox)) != null)
             {
 
                 System.Console.WriteLine("DragDrop");
@@ -187,7 +189,7 @@ namespace Game
 
                     if (toPanel != null && fromPanel != null)
                     {
-                        if (toPanel != fromPanel)
+                        if (toPanel != fromPanel && this.cards.Count < 6)
                         {
                             fromPanel.RemoveCard(draggedCard.Card);
                             toPanel.AddCard(draggedCard.Card);
@@ -201,7 +203,7 @@ namespace Game
                 //this.AddCard(newCard);
 
 
-            }
+            }*/
         }
     }
 }
