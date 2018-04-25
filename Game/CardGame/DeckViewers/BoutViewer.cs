@@ -131,14 +131,7 @@ namespace DeckViewerTester
                     Card lastCard = this.cards[this.cards.Count - 1];
 
                     //Check if the passed card is of a matching suit and higher rank, trumps are handled slightly differently
-                    //TODO: c.Rank > lastCard.Rank has problems with Aces being high, fix it
-                    /*if ((c.Suit == lastCard.Suit && ((c > lastCard && lastCard.Rank != Rank.Ace) || c.Rank == Rank.Ace)) || (c.Suit == Card.trump && lastCard.Suit != Card.trump))
-                    {
-                        //The defender can play this card
-                        canPlace = true;
-                    }*/
 
-                    //Suit must match
                     if(c.Suit == lastCard.Suit)
                     {
                         if(c.Rank == Rank.Ace)

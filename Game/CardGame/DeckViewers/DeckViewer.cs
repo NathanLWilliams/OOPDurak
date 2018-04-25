@@ -100,7 +100,6 @@ namespace Game
                 }
                 else
                 {
-                    System.Console.WriteLine(i + " Count: " + cards.Count);
                     CardBox cardBox = new CardBox(cards[i], willCardsPop);
                     cardBox.Size = standardCardSize;
                     this.Controls.Add(cardBox);

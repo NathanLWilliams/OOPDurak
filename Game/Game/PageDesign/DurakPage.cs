@@ -26,7 +26,7 @@ namespace Game
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.PictureBox pbEnemyPlayerImage;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox pbSkipButton;
         private Label lblCurrentTurn;
         private DeckViewer enemyDeckViewer;
         private BoutViewer boutDeckViewer;
@@ -68,7 +68,7 @@ namespace Game
             this.lblCurrentTurn = new Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pbSkipButton = new System.Windows.Forms.PictureBox();
             this.pbMyPlayerImage = new System.Windows.Forms.PictureBox();
             this.panel9 = new System.Windows.Forms.Panel();
             this.pbEnemyPlayerImage = new System.Windows.Forms.PictureBox();
@@ -81,7 +81,7 @@ namespace Game
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuOptions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSkipButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMyPlayerImage)).BeginInit();
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbEnemyPlayerImage)).BeginInit();
@@ -101,7 +101,7 @@ namespace Game
             // panel1
             // 
             this.panel1.Controls.Add(this.pictureBox5);
-            this.panel1.Controls.Add(this.pictureBox4);
+            this.panel1.Controls.Add(this.pbSkipButton);
             this.panel1.Controls.Add(this.pbMyPlayerImage);
             this.panel1.Location = new System.Drawing.Point(-3, 667);
             this.panel1.Name = "panel1";
@@ -120,13 +120,14 @@ namespace Game
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(820, 32);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(61, 50);
-            this.pictureBox4.TabIndex = 11;
-            this.pictureBox4.TabStop = false;
-            this.pictureBox4.Image = Properties.Resources.skip;
-            this.pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.pbSkipButton.Location = new System.Drawing.Point(820, 32);
+            this.pbSkipButton.Name = "pictureBox4";
+            this.pbSkipButton.Size = new System.Drawing.Size(61, 50);
+            this.pbSkipButton.TabIndex = 11;
+            this.pbSkipButton.TabStop = false;
+            this.pbSkipButton.Image = Properties.Resources.skip;
+            this.pbSkipButton.SizeMode = PictureBoxSizeMode.StretchImage;
+            this.pbSkipButton.Click += pbSkipButton_Click;
             // 
             // pictureBox3
             // 
@@ -309,13 +310,19 @@ namespace Game
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuOptions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbSkipButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMyPlayerImage)).EndInit();
             this.panel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbEnemyPlayerImage)).EndInit();
             this.ResumeLayout(false);
             //SetUpPlayer();
         }
+
+        private void pbSkipButton_Click(object sender, EventArgs e)
+        {
+            EndBout();
+        }
+
         private void UpdatePlayersHandCount(object sender, ControlEventArgs e)
         {
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
@@ -372,7 +379,7 @@ namespace Game
             }
         }
 
-        //TODO: Add functionality to end the game when the DeckPile has no more cards and a player has run out
+        //TODO: Add functionality to end the game (determine winner, go to ResultPage) when the DeckPile has no more cards and a player has run out
         //TODO: Add functionality to EndBout through pressing the pass/surrender button
         /// <summary>
         /// Ends the bout by switching the roles of the attacker and defender, distributing cards to the loser,
@@ -422,31 +429,61 @@ namespace Game
             //Calls a method to refill the player and AI hand to 6 cards minimum
             RefillCards();
 
-            //Switch roles of attacker and defender
-            isPlayerAttacking = isPlayerAttacking ? false : true;
-            lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
-
-            //The AI is going to attack
-            if(isPlayerAttacking == false)
+            if((enemyDeckViewer.GetCards().Count == 0 || playerDeckViewer.GetCards().Count == 0) && drawDeckViewer.GetCards().Count == 0)
             {
-                //The user can't trigger the AI's turn since it's the first
-                //card placed in the bout, therefore OnNextTurn is not triggered
-                //therefore, trigger it here.
-                boutDeckViewer.IsAttackerTurn = true;
-                NextTurn();
-            }
+                //No cards in the draw pile and a player has run out of cards, end the game
 
+                if (enemyDeckViewer.GetCards().Count == 0 && playerDeckViewer.GetCards().Count == 0)
+                {
+                    //It's a tie!
+                    if (this.Parent is PlayDurak)
+                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
+                }
+                else if(enemyDeckViewer.GetCards().Count == 0)
+                {
+                    //The AI wins!
+                    if (this.Parent is PlayDurak)
+                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
+                }
+                else if(playerDeckViewer.GetCards().Count == 0)
+                {
+                    //The human player wins!
+                    if (this.Parent is PlayDurak)
+                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
+                }
+
+            }
+            else
+            {
+                //TODO: Make this switching of roles into a method
+                //Switch roles of attacker and defender
+                isPlayerAttacking = isPlayerAttacking ? false : true;
+                isPlayerTurn = isPlayerAttacking;
+                boutDeckViewer.IsAttackerTurn = true; //Set to true since the first card is always from an attacker
+
+                lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
+
+                //The AI is going to attack
+                if (isPlayerAttacking == false)
+                {
+                    //The user can't trigger the AI's turn since it's the first
+                    //card placed in the bout, therefore OnNextTurn is not triggered
+                    //therefore, trigger it here.
+                    NextTurn();
+                }
+            }
+            
         }
 
         public void RefillCards()
         {
             //TODO: Make a constant for the num of cards minimum before refilling
-            while(enemyDeckViewer.GetCards().Count < 6)
+            while (enemyDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
             {
                 enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
             }
 
-            while(playerDeckViewer.GetCards().Count < 6)
+            while(playerDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
             {
                 playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
             }
