@@ -37,11 +37,19 @@ namespace DeckViewerTester
         }
         public override void DeckViewer_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(typeof(CardBox)) != null && this.Controls.Count < 12)
+            if (e.Data.GetData(typeof(CardBox)) != null)
             {
-                CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
-                if (draggedCard.Parent.GetType() == typeof(DeckViewer) && (string)draggedCard.Parent.Tag != "enemyDeck")
-                    e.Effect = DragDropEffects.Move;
+                if(this.cards.Count < 12)
+                {
+                    CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
+                    if (draggedCard.Parent.GetType() == typeof(DeckViewer) && (string)draggedCard.Parent.Tag != "enemyDeck")
+                        e.Effect = DragDropEffects.Move;
+                }
+                else
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+                
             }
         }
         public override void DeckViewer_DragDrop(object sender, DragEventArgs e)
@@ -124,11 +132,32 @@ namespace DeckViewerTester
 
                     //Check if the passed card is of a matching suit and higher rank, trumps are handled slightly differently
                     //TODO: c.Rank > lastCard.Rank has problems with Aces being high, fix it
-                    if ((c.Suit == lastCard.Suit && ((c.Rank > lastCard.Rank && lastCard.Rank != Rank.Ace) || c.Rank == Rank.Ace)) || (c.Suit == Card.trump && lastCard.Suit != Card.trump))
+                    /*if ((c.Suit == lastCard.Suit && ((c > lastCard && lastCard.Rank != Rank.Ace) || c.Rank == Rank.Ace)) || (c.Suit == Card.trump && lastCard.Suit != Card.trump))
                     {
                         //The defender can play this card
                         canPlace = true;
+                    }*/
+
+                    //Suit must match
+                    if(c.Suit == lastCard.Suit)
+                    {
+                        if(c.Rank == Rank.Ace)
+                        {
+                            if(lastCard.Rank != Rank.Ace)
+                            {
+                                canPlace = true;
+                            }
+                        }
+                        else if(lastCard.Rank != Rank.Ace && c.Rank > lastCard.Rank)
+                        {
+                            canPlace = true;
+                        }
                     }
+                    else if(c.Suit == Card.trump) //last card is not trump, but card to play is
+                    {
+                        canPlace = true;
+                    }
+
                 }
                 
             }
