@@ -352,8 +352,6 @@ namespace Game
             }
         }
 
-        //TODO: Add functionality to end the game (determine winner, go to ResultPage) when the DeckPile has no more cards and a player has run out
-        //TODO: Add functionality to EndBout through pressing the pass/surrender button
         /// <summary>
         /// Ends the bout by switching the roles of the attacker and defender, distributing cards to the loser,
         /// and clearing the cards from the bout
@@ -452,20 +450,20 @@ namespace Game
         {
             //TODO: Make a constant for the num of cards minimum before refilling
             
-            if(isPlayerAttacking)
-            {
+            //if(isPlayerAttacking)
+            //{
                 while (enemyDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
                 {
                     enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
                 }
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 while (playerDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
                 {
                     playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
                 }
-            }
+            //}
             
             enemyDeckViewer.AdjustCards();
             playerDeckViewer.AdjustCards();

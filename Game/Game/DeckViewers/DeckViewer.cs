@@ -161,7 +161,7 @@ namespace Game
 
         public virtual void DeckViewer_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(typeof(CardBox)) != null)
+            /*if (e.Data.GetData(typeof(CardBox)) != null)
             {
                 CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
 
@@ -169,7 +169,7 @@ namespace Game
                     e.Effect = DragDropEffects.Move;
 
 
-            }
+            }*/
         }
         public virtual void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
