@@ -21,7 +21,7 @@ using System.Text;
 
 namespace CardGame
 {
-    public class Deck  : Cards
+    public class Deck : Cards
     {
         public enum Size
         {
@@ -37,7 +37,7 @@ namespace CardGame
         {
             int minRank = isAceHigh ? 2 : 1;
 
-            switch(size)
+            switch (size)
             {
                 case Size.Small:
                     minRank = 10;
@@ -47,13 +47,13 @@ namespace CardGame
                     break;
             }
 
-            for(int suitVal = 0; suitVal < 4; suitVal++)
+            for (int suitVal = 0; suitVal < 4; suitVal++)
             {
-                for(int rankVal = minRank; rankVal < 14; rankVal++)
+                for (int rankVal = minRank; rankVal < 14; rankVal++)
                 {
                     this.Add(new Card((Suit)suitVal, (Rank)rankVal));
                 }
-                if(isAceHigh)
+                if (isAceHigh)
                     this.Add(new Card((Suit)suitVal, Rank.Ace));
             }
 
@@ -114,28 +114,21 @@ namespace CardGame
             this.RemoveAt(this.Count - 1);
             return card;
         }
-
+        /// <summary>
+        /// Fisher yates shuffle method
+        /// </summary>
         public void Shuffle()
         {
-            Cards newDeck = new Cards();
-            bool[] assigned = new bool[52];
-            Random sourceGen = new Random();
-            for (int i = 0; i < 52; i++)
+            Random randomNumber = new Random();
+            for (int n = this.Count-1; n > 0; --n)
             {
-                int sourceCard = 0;
-                bool foundCard = false;
-                while (foundCard == false)
-                {
-                    sourceCard = sourceGen.Next(52);
-                    if (assigned[sourceCard] == false)
-                        foundCard = true;
-                }
-                assigned[sourceCard] = true;
-                newDeck.Add(this[sourceCard]);
+                int k = randomNumber.Next(n + 1);
+                Card tempCard = this[n];
+                this[n] = this[k];
+                this[k] = tempCard;
             }
-            newDeck.CopyTo(this);
         }
 
-      
+
     }
 }

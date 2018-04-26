@@ -294,6 +294,7 @@ namespace Game
                 if (pbDeckSize.BorderStyle == BorderStyle.Fixed3D)
                 {   
                     gameDeck = new Deck((Deck.Size)pbDeckSize.Tag, true, true, Suit.Diamonds);
+                    gameDeck.Shuffle();
                 }
             }
             
@@ -330,8 +331,6 @@ namespace Game
             }
             return isDeckSizeSelected;
         }
-
-
 
     }
 

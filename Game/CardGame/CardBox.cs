@@ -102,9 +102,11 @@ namespace CardBoxControl
 
         #endregion
         #region Constructor
-        public CardBox() : this(new Card(), false, Orientation.Vertical)
+        public CardBox()
         {
             InitializeComponent();
+            myOrentaion = Orientation.Vertical;
+            myCard = new Card();
         }
 
         public CardBox(Card card, bool canGrow = false, Orientation orientation = Orientation.Vertical)
@@ -221,6 +223,7 @@ namespace CardBoxControl
             if (myOrentaion == Orientation.Horizontal)
             {
                 pbCardDisplay.Image.RotateFlip(RotateFlipType.Rotate90FlipNone);
+                this.Size = new Size(this.Size.Height, this.Size.Width);
             }
         }
         public override string ToString()

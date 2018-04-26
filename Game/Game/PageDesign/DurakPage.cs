@@ -23,13 +23,14 @@ namespace Game
         private System.Windows.Forms.PictureBox pbMyPlayerImage;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.PictureBox pbEnemyPlayerImage;
-        private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pbSkipButton;
         private Label lblCurrentTurn;
         private DeckViewer enemyDeckViewer;
         private BoutViewer boutDeckViewer;
         private DeckPileViewer drawDeckViewer;
         private DeckViewer playerDeckViewer;
+
+        private CardBox cdbTrumpCard;
 
         private AiPlayer enemyPlayer;
         private HumanPlayer humanPlayer;
@@ -46,6 +47,7 @@ namespace Game
         public DurakPage(HumanPlayer humanPlayer, AiPlayer aiPlayer, Deck deck)
         {
             Initialize();
+            SetupTrumpCard(deck);
             SetUpPlayers(humanPlayer, aiPlayer, deck);
             InitializeDeck(deck);
         }
@@ -63,12 +65,12 @@ namespace Game
             this.pbMenuOptions = new PictureBox();
             this.lblCurrentTurn = new Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pbSkipButton = new System.Windows.Forms.PictureBox();
             this.pbMyPlayerImage = new System.Windows.Forms.PictureBox();
             this.panel9 = new System.Windows.Forms.Panel();
             this.pbEnemyPlayerImage = new System.Windows.Forms.PictureBox();
             this.boutDeckViewer = new BoutViewer();
+
             //this.drawDeckViewer = new DeckPileViewer();
             this.playerDeckViewer = new DeckViewer();
             this.enemyDeckViewer = new DeckViewer(true);
@@ -76,7 +78,6 @@ namespace Game
             this.enemyDeckViewer.AllowDrop = false;
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuOptions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSkipButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMyPlayerImage)).BeginInit();
             this.panel9.SuspendLayout();
@@ -96,23 +97,12 @@ namespace Game
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.pictureBox5);
             this.panel1.Controls.Add(this.pbSkipButton);
             this.panel1.Controls.Add(this.pbMyPlayerImage);
             this.panel1.Location = new System.Drawing.Point(-3, 667);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1187, 95);
             this.panel1.TabIndex = 5;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Location = new System.Drawing.Point(920, 32);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(60, 50);
-            this.pictureBox5.TabIndex = 12;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Image = Properties.Resources.surrender;
-            this.pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // pictureBox4
             // 
@@ -266,6 +256,7 @@ namespace Game
             // 
             this.BackgroundImage = Properties.Resources.mainMenuBackgroundCenter;
             this.ClientSize = new System.Drawing.Size(1184, 761);
+
             this.Controls.Add(this.lbEnemyPlayerName);
             this.Controls.Add(this.lbMyPlayerName);
             this.Controls.Add(this.lbMyPlayerHandCount);
@@ -282,7 +273,6 @@ namespace Game
             this.Text = "DurakDeck";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuOptions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSkipButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMyPlayerImage)).EndInit();
             this.panel9.ResumeLayout(false);
@@ -484,7 +474,9 @@ namespace Game
             this.drawDeckViewer.Name = "deckViewer2";
             this.drawDeckViewer.Size = new System.Drawing.Size(200, 287);
             this.drawDeckViewer.TabIndex = 10;
+            
             this.Controls.Add(this.drawDeckViewer);
+   
         }
         private void SetUpPlayers(HumanPlayer myPlayer, AiPlayer enemyPlayer, Deck deck)
         {
@@ -508,6 +500,23 @@ namespace Game
 
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
         }
+        private void SetupTrumpCard(Deck deck)
+        {
+            Random randomNumber = new Random();
+            
+            Card cardChosen = new Card(deck[randomNumber.Next(deck.Count)].GetHashCode());
+            
+            cdbTrumpCard = new CardBox(cardChosen,false,Orientation.Horizontal);
+            cdbTrumpCard.Name = "cdbTrumpCard";
+            cdbTrumpCard.FaceUp = true;
+            cdbTrumpCard.Size = new Size(87, 141);
+            cdbTrumpCard.Location = new Point(55, 380);
+            
+            this.Controls.Add(this.cdbTrumpCard);
+            this.Controls["cdbTrumpCard"].BringToFront();
+
+        }
+
 
 
     }
