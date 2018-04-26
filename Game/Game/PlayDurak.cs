@@ -79,6 +79,7 @@ namespace Game
                     SetScreenVisible(this.Controls, playOptions);
                     break;
                 case Screen.GameResults:
+                    SetScreenVisible(this.Controls, winPage);
                     break;
                 default:
                     break;
