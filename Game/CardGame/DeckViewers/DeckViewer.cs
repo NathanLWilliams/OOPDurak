@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CardBoxControl;
 using CardGame;
 using DeckViewerTester;
+using CardBoxControl;
 
 namespace Game
 {
@@ -52,7 +52,10 @@ namespace Game
             }
             AdjustCards();
         }
-
+        public Cards GetCards()
+        {
+            return this.cards;
+        }
         public void AddCard(Card card, bool adjust = true)
         {
             cards.Add(card);
@@ -161,14 +164,6 @@ namespace Game
 
             }
         }
-        /// <summary>
-        /// To assign cards to palyer hands. Might use this method later
-        /// </summary>
-        /// <param name="playerHand"></param>
-        public void AssignToDeckViewr(Hand playerHand)
-        {
-            
-        }
         public virtual void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetData(typeof(CardBox)) != null)
@@ -194,6 +189,11 @@ namespace Game
                     }
 
                 }
+                //this.AddCard(draggedCard);
+                //Card newCard = (Card)draggedCard.Card.Clone();
+                //(draggedCard.Parent as DeckViewer).RemoveCard(draggedCard.Card);
+                //this.AddCard(newCard);
+
 
             }
         }

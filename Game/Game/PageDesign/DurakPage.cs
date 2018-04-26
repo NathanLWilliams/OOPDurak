@@ -19,8 +19,6 @@ namespace Game
         private Label lbEnemyPlayerName;
         private Label lbEnemyPlayerScore;
         private Label lbEnemyPlayerHandCount;
-
-        private CardBox cdbTrumCard;
         
         private System.Windows.Forms.Panel panel1;
         private PictureBox pbMenuOptions;
@@ -29,12 +27,16 @@ namespace Game
         private System.Windows.Forms.PictureBox pbEnemyPlayerImage;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox4;
+        private Label lblCurrentTurn;
         private DeckViewer enemyDeckViewer;
-        private DeckViewer boutDeckViewer;
+        private BoutViewer boutDeckViewer;
         private DeckViewer drawDeckViewer;
         private DeckViewer playerDeckViewer;
 
-        //private CardBox dragCard;
+        private AiPlayer enemyPlayer;
+        private HumanPlayer humanPlayer;
+        private bool isPlayerAttacking;
+        private bool isPlayerTurn;
 
         private const int POP = 25;
 
@@ -47,10 +49,7 @@ namespace Game
         {
             Initialize();
             SetUpPlayers(humanPlayer, aiPlayer, deck);
-            //SetUpTrumpCard(deck);
             InitializeDeck(deck);
-            
-
         }
 
         /// <summary>
@@ -66,6 +65,7 @@ namespace Game
             this.lbEnemyPlayerHandCount = new Label();
             this.lbMyPlayerHandCount = new Label();
             this.pbMenuOptions = new PictureBox();
+            this.lblCurrentTurn = new Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -147,6 +147,21 @@ namespace Game
             this.panel9.Name = "panel9";
             this.panel9.Size = new System.Drawing.Size(292, 160);
             this.panel9.TabIndex = 7;
+
+            // 
+            // lblCurrentTurn
+            // 
+            this.lblCurrentTurn.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblCurrentTurn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCurrentTurn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.lblCurrentTurn.Location = new System.Drawing.Point(762, 676);
+            this.lblCurrentTurn.Name = "lblCurrentTurn";
+            this.lblCurrentTurn.Size = new System.Drawing.Size(100, 23);
+            this.lblCurrentTurn.TabIndex = 13;
+            this.lblCurrentTurn.Text = "Attacker";
+            this.lblCurrentTurn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
+
             // 
             // pbEnemyPlyerImage
             // 
@@ -237,6 +252,7 @@ namespace Game
             this.boutDeckViewer.Name = "deckViewer3";
             this.boutDeckViewer.Size = new System.Drawing.Size(967, 287);
             this.boutDeckViewer.TabIndex = 9;
+            this.boutDeckViewer.ControlAdded += NextTurn;
             // 
             // drawDeckViewr
             // 
@@ -257,7 +273,6 @@ namespace Game
             this.playerDeckViewer.TabIndex = 11;
             this.playerDeckViewer.ControlAdded += UpdatePlayersHandCount;
             this.playerDeckViewer.ControlRemoved += UpdatePlayersHandCount;
-            //TODO: Instantiate the deck separately using Settings.deckSize
             //this.playerDeckViewer.AddCards(new Deck(Deck.Size.Medium, true, true, Suit.Clubs), 6);
             // 
             // deckViewer4
@@ -281,6 +296,7 @@ namespace Game
             this.Controls.Add(this.lbMyPlayerScore);
             this.Controls.Add(this.lbMyPlayerHandCount);
             this.Controls.Add(this.lbEnemyPlayerHandCount);
+            this.Controls.Add(this.lblCurrentTurn);
 
             this.Controls.Add(this.playerDeckViewer);
             
@@ -305,7 +321,85 @@ namespace Game
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
             lbEnemyPlayerHandCount.Text = enemyDeckViewer.Controls.Count.ToString();
         }
-       
+
+        /// <summary>
+        /// Processes the AI and human player's turn. Called when a card is added to the BoutDeckViewer.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NextTurn(object sender, ControlEventArgs e)
+        {
+            //Check if it's the player's turn or the Ai's turn
+            if(isPlayerTurn)
+            {
+                //Make it the AI player's turn
+                isPlayerTurn = false;
+                (boutDeckViewer as BoutViewer).AllowDrop = false;
+
+                //Since nothing currently triggers the AiPlayer's turn, recursively call
+                //this event handler in order to activate the AiPlayer's turn
+                NextTurn(sender, e);
+            }
+            else
+            {
+                //The AI chooses what card to play
+                Card cardToPlay = enemyPlayer.ChooseAction(enemyDeckViewer, boutDeckViewer);
+
+                //Confirm the AI actually chose a card, and not the default null card
+                if (object.ReferenceEquals(cardToPlay, null))
+                {
+                    //The AI is unable to play any cards, so he loses the Bout
+                    EndBout();
+                }
+                else
+                {
+                    //The AI plays a card
+                    boutDeckViewer.AddCard((Card)cardToPlay.Clone());
+                    enemyDeckViewer.RemoveCard(cardToPlay);
+                }
+
+                //Make it the human player's turn
+                isPlayerTurn = true;
+                (boutDeckViewer as BoutViewer).AllowDrop = true;
+            }
+
+        }
+
+        /// <summary>
+        /// Ends the bout by switching the roles of the attacker and defender, distributing cards to the loser,
+        /// and clearing the cards from the bout
+        /// </summary>
+        public void EndBout()
+        {
+            //Switch roles of attacker and defender
+            isPlayerAttacking = isPlayerAttacking ? false : true;
+            lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
+
+            //Check if the player is attacking or not and distribute cards in the bout depending on it
+            if(!isPlayerAttacking)
+            {
+                //Player is currently defending, yet the bout has ended, therefore he has lost (he can't play a card)
+
+                //Take all the bout cards and add it to the players hand
+                for(int i = boutDeckViewer.Controls.Count; i > 0; i--)
+                {
+                    playerDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
+                }
+            }
+            else
+            {
+                //The AI has lost
+
+                //Take all the bout cards and add it to the AI hand
+                for (int i = boutDeckViewer.Controls.Count; i > 0; i--) //TODO: Make this a method maybe
+                {
+                    enemyDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
+                }
+            }
+
+            //TODO: Use this elsewhere
+            //(boutDeckViewer as BoutViewer).IsAttackerTurn = isPlayerAttacking;
+        }
 
         private void LbEnemyPlayerHandCount_Click(object sender, EventArgs e)
         {
@@ -323,17 +417,16 @@ namespace Game
             this.drawDeckViewer.Size = new System.Drawing.Size(200, 287);
             this.drawDeckViewer.TabIndex = 10;
             this.Controls.Add(this.drawDeckViewer);
-            this.Controls.Add(new CardBox(new Card(Card.trump, Rank.Ace), false, Orientation.Horizontal));
-            
         }
         private void SetUpPlayers(HumanPlayer myPlayer, AiPlayer enemyPlayer, Deck deck)
         {
+            this.enemyPlayer = enemyPlayer;
+            this.humanPlayer = myPlayer;
+
            // set up enemplayer object
             pbEnemyPlayerImage.Image = enemyPlayer.Image;
             lbEnemyPlayerName.Text = enemyPlayer.Name;
             lbEnemyPlayerScore.Text = enemyPlayer.Score.ToString();
-
-           // myPlayer.MyHand = enemyDeckViewer.AssignToDeckViewr(); - might use this method later if decided we'll use hand class
 
             enemyDeckViewer.AddCards(deck, 6);
 
@@ -346,13 +439,7 @@ namespace Game
 
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
         }
-        private void SetUpTrumpCard(Deck deck)
-        {
-            Random rnd = new Random();
-            int r = rnd.Next(deck.Count);
-            //cdbTrumCard.Card = new deck[r];
-            cdbTrumCard.FaceUp = true;
-        }
+
 
     }
 }

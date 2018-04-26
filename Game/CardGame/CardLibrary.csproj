@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,9 +45,27 @@
     <Compile Include="AiPlayer.cs" />
     <Compile Include="Bout.cs" />
     <Compile Include="Card.cs" />
+    <Compile Include="CardBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CardBox.Designer.cs">
+      <DependentUpon>CardBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="CardOutOfRangeException.cs" />
     <Compile Include="Cards.cs" />
     <Compile Include="Deck.cs" />
+    <Compile Include="DeckViewers\BoutViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DeckViewers\DeckPileViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DeckViewers\DeckViewer.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DeckViewers\DeckViewer.Designer.cs">
+      <DependentUpon>DeckViewer.cs</DependentUpon>
+    </Compile>
     <Compile Include="DurakGame.cs" />
     <Compile Include="Hand.cs" />
     <Compile Include="HumanPlayer.cs" />
@@ -64,6 +83,12 @@
     <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CardBox.resx">
+      <DependentUpon>CardBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeckViewers\DeckViewer.resx">
+      <DependentUpon>DeckViewer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -5,11 +5,6 @@ namespace Game
 {
     public partial class PlayDurak : Form
     {
-        //BUGS:
-
-        //TODO: Maybe add some static font sizes or buttons sizes which are shared and consistent between each layout/state
-
-        //Separate the different sets of controls/layouts into panels so we can easily loop through in code to set visible or invisible
 
         public enum Screen
         {
@@ -24,7 +19,7 @@ namespace Game
         static MainMenu menu;
         static pgPlayOptions playOptions;
         static StatisticsPage stats;
-        static DurakPage durakPage;
+        //static DurakPage durakPage;
         static InstructionsPage instructionPage;
         static Win winPage;
 

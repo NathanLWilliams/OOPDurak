@@ -18,7 +18,6 @@ namespace CardGame
             set { myScore = value; }
         }
 
-
         private Hand myHand;
 
         public Hand MyHand
