@@ -30,7 +30,7 @@ namespace Game
         }
         public DeckViewer(Deck deck, int numberOfCards) : this()
         {
-            this.AddCards(deck, numberOfCards);
+            this.DrawCards(deck, numberOfCards);
         }
         public DeckViewer(Deck deck, bool isEnemy = false)
         {
@@ -41,7 +41,8 @@ namespace Game
 
             this.DragEnter += new DragEventHandler(this.DeckViewer_DragEnter);
             this.DragDrop += new DragEventHandler(this.DeckViewer_DragDrop);
-            this.AddCards(deck, deck.Count);
+            this.DrawCards(deck, deck.Count);
+            
         }
         public void Reset()
         {
@@ -49,13 +50,22 @@ namespace Game
             this.Controls.Clear();
             AdjustCards();
         }
-        public void AddCards(Deck deck, int numberOfCards)
+        public void DrawCards(Deck deck, int numberOfCards)
         {
 
             for (int i = 0; i < numberOfCards; i++)
             {
                 Card card = deck.DrawCard();
                 this.AddCard(card, false);
+            }
+            AdjustCards();
+        }
+        public void DrawCards(Cards cards)
+        {
+            for(int i = cards.Count - 1; i >= 0; i--)
+            {
+                this.AddCard((Card)cards[i].Clone(), false);
+                cards.RemoveAt(i);
             }
             AdjustCards();
         }
@@ -142,7 +152,7 @@ namespace Game
             UpdateCardBoxes(true);
             for (int i = 0; i < this.Controls.Count; i++)
             {
-                double widthDivider = (2 + this.Controls.Count / 3);
+                double widthDivider = (2 + this.Controls.Count / 6);
                 int firstCardX = this.Size.Width / 2 - (this.Controls.Count + 1) * (int)(this.Controls[0].Width / widthDivider) / 2;
                 int nextCardX = firstCardX + (i + 1) * (int)(this.Controls[0].Width / widthDivider);
                 if (IsEnemyView == true)

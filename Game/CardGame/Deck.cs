@@ -60,6 +60,7 @@ namespace CardGame
             Card.isAceHigh = isAceHigh;
             Card.useTrumps = useTrumps;
             Card.trump = trump;
+            
         }
 
         private Deck(Cards newCards)

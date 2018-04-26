@@ -283,7 +283,6 @@ namespace Game
                 MessageBox.Show("Error! Deck size must be selected");
             }
 
-            
         }
         private Deck GetPlayerSelectedDeck()
         {

@@ -10,13 +10,13 @@ namespace Game
 {
     public class BoutViewer : DeckViewer
     {
-        //TODO: Change this. Tried to get the parent of BoutViewer (DurakPage) in order to get the isAttackerTurn variable there (so we don't need two of them),
-        //yet for some reason I can't reference DurakPage with "(this.Parent as DurakPage).IsAttackerTurn"
-        bool isAttackerTurn = true;
-        public bool IsAttackerTurn
+
+        const int MAXIMUM_CARDS_IN_BOUT = 12;
+        private int cardCountAtBoutStart = 6;
+        public int CardCountAtBoutStart
         {
-            get { return isAttackerTurn; }
-            set { isAttackerTurn = value; }
+            get { return cardCountAtBoutStart; }
+            set { cardCountAtBoutStart = value; }
         }
         public event EventHandler CardAdded;
 
@@ -25,11 +25,11 @@ namespace Game
         }
         public void AddDeck(Deck deck)
         {
-            this.AddCards(deck, deck.Count);
+            this.DrawCards(deck, deck.Count);
         }
         public void AddCard(Card c, bool adjust = true, bool willTriggerTurn = false)
         {
-            Console.WriteLine("ADDED CARD");
+            //Console.WriteLine("ADDED CARD");
             base.AddCard(c, adjust);
 
             if(willTriggerTurn)
@@ -39,7 +39,7 @@ namespace Game
         {
             if (e.Data.GetData(typeof(CardBox)) != null)
             {
-                if(this.cards.Count < 12)
+                if(this.isFull() == false)
                 {
                     CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
                     if (draggedCard.Parent.GetType() == typeof(DeckViewer) && (string)draggedCard.Parent.Tag != "enemyDeck")
@@ -54,10 +54,10 @@ namespace Game
         }
         public override void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(typeof(CardBox)) != null && this.Controls.Count < 12)
+            if (e.Data.GetData(typeof(CardBox)) != null && this.isFull() == false)
             {
 
-                System.Console.WriteLine("DragDrop");
+                //System.Console.WriteLine("DragDrop");
                 //int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
                 //Card draggedCard = new Card(cardHashCode);
                 CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
@@ -90,6 +90,20 @@ namespace Game
 
 
         }
+
+        /// <summary>
+        /// Checks whether cards can still be added to this bout viewer
+        /// </summary>
+        /// <returns>Whether the maximum number of cards allowed in the bout has been reached</returns>
+        public bool isFull()
+        {
+            bool full = false;
+            if(this.cards.Count >= MAXIMUM_CARDS_IN_BOUT || this.cards.Count / 2 >= this.cardCountAtBoutStart)
+            {
+                full = true;
+            }
+            return full;
+        }
         /// <summary>
         /// Determines whether either an attacker or defender can place a card in the bout
         /// </summary>
@@ -99,8 +113,7 @@ namespace Game
         public bool canPlaceCard(Card c)
         {
             bool canPlace = false;
-            
-            if(isAttackerTurn)
+            if(DurakPage.isPlayerAttacking == DurakPage.isPlayerTurn)
             {
                 //No cards in bout currently, attacker can play any card
                 if(this.cards.Count == 0)
@@ -129,7 +142,7 @@ namespace Game
 
                     //Get the last card played
                     Card lastCard = this.cards[this.cards.Count - 1];
-
+                    c.FaceUp = true;
                     //Check if the passed card is of a matching suit and higher rank, trumps are handled slightly differently
 
                     if(c.Suit == lastCard.Suit)
@@ -139,16 +152,19 @@ namespace Game
                             if(lastCard.Rank != Rank.Ace)
                             {
                                 canPlace = true;
+                                //System.Console.WriteLine("1: " + lastCard.ToString() + "        " + c.ToString() +    "          " + (lastCard.Suit == c.Suit));
                             }
                         }
                         else if(lastCard.Rank != Rank.Ace && c.Rank > lastCard.Rank)
                         {
                             canPlace = true;
+                            //System.Console.WriteLine("2: " + lastCard.ToString() + "        " + c.ToString() + "          " + (lastCard.Suit == c.Suit));
                         }
                     }
                     else if(c.Suit == Card.trump) //last card is not trump, but card to play is
                     {
                         canPlace = true;
+                        //System.Console.WriteLine("3: " + lastCard.ToString() + "        " + c.ToString() + "          " + (lastCard.Suit == c.Suit));
                     }
 
                 }

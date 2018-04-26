@@ -25,7 +25,6 @@ namespace Game
         private System.Windows.Forms.PictureBox pbMyPlayerImage;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.PictureBox pbEnemyPlayerImage;
-        private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pbSkipButton;
         private Label lblCurrentTurn;
         private DeckViewer enemyDeckViewer;
@@ -39,6 +38,7 @@ namespace Game
         public static bool isPlayerTurn;
 
         private const int POP = 25;
+        private const int CARD_MIN_BEFORE_REFILL = 6;
 
         public DurakPage()
         {
@@ -67,7 +67,6 @@ namespace Game
             this.pbMenuOptions = new PictureBox();
             this.lblCurrentTurn = new Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pbSkipButton = new System.Windows.Forms.PictureBox();
             this.pbMyPlayerImage = new System.Windows.Forms.PictureBox();
             this.panel9 = new System.Windows.Forms.Panel();
@@ -80,7 +79,6 @@ namespace Game
             this.enemyDeckViewer.AllowDrop = false;
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuOptions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSkipButton)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMyPlayerImage)).BeginInit();
             this.panel9.SuspendLayout();
@@ -98,25 +96,25 @@ namespace Game
             this.pbMenuOptions.TabIndex = 4;
             this.pbMenuOptions.TabStop = false;
             // 
+            // deckViewer1
+            // 
+            this.playerDeckViewer.BackColor = System.Drawing.Color.Lime;
+            this.playerDeckViewer.Location = new System.Drawing.Point(11, 502);
+            this.playerDeckViewer.Margin = new System.Windows.Forms.Padding(2);
+            this.playerDeckViewer.Name = "deckViewer1";
+            this.playerDeckViewer.Size = new System.Drawing.Size(1171, 167);
+            this.playerDeckViewer.TabIndex = 11;
+            this.playerDeckViewer.ControlAdded += UpdatePlayersHandCount;
+            this.playerDeckViewer.ControlRemoved += UpdatePlayersHandCount;
+            // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.pictureBox5);
             this.panel1.Controls.Add(this.pbSkipButton);
             this.panel1.Controls.Add(this.pbMyPlayerImage);
-            this.panel1.Location = new System.Drawing.Point(-3, 667);
+            this.panel1.Location = new System.Drawing.Point(this.playerDeckViewer.Location.X, 667);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1187, 95);
+            this.panel1.Size = new System.Drawing.Size(this.playerDeckViewer.Size.Width, 120);
             this.panel1.TabIndex = 5;
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.Location = new System.Drawing.Point(920, 32);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(60, 50);
-            this.pictureBox5.TabIndex = 12;
-            this.pictureBox5.TabStop = false;
-            this.pictureBox5.Image = Properties.Resources.surrender;
-            this.pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
             // 
             // pictureBox4
             // 
@@ -264,18 +262,6 @@ namespace Game
             //this.drawDeckViewer.Size = new System.Drawing.Size(200, 287);
             //this.drawDeckViewer.TabIndex = 10;
             // 
-            // deckViewer1
-            // 
-            this.playerDeckViewer.BackColor = System.Drawing.Color.Lime;
-            this.playerDeckViewer.Location = new System.Drawing.Point(11, 502);
-            this.playerDeckViewer.Margin = new System.Windows.Forms.Padding(2);
-            this.playerDeckViewer.Name = "deckViewer1";
-            this.playerDeckViewer.Size = new System.Drawing.Size(1171, 167);
-            this.playerDeckViewer.TabIndex = 11;
-            this.playerDeckViewer.ControlAdded += UpdatePlayersHandCount;
-            this.playerDeckViewer.ControlRemoved += UpdatePlayersHandCount;
-            //this.playerDeckViewer.AddCards(new Deck(Deck.Size.Medium, true, true, Suit.Clubs), 6);
-            // 
             // deckViewer4
             // 
             this.enemyDeckViewer.BackColor = System.Drawing.Color.Lime;
@@ -290,6 +276,7 @@ namespace Game
             // DurakDeck
             // 
             this.BackgroundImage = Properties.Resources.mainMenuBackgroundCenter;
+            this.Dock = DockStyle.Fill;
             this.ClientSize = new System.Drawing.Size(1184, 761);
             this.Controls.Add(this.lbEnemyPlayerName);
             this.Controls.Add(this.lbEnemyPlayerScore);
@@ -309,13 +296,11 @@ namespace Game
             this.Text = "DurakDeck";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbMenuOptions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbSkipButton)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbMyPlayerImage)).EndInit();
             this.panel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pbEnemyPlayerImage)).EndInit();
             this.ResumeLayout(false);
-            //SetUpPlayer();
         }
 
         private void pbSkipButton_Click(object sender, EventArgs e)
@@ -339,44 +324,49 @@ namespace Game
             NextTurn();
         }
 
-        //TODO: Add functionality to end the bout if the maximum amount of cards in the bout is reached
         public void NextTurn()
         {
-            //Check if it's the player's turn or the Ai's turn
-            if (isPlayerTurn)
+            if(boutDeckViewer.isFull())
             {
-                //Make it the AI player's turn
-                isPlayerTurn = false;
-                boutDeckViewer.IsAttackerTurn = isPlayerAttacking ? false : true;
-                (boutDeckViewer as BoutViewer).AllowDrop = false;
-
-                //Since nothing currently triggers the AiPlayer's turn, recursively call
-                //this event handler in order to activate the AiPlayer's turn
-                NextTurn();
+                EndBout();
             }
             else
             {
-                //The AI chooses what card to play
-                Card cardToPlay = enemyPlayer.ChooseAction(enemyDeckViewer, boutDeckViewer);
-
-                //Confirm the AI actually chose a card, and not the default null card
-                if (object.ReferenceEquals(cardToPlay, null))
+                //Check if it's the player's turn or the Ai's turn
+                if (isPlayerTurn)
                 {
-                    //The AI is unable to play any cards, so he loses the Bout
-                    EndBout();
+                    //Make it the AI player's turn
+                    isPlayerTurn = false;
+                    (boutDeckViewer as BoutViewer).AllowDrop = false;
+
+                    //Since nothing currently triggers the AiPlayer's turn, recursively call
+                    //this event handler in order to activate the AiPlayer's turn
+                    NextTurn();
                 }
                 else
                 {
-                    //The AI plays a card
-                    boutDeckViewer.AddCard((Card)cardToPlay.Clone(), true, false);
-                    enemyDeckViewer.RemoveCard(cardToPlay);
-                }
+                    //The AI chooses what card to play
+                    Card cardToPlay = enemyPlayer.ChooseAction(enemyDeckViewer, boutDeckViewer);
 
-                //Make it the human player's turn
-                isPlayerTurn = true;
-                boutDeckViewer.IsAttackerTurn = isPlayerAttacking ? true : false;
-                (boutDeckViewer as BoutViewer).AllowDrop = true;
+                    //Confirm the AI actually chose a card, and not the default null card
+                    if (object.ReferenceEquals(cardToPlay, null))
+                    {
+                        //The AI is unable to play any cards, so he loses the Bout
+                        EndBout();
+                    }
+                    else
+                    {
+                        //The AI plays a card
+                        boutDeckViewer.AddCard((Card)cardToPlay.Clone(), true, false);
+                        enemyDeckViewer.RemoveCard(cardToPlay);
+                    }
+
+                    //Make it the human player's turn
+                    isPlayerTurn = true;
+                    (boutDeckViewer as BoutViewer).AllowDrop = true;
+                }
             }
+            
         }
 
         /// <summary>
@@ -398,10 +388,12 @@ namespace Game
                     //Player loses the bout as the defender
 
                     //Take all the bout cards and add it to the players hand
-                    for (int i = boutDeckViewer.Controls.Count - 1; i >= 0; i--)
+                    /*for (int i = boutDeckViewer.Controls.Count - 1; i >= 0; i--)
                     {
                         playerDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
-                    }
+                    }*/
+                    this.playerDeckViewer.DrawCards(boutDeckViewer.GetCards());
+                    boutDeckViewer.AdjustCards();
                 }
             }
             else
@@ -411,10 +403,13 @@ namespace Game
                     //The AI loses the bout as the defender
 
                     //Take all the bout cards and add it to the AI hand
-                    for (int i = boutDeckViewer.Controls.Count - 1; i >= 0; i--) //TODO: Make this a method maybe
+                    /*for (int i = boutDeckViewer.Controls.Count - 1; i >= 0; i--) //TODO: Make this a method maybe
                     {
                         enemyDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
-                    }
+                    }*/
+                    this.enemyDeckViewer.DrawCards(boutDeckViewer.GetCards());
+                    boutDeckViewer.AdjustCards();
+
                 }
                 else
                 {
@@ -426,8 +421,9 @@ namespace Game
 
             //Calls a method to refill the player and AI hand to 6 cards minimum
             RefillCards();
+            boutDeckViewer.CardCountAtBoutStart = isPlayerAttacking ? enemyDeckViewer.GetCards().Count : playerDeckViewer.GetCards().Count;
 
-            if((enemyDeckViewer.GetCards().Count == 0 || playerDeckViewer.GetCards().Count == 0) && drawDeckViewer.GetCards().Count == 0)
+            if ((enemyDeckViewer.GetCards().Count == 0 || playerDeckViewer.GetCards().Count == 0) && drawDeckViewer.GetCards().Count == 0)
             {
                 //No cards in the draw pile and a player has run out of cards, end the game
 
@@ -457,7 +453,6 @@ namespace Game
                 //Switch roles of attacker and defender
                 isPlayerAttacking = isPlayerAttacking ? false : true;
                 isPlayerTurn = isPlayerAttacking;
-                boutDeckViewer.IsAttackerTurn = true; //Set to true since the first card is always from an attacker
 
                 lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
 
@@ -473,24 +468,21 @@ namespace Game
             
         }
 
+        /// <summary>
+        /// Refills the player and AIs hands to be at least the minimum number of cards at the end of a bout
+        /// </summary>
         public void RefillCards()
         {
-            //TODO: Make a constant for the num of cards minimum before refilling
-            
-            //if(isPlayerAttacking)
-            //{
-                while (enemyDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
-                {
-                    enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
-                }
-            //}
-            //else
-            //{
-                while (playerDeckViewer.GetCards().Count < 6 && drawDeckViewer.GetCards().Count > 0)
-                {
-                    playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
-                }
-            //}
+
+            while (enemyDeckViewer.GetCards().Count < CARD_MIN_BEFORE_REFILL && drawDeckViewer.GetCards().Count > 0)
+            {
+                enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+            }
+
+            while (playerDeckViewer.GetCards().Count < CARD_MIN_BEFORE_REFILL && drawDeckViewer.GetCards().Count > 0)
+            {
+                playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+            }
             
             enemyDeckViewer.AdjustCards();
             playerDeckViewer.AdjustCards();
@@ -504,6 +496,7 @@ namespace Game
         private void InitializeDeck(Deck deck)
         {
             drawDeckViewer = new DeckPileViewer(deck);
+            drawDeckViewer.DrawCards(new CardGame.Deck(Deck.Size.Large, true, true, Suit.Diamonds), 5);
             // drawDeckViewer.AddCards(deck, deck.Count); // also in DeckPile viewer class need to make adjustments for TrumpCard to show horizontally and do something with deck
             this.drawDeckViewer.BackColor = System.Drawing.Color.Lime;
             this.drawDeckViewer.Location = new System.Drawing.Point(11, 211);
@@ -526,9 +519,9 @@ namespace Game
             lbEnemyPlayerName.Text = enemyPlayer.Name;
             lbEnemyPlayerScore.Text = enemyPlayer.Score.ToString();
 
-            enemyDeckViewer.AddCards(deck, 6);
+            enemyDeckViewer.DrawCards(deck, 6);
 
-            playerDeckViewer.AddCards(deck, 6);
+            playerDeckViewer.DrawCards(deck, 6);
          
             // set up myPlayer object
             pbMyPlayerImage.Image = myPlayer.Image;

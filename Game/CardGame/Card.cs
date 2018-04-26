@@ -192,7 +192,7 @@ namespace CardGame
             }
             else
             {
-                //TODO: Fix this to include rank
+                //TODO: Fix this to include rank, or basically fix all the operators
                 if (useTrumps && (card2.suit == Card.trump))
                     return false;
                 else
