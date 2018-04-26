@@ -14,10 +14,8 @@ namespace Game
     public class DurakPage : Panel
     {
         private Label lbMyPlayerName;
-        private Label lbMyPlayerScore;
         private Label lbMyPlayerHandCount;
         private Label lbEnemyPlayerName;
-        private Label lbEnemyPlayerScore;
         private Label lbEnemyPlayerHandCount;
         
         private System.Windows.Forms.Panel panel1;
@@ -59,9 +57,7 @@ namespace Game
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DurakPage));
             this.lbMyPlayerName = new Label();
-            this.lbMyPlayerScore = new Label() ;
             this.lbEnemyPlayerName = new Label();
-            this.lbEnemyPlayerScore = new Label();
             this.lbEnemyPlayerHandCount = new Label();
             this.lbMyPlayerHandCount = new Label();
             this.pbMenuOptions = new PictureBox();
@@ -196,17 +192,7 @@ namespace Game
             this.lbMyPlayerHandCount.TabIndex = 13;
             this.lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
             this.lbMyPlayerHandCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbMyPlayerScore
-            // 
-            this.lbMyPlayerScore.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lbMyPlayerScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMyPlayerScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lbMyPlayerScore.Location = new System.Drawing.Point(458, 700);
-            this.lbMyPlayerScore.Name = "lbPlayerScore";
-            this.lbMyPlayerScore.Size = new System.Drawing.Size(100, 23);
-            this.lbMyPlayerScore.TabIndex = 14;
-            this.lbMyPlayerScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+ 
             // 
             // lbEnemyPlayerName
             // 
@@ -231,18 +217,7 @@ namespace Game
             this.lbEnemyPlayerHandCount.Size = new System.Drawing.Size(88, 23);
             this.lbEnemyPlayerHandCount.TabIndex = 14;
             this.lbEnemyPlayerHandCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbEnememyPlayerScore
-            // 
-            this.lbEnemyPlayerScore.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lbEnemyPlayerScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbEnemyPlayerScore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.lbEnemyPlayerScore.Location = new System.Drawing.Point(465, 55);
-            this.lbEnemyPlayerScore.Name = "lbEnemyPlayerScore";
-            this.lbEnemyPlayerScore.Size = new System.Drawing.Size(88, 23);
-            this.lbEnemyPlayerScore.TabIndex = 15;
-            this.lbEnemyPlayerScore.Text = " ";
-            this.lbEnemyPlayerScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+
 
             // 
             // boutDeckViewer
@@ -292,9 +267,7 @@ namespace Game
             this.BackgroundImage = Properties.Resources.mainMenuBackgroundCenter;
             this.ClientSize = new System.Drawing.Size(1184, 761);
             this.Controls.Add(this.lbEnemyPlayerName);
-            this.Controls.Add(this.lbEnemyPlayerScore);
             this.Controls.Add(this.lbMyPlayerName);
-            this.Controls.Add(this.lbMyPlayerScore);
             this.Controls.Add(this.lbMyPlayerHandCount);
             this.Controls.Add(this.lbEnemyPlayerHandCount);
             this.Controls.Add(this.lblCurrentTurn);
@@ -526,7 +499,6 @@ namespace Game
            // set up enemplayer object
             pbEnemyPlayerImage.Image = enemyPlayer.Image;
             lbEnemyPlayerName.Text = enemyPlayer.Name;
-            lbEnemyPlayerScore.Text = enemyPlayer.Score.ToString();
 
             enemyDeckViewer.AddCards(deck, 6);
 
@@ -535,7 +507,6 @@ namespace Game
             // set up myPlayer object
             pbMyPlayerImage.Image = myPlayer.Image;
             lbMyPlayerName.Text = myPlayer.Name;
-            lbMyPlayerScore.Text = myPlayer.Score.ToString();
 
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
         }
