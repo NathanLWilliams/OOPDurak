@@ -15,7 +15,7 @@ namespace Game
 
         public DeckPileViewer() : base()
         {
-            Deck deck = new Deck(Deck.Size.Medium, true, true, Suit.Diamonds);
+            Deck deck = new Deck(Deck.Size.Medium, true);
             this.DrawCards(deck, deck.Count);
             this.AllowDrop = false;
         }

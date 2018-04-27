@@ -317,45 +317,39 @@ namespace Game
 
         public void NextTurn()
         {
-            //TODO: Fix ending the bout if full, has problems
-            
-            //else
-            //{
-                //Check if it's the player's turn or the Ai's turn
-                if (isPlayerTurn)
-                {
-                    //Make it the AI player's turn
-                    isPlayerTurn = false;
-                    (boutDeckViewer as BoutViewer).AllowDrop = false;
+            //Check if it's the player's turn or the Ai's turn
+            if (isPlayerTurn)
+            {
+                //Make it the AI player's turn
+                isPlayerTurn = false;
+                (boutDeckViewer as BoutViewer).AllowDrop = false;
 
-                    //Since nothing currently triggers the AiPlayer's turn, recursively call
-                    //this event handler in order to activate the AiPlayer's turn
-                    NextTurn();
+                //Since nothing currently triggers the AiPlayer's turn, recursively call
+                //this event handler in order to activate the AiPlayer's turn
+                NextTurn();
+            }
+            else
+            {
+                //The AI chooses what card to play
+                Card cardToPlay = enemyPlayer.ChooseAction(enemyDeckViewer, boutDeckViewer);
+
+                //Confirm the AI actually chose a card, and not the default null card
+                if (object.ReferenceEquals(cardToPlay, null))
+                {
+                    //The AI is unable to play any cards, so he loses the Bout
+                    EndBout();
                 }
                 else
                 {
-                    //The AI chooses what card to play
-                    Card cardToPlay = enemyPlayer.ChooseAction(enemyDeckViewer, boutDeckViewer);
-
-                    //Confirm the AI actually chose a card, and not the default null card
-                    if (object.ReferenceEquals(cardToPlay, null))
-                    {
-                        //The AI is unable to play any cards, so he loses the Bout
-                        EndBout();
-                    }
-                    else
-                    {
-                        //The AI plays a card
-                        boutDeckViewer.AddCard((Card)cardToPlay.Clone(), false);
-                        enemyDeckViewer.RemoveCard(cardToPlay);
-                    }
-
-                    //Make it the human player's turn
-                    isPlayerTurn = true;
-                    (boutDeckViewer as BoutViewer).AllowDrop = true;
+                    //The AI plays a card
+                    boutDeckViewer.AddCard((Card)cardToPlay.Clone(), false);
+                    enemyDeckViewer.RemoveCard(cardToPlay);
                 }
-            //}
-            
+
+                //Make it the human player's turn
+                isPlayerTurn = true;
+                (boutDeckViewer as BoutViewer).AllowDrop = true;
+            }
         }
 
         /// <summary>
@@ -463,7 +457,7 @@ namespace Game
         private void InitializeDeck(Deck deck)
         {
             drawDeckViewer = new DeckPileViewer(deck);
-            drawDeckViewer.DrawCards(new CardGame.Deck(Deck.Size.Large, true, true, Suit.Diamonds), 5);
+            drawDeckViewer.DrawCards(new CardGame.Deck(Deck.Size.Large, true), 5);
             // drawDeckViewer.AddCards(deck, deck.Count); // also in DeckPile viewer class need to make adjustments for TrumpCard to show horizontally and do something with deck
             this.drawDeckViewer.BackColor = System.Drawing.Color.Lime;
             this.drawDeckViewer.Location = new System.Drawing.Point(11, 211);
@@ -505,7 +499,7 @@ namespace Game
         {
             Random randomNumber = new Random();
             
-            Card cardChosen = new Card(deck[randomNumber.Next(deck.Count)].GetHashCode());
+            Card cardChosen = new Card(deck[randomNumber.Next(deck.Count - 1) + 1].GetHashCode());
             
             cdbTrumpCard = new CardBox(cardChosen,false,Orientation.Horizontal);
             cdbTrumpCard.Name = "cdbTrumpCard";

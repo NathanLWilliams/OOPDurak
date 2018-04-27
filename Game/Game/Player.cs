@@ -19,30 +19,6 @@ namespace CardGame
     public abstract class Player
     {
 
-        // fields and properties
-        private int myScore; // probably make seperate score class later
-
-        /// <summary>
-        /// A property for score
-        /// </summary>
-        public int Score
-        {
-            get { return myScore; }
-            set { myScore = value; }
-        }
-
-        private Hand myHand;
-
-
-        /// <summary>
-        /// A property for the hand a player (human or AI) has
-        /// </summary>
-        public Hand MyHand
-        {
-            get { return myHand; }
-            set { myHand = value; }
-        }
-
         /// <summary>
         /// A property for the status of the player (human or AI)
         /// </summary>

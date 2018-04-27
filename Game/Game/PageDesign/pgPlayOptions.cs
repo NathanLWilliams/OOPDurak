@@ -292,7 +292,7 @@ namespace Game
                 // border style tells us if box is selected
                 if (pbDeckSize.BorderStyle == BorderStyle.Fixed3D)
                 {   
-                    gameDeck = new Deck((Deck.Size)pbDeckSize.Tag, true, true, Suit.Diamonds);
+                    gameDeck = new Deck((Deck.Size)pbDeckSize.Tag, true);
                     gameDeck.Shuffle();
                 }
             }
@@ -304,7 +304,6 @@ namespace Game
             AiPlayer enemyPlayer = new AiPlayer();
             enemyPlayer.Image = Properties.Resources.robot;
             enemyPlayer.Name = "Computer";
-            enemyPlayer.Score = 1000; // score could be seperate class
 
             return enemyPlayer;
         }
@@ -313,7 +312,6 @@ namespace Game
             HumanPlayer myPlayer = new HumanPlayer();
             myPlayer.Image = Properties.Resources.user;
             myPlayer.Name = "John Wick"; // maybe add text box in play options page to get these name like values
-            myPlayer.Score = 1000; // score could be seperate class
            
             return myPlayer;
         }
