@@ -98,7 +98,7 @@ namespace Game
         private void Exit_Click(object sender, EventArgs e)
         {
             if(this.Parent is Form)
-                (this.Parent.Parent as Form).Close();
+                (this.Parent as Form).Close();
         }
         private void Start_Click(object sender, EventArgs e)
         {

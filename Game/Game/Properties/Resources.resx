@@ -157,4 +157,7 @@
   <data name="surrender" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\surrender.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="menu_shade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\menu-shade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
