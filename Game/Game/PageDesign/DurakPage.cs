@@ -304,6 +304,7 @@ namespace Game
 
         public void NextTurn()
         {
+            //TODO: Fix ending the bout if full, has problems
             if(boutDeckViewer.isFull())
             {
                 EndBout();
@@ -353,95 +354,61 @@ namespace Game
         /// </summary>
         public void EndBout()
         {
-            if(isPlayerTurn)
+            if (isPlayerTurn == isPlayerAttacking) //The current player is attacking
             {
-                if(isPlayerAttacking)
-                {
-                    //The player loses the bout as the attacker
-                    boutDeckViewer.Reset();
-
-                }
-                else
-                {
-                    //Player loses the bout as the defender
-
-                    //Take all the bout cards and add it to the players hand
-                    /*for (int i = boutDeckViewer.Controls.Count - 1; i >= 0; i--)
-                    {
-                        playerDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
-                    }*/
-                    this.playerDeckViewer.DrawCards(boutDeckViewer.GetCards());
-                    boutDeckViewer.AdjustCards();
-                }
+                boutDeckViewer.Reset();
             }
-            else
+            else if (isPlayerTurn) //Is human player and is defending
             {
-                if (isPlayerAttacking)
-                {
-                    //The AI loses the bout as the defender
-
-                    //Take all the bout cards and add it to the AI hand
-                    /*for (int i = boutDeckViewer.Controls.Count - 1; i >= 0; i--) //TODO: Make this a method maybe
-                    {
-                        enemyDeckViewer.AddCard(boutDeckViewer.TakeCard(i));
-                    }*/
-                    this.enemyDeckViewer.DrawCards(boutDeckViewer.GetCards());
-                    boutDeckViewer.AdjustCards();
-
-                }
-                else
-                {
-                    //The AI loses the bout as the attacker
-                    boutDeckViewer.Reset();
-                }
-                
+                this.playerDeckViewer.DrawCards(boutDeckViewer.GetCards());
+                boutDeckViewer.AdjustCards();
+            }
+            else //Is AI and is defending
+            {
+                this.enemyDeckViewer.DrawCards(boutDeckViewer.GetCards());
+                boutDeckViewer.AdjustCards();
             }
 
             //Calls a method to refill the player and AI hand to 6 cards minimum
             RefillCards();
             boutDeckViewer.CardCountAtBoutStart = isPlayerAttacking ? enemyDeckViewer.GetCards().Count : playerDeckViewer.GetCards().Count;
 
-            if ((enemyDeckViewer.GetCards().Count == 0 || playerDeckViewer.GetCards().Count == 0) && drawDeckViewer.GetCards().Count == 0)
+            if(drawDeckViewer.Controls.Count == 0)
             {
-                //No cards in the draw pile and a player has run out of cards, end the game
-
-                if (enemyDeckViewer.GetCards().Count == 0 && playerDeckViewer.GetCards().Count == 0)
+                if(playerDeckViewer.Controls.Count == 0 && enemyDeckViewer.Controls.Count == 0)
                 {
                     //It's a tie!
                     if (this.Parent is PlayDurak)
                         (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
                 }
-                else if(enemyDeckViewer.GetCards().Count == 0)
-                {
-                    //The AI wins!
-                    if (this.Parent is PlayDurak)
-                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
-                }
-                else if(playerDeckViewer.GetCards().Count == 0)
+                else if(playerDeckViewer.Controls.Count == 0)
                 {
                     //The human player wins!
                     if (this.Parent is PlayDurak)
                         (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
                 }
-
-            }
-            else
-            {
-                //TODO: Make this switching of roles into a method
-                //Switch roles of attacker and defender
-                isPlayerAttacking = isPlayerAttacking ? false : true;
-                isPlayerTurn = isPlayerAttacking;
-
-                lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
-
-                //The AI is going to attack
-                if (isPlayerAttacking == false)
+                else
                 {
-                    //The user can't trigger the AI's turn since it's the first
-                    //card placed in the bout, therefore OnNextTurn is not triggered
-                    //therefore, trigger it here.
-                    NextTurn();
+                    //The AI wins!
+                    if (this.Parent is PlayDurak)
+                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
                 }
+            }
+
+            //TODO: Make this switching of roles into a method
+            //Switch roles of attacker and defender
+            isPlayerAttacking = isPlayerAttacking ? false : true;
+            isPlayerTurn = isPlayerAttacking;
+
+            lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
+
+            //The AI is going to attack
+            if (isPlayerAttacking == false)
+            {
+                //The user can't trigger the AI's turn since it's the first
+                //card placed in the bout, therefore OnNextTurn is not triggered
+                //therefore, trigger it here.
+                NextTurn();
             }
             
         }

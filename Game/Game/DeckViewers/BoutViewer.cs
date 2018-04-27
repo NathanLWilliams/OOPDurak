@@ -20,7 +20,7 @@ namespace Game
     public class BoutViewer : DeckViewer
     {
         // Constants and Variables
-        const int MAXIMUM_CARDS_IN_BOUT = 12;
+        public static int MAXIMUM_CARDS_IN_BOUT = 12;
         private int cardCountAtBoutStart = 6;
         // An event flag for added cards
         public event EventHandler CardAdded;
@@ -147,7 +147,7 @@ namespace Game
             bool full = false;
 
             // A logic structure which determines whether the maximum number of cards was reached
-            if(this.cards.Count >= MAXIMUM_CARDS_IN_BOUT || this.cards.Count / 2 >= this.cardCountAtBoutStart)
+            if(this.cards.Count >= BoutViewer.MAXIMUM_CARDS_IN_BOUT || this.cards.Count / 2 >= this.cardCountAtBoutStart)
             {
                 full = true;
             }
