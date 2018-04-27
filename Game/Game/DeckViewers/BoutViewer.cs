@@ -1,4 +1,4 @@
-﻿using CardBoxControl;
+using CardBoxControl;
 using CardGame;
 using Game;
 using System;
@@ -8,37 +8,71 @@ using System.Windows.Forms;
 
 namespace Game
 {
+
+    /// <summary>
+    /// BoutViewer class which inherits from DeckViewer
+    /// </summary>
     public class BoutViewer : DeckViewer
     {
-
+        // Constants and Variables
         const int MAXIMUM_CARDS_IN_BOUT = 12;
         private int cardCountAtBoutStart = 6;
+        // An event flag for added cards
+        public event EventHandler CardAdded;
+
+        /// <summary>
+        /// Gets a count of cards and sets the card count
+        /// </summary>
         public int CardCountAtBoutStart
         {
             get { return cardCountAtBoutStart; }
             set { cardCountAtBoutStart = value; }
         }
-        public event EventHandler CardAdded;
 
+
+        /// <summary>
+        /// 
+        /// </summary>
         public BoutViewer() : base()
         {
+
         }
+
+        /// <summary>
+        /// Method which adds a deck
+        /// </summary>
+        /// <param name="deck"></param>
         public void AddDeck(Deck deck)
         {
             this.DrawCards(deck, deck.Count);
         }
+
+        /// <summary>
+        /// Method which adds a card
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="adjust"></param>
+        /// <param name="willTriggerTurn"></param>
         public void AddCard(Card c, bool adjust = true, bool willTriggerTurn = false)
         {
             //Console.WriteLine("ADDED CARD");
             base.AddCard(c, adjust);
 
+            // An if structure which determines whether the argument willTriggerTurn is true
             if(willTriggerTurn)
                 CardAdded(this, new EventArgs());
         }
+
+        /// <summary>
+        /// Method which determines whether the card was 'dragged'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>        
         public override void DeckViewer_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetData(typeof(CardBox)) != null)
             {
+                // An logic structure which determines whether its a player card
                 if(this.isFull() == false)
                 {
                     CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
@@ -52,6 +86,12 @@ namespace Game
                 
             }
         }
+
+        /// <summary>
+        /// Method which determines whether the card was 'dropped' 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
             if (e.Data.GetData(typeof(CardBox)) != null && this.isFull() == false)
@@ -62,6 +102,8 @@ namespace Game
                 //Card draggedCard = new Card(cardHashCode);
                 CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
 
+
+                // A logic structure which determines which panels to move the card to
                 if (draggedCard != null && draggedCard.Parent.GetType() == typeof(DeckViewer))
                 {
                     DeckViewer fromPanel = draggedCard.Parent as DeckViewer;
@@ -98,6 +140,8 @@ namespace Game
         public bool isFull()
         {
             bool full = false;
+
+            // A logic structure which determines whether the maximum number of cards was reached
             if(this.cards.Count >= MAXIMUM_CARDS_IN_BOUT || this.cards.Count / 2 >= this.cardCountAtBoutStart)
             {
                 full = true;
@@ -173,9 +217,15 @@ namespace Game
             
             return canPlace;
         }
+
+        /// <summary>
+        /// Adjusts the cards updating their location
+        /// </summary>
         public override void AdjustCards()
         {
             UpdateCardBoxes(false);
+
+            // If the player is attacking then the cards look like this
             if(DurakPage.isPlayerAttacking)
             {
                 for (int i = 0; i < this.Controls.Count; i++)
