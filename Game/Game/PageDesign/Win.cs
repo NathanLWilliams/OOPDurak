@@ -33,15 +33,7 @@ namespace Game
             this.button1.Text = "Play Again";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(154, 153);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 62);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Menu";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
+          
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(312, 153);
