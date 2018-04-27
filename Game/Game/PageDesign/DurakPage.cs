@@ -436,8 +436,9 @@ namespace Game
                  if (playerDeckViewer.Controls.Count == 0 && enemyDeckViewer.Controls.Count == 0)
                 {
                     //It's a tie!
-                    result.LabelText = "Tie Game";
                     this.Parent.Controls.Add(result);
+                    result.LabelText = "Tie Game";
+                    
                     if (this.Parent is PlayDurak)  
                     PlayDurak.SetScreenVisible(this.Parent.Controls, result);
                     
@@ -446,14 +447,16 @@ namespace Game
                 else if (playerDeckViewer.Controls.Count == 0)
                 {
                     //The human player wins!
-                    result.LabelText = "You Win !!";
                     this.Parent.Controls.Add(result);
+                    result.LabelText = "You Win !!";
+                    
                     if (this.Parent is PlayDurak)
                         PlayDurak.SetScreenVisible(this.Parent.Controls, result);
                 }
                 else
                 {
                     //The AI wins!
+                     this.Parent.Controls.Add(result);
                     result.LabelText = "You are the Durak!";
                     if (this.Parent is PlayDurak)
                         PlayDurak.SetScreenVisible(this.Parent.Controls, result);
