@@ -427,26 +427,30 @@ namespace Game
             Win result = new Win(); 
             if (drawDeckViewer.Controls.Count == 0)
             {
-                if (playerDeckViewer.Controls.Count == 0 && enemyDeckViewer.Controls.Count == 0)
+                 if (playerDeckViewer.Controls.Count == 0 && enemyDeckViewer.Controls.Count == 0)
                 {
                     //It's a tie!
-                    result.LabelText = "Tie Game"; //set the value of the label
-                    if (this.Parent is PlayDurak)
-                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
+                    result.LabelText = "Tie Game";
+                    this.Parent.Controls.Add(result);
+                    if (this.Parent is PlayDurak)  
+                    PlayDurak.SetScreenVisible(this.Parent.Controls, result);
+                    
+                      
                 }
                 else if (playerDeckViewer.Controls.Count == 0)
                 {
                     //The human player wins!
-                    result.LabelText = "You Win !!";  //set the value of the label
+                    result.LabelText = "You Win !!";
+                    this.Parent.Controls.Add(result);
                     if (this.Parent is PlayDurak)
-                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
+                        PlayDurak.SetScreenVisible(this.Parent.Controls, result);
                 }
-                else if(enemyDeckViewer.Controls.Count == 0)
+                else
                 {
                     //The AI wins!
-                    result.LabelText = "You are the Durak!";  //set the value of the label
+                    result.LabelText = "You are the Durak!";
                     if (this.Parent is PlayDurak)
-                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
+                        PlayDurak.SetScreenVisible(this.Parent.Controls, result);
                 }
             }
         }
