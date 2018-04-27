@@ -438,7 +438,7 @@ namespace Game
                     if (this.Parent is PlayDurak)
                         (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
                 }
-                else
+                else if(enemyDeckViewer.Controls.Count == 0)
                 {
                     //The AI wins!
                     if (this.Parent is PlayDurak)
