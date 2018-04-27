@@ -1,4 +1,9 @@
-﻿using System;
+/* MainMenu.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 26/4/18
+ * Description: Main menu controls are set here.
+ */
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,12 +13,16 @@ using System.Windows.Forms;
 
 namespace Game
 {
+    // MainMenu inherits from the panel class (windows)
     public class MainMenu : Panel
     {
         static Size buttonSize = new Size(300, 80);
         static Font buttonFont = new Font("Arial", 24, FontStyle.Regular);
         static Color buttonColor = Color.LimeGreen;
 
+        /// <summary>
+        /// Main menu setup
+        /// </summary>
         public MainMenu()
         {
             //Generate the big title
@@ -95,23 +104,39 @@ namespace Game
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.Dock = DockStyle.Fill;
         }
+
+        /// <summary>
+        /// Click event handler for the exit button 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Exit_Click(object sender, EventArgs e)
         {
             if(this.Parent is Form)
-                (this.Parent.Parent as Form).Close();
+                System.Windows.Forms.Application.Exit();
         }
+
+        /// <summary>
+        /// Click event handler for the start button 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Start_Click(object sender, EventArgs e)
         {
             //Goto play options
             if(this.Parent is Form)
                 (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.PlayOptions);
         }
+
+        /// Click event handler for the statistics button 
         private void Statistics_Click(object sender, EventArgs e)
         {
             //Goto statistics
             if (this.Parent is Form)
                 (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Statistics);
         }
+
+        /// Click event handler for the instructions button 
         private void Instructions_Click(object sender, EventArgs e)
         {
             //Goto instructions
