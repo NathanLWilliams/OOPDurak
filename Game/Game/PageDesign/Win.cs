@@ -49,7 +49,7 @@ namespace Game
             this.lblStatuts.Name = "lblStatuts";
             this.lblStatuts.Size = new System.Drawing.Size(429, 141);
             this.lblStatuts.TabIndex = 3;
-            this.lblStatuts.Text = "";
+            this.lblStatuts.Text = "You win!";
             this.lblStatuts.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
@@ -89,8 +89,8 @@ namespace Game
         private void button1_Click(object sender, EventArgs e)
         {
             //Goto Main Menu
-            if (this.Parent.Parent is Form)
-                (this.Parent.Parent as PlayDurak).SetScreen(PlayDurak.Screen.MainMenu);
+            if (this.Parent is Form)
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.MainMenu);
         }
 
         private System.Windows.Forms.Button button1;
