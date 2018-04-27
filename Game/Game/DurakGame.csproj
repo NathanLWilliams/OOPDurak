@@ -71,9 +71,6 @@
     <Compile Include="PageDesign\pgPlayOptions.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PageDesign\StatisticsPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="PageDesign\Win.cs">
       <SubType>Component</SubType>
     </Compile>

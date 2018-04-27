@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* DeckViewer.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: A class for the panel which is designed to hold and display a players cards
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;

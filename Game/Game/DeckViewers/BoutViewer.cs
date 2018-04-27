@@ -1,8 +1,9 @@
 /* BoutViewer.cs
  * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
  * Date: 26/4/18
- * Description: A class for the BoutViewer.
+ * Description: A subclass of DeckViewer, this is used to represent the bout which players will place their cards into
  */
+
 using CardBoxControl;
 using CardGame;
 using Game;

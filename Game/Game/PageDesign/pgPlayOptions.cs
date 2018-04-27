@@ -1,4 +1,10 @@
-﻿using CardGame;
+﻿/* pgPlayOptions.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: A class for the panel which allows the player to select options for the durak game
+ */
+
+using CardGame;
 using System;
 using System.Collections.Generic;
 using System.Drawing;

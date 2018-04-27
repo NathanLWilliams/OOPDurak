@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿/* PlayDurak.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: The form which all the games content will take place on
+ */
+
+using System.Collections.Generic;
 using System.Windows.Forms;
 using CardGame;
 namespace Game

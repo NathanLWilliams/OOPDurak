@@ -3,6 +3,7 @@
  * Date: 26/4/18
  * Description: Main menu controls are set here.
  */
+
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -70,24 +71,10 @@ namespace Game
             instructions.Anchor = AnchorStyles.Top;
             this.Controls.Add(instructions);
 
-            Button statistics = new Button();
-            statistics.Text = "Statistics";
-            statistics.Size = buttonSize;
-            statistics.Location = new Point(buttonX, buttonStartY + 50 + buttonSize.Height*2);
-            statistics.Font = buttonFont;
-            statistics.BackColor = buttonColor;
-            statistics.FlatStyle = FlatStyle.Popup;
-            statistics.Click += Statistics_Click;
-            statistics.TabIndex = 3;
-            statistics.AutoSize = true;
-            statistics.TextAlign = ContentAlignment.MiddleCenter;
-            statistics.Anchor = AnchorStyles.Top;
-            this.Controls.Add(statistics);
-
             Button exit = new Button();
             exit.Text = "Exit";
             exit.Size = buttonSize;
-            exit.Location = new Point(buttonX, buttonStartY + 75 + buttonSize.Height*3);
+            exit.Location = new Point(buttonX, buttonStartY + 50 + buttonSize.Height*2);
             exit.Font = buttonFont;
             exit.BackColor = buttonColor;
             exit.FlatStyle = FlatStyle.Popup;

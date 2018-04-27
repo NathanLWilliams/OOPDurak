@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* DurakPage.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: A class for the actual durak game panel, represents a durak game
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

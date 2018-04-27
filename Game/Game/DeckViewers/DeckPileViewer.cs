@@ -1,4 +1,10 @@
-﻿using CardBoxControl;
+﻿/* DeckPileViewer.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: A subclass of DeckViewer, this is designed to represent a draw pile
+ */
+
+using CardBoxControl;
 using CardGame;
 using Game;
 using System;

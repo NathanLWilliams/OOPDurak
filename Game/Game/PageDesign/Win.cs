@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* Win.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: A panel to be added and displayed on the form when a durak game ends, it displays the games result
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

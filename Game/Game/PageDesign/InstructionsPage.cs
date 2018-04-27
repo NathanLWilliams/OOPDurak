@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* InstructionsPage.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: A class for the panel which displays instructions on how to play the game
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
