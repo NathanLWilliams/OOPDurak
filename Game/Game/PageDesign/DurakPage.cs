@@ -49,18 +49,20 @@ namespace Game
         private const int POP = 25;
         private const int CARD_MIN_BEFORE_REFILL = 6;
         private const int CARDS_DEALT_AT_START = 6;
+        private bool isNewbieMode;
 
         public DurakPage()
         {
             Initialize(); // calls the form controls load method
         }
 
-        public DurakPage(HumanPlayer humanPlayer, AiPlayer aiPlayer, Deck deck)
+        public DurakPage(HumanPlayer humanPlayer, AiPlayer aiPlayer, Deck deck, bool isNewbieMode)
         {
             Initialize();
             SetupTrumpCard(deck);
             SetUpPlayers(humanPlayer, aiPlayer, deck);
             InitializeDeck(deck);
+            this.isNewbieMode = isNewbieMode;
         }
 
         /// <summary>
@@ -351,6 +353,7 @@ namespace Game
             this.drawDeckViewer.AdjustCards();
             this.playerDeckViewer.AdjustCards();
             this.enemyDeckViewer.AdjustCards();
+            canPlaceCard();
         }
 
         /// <summary>
@@ -383,6 +386,7 @@ namespace Game
             this.drawDeckViewer.AdjustCards();
             this.playerDeckViewer.AdjustCards();
             this.enemyDeckViewer.AdjustCards();
+            canPlaceCard();
         }
 
         /// <summary>
@@ -423,6 +427,7 @@ namespace Game
                 isPlayerTurn = true;
                 (boutDeckViewer as BoutViewer).AllowDrop = true;
             }
+            
         }
 
         /// <summary>
@@ -562,6 +567,7 @@ namespace Game
             this.drawDeckViewer.AdjustCards();
             this.playerDeckViewer.AdjustCards();
             this.enemyDeckViewer.AdjustCards();
+            canPlaceCard();
 
         }
 
@@ -616,90 +622,23 @@ namespace Game
         }
         public void canPlaceCard()
         {
-            bool isAttacker = true;
-            if (isAttacker) //you are attacking first
+
+            if(isNewbieMode)
             {
-                //determine playable cards when the bout is empty
-                if (boutDeckViewer.GetCards().Count == 0)
+                foreach (Control c in playerDeckViewer.Controls)
                 {
-                    //all cards should be playable,  highlight all the cards
-                    foreach (Control cardControl in playerDeckViewer.Controls)
+                    if (boutDeckViewer.canPlaceCard((c as CardBox).Card))
                     {
-
-                        if (cardControl is CardBox)
-                        {
-                            //cardControl.Paint += CardControl_Paint;
-                            (cardControl as CardBox).FaceUp = true;
-                        }
+                        (c as CardBox).IsGrey = false;
                     }
-
-                }
-                else
-                {
-                    //There are cards in the bout currently, check if there
-                    //is the passed card matches any of their ranks
-                    foreach (Card boutCard in boutDeckViewer.GetCards())
+                    else
                     {
-                        //check each card to see if it's playable
-                        //all cards should be playable,  highlight all the cards
-                        foreach (Control cardControl in playerDeckViewer.Controls)
-                        {
-
-                            if (cardControl is CardBox)
-                                if ((cardControl as CardBox).Rank == boutCard.Rank)
-                                    (cardControl as CardBox).FaceUp = true;
-                                else
-                                    (cardControl as CardBox).FaceUp = false;
-
-                        }
-
+                        (c as CardBox).IsGrey = true;
                     }
                 }
-
             }
-            else
-            {
-
-                if (boutDeckViewer.GetCards().Count != 0) //bout deck is never empty as a defender
-                {
-                    //There are cards in the bout for the defender to defend against
-
-                    //TODO:assign the lastCard to be the last card played in the bout
-                    CardBox lastCard = (CardBox)boutDeckViewer.Controls[boutDeckViewer.Controls.Count - 1];
-                    //Check if the passed card is of a matching suit and higher rank, trumps are handled slightly differently
-
-                    //check each card to see if it's playable
-                    //all cards should be playable,  highlight all the cards
-                    foreach (Control cardControl in playerDeckViewer.Controls)
-                    {
-
-                        if (cardControl is CardBox)
-                        {
-                            if ((cardControl as CardBox).Suit == lastCard.Suit)
-                            {
-                                if ((cardControl as CardBox).Rank == Rank.Ace)
-                                {
-                                    if (lastCard.Rank != Rank.Ace)
-                                    {
-                                        (cardControl as CardBox).FaceUp = true;
-                                    }
-                                }
-                                else if (lastCard.Rank != Rank.Ace && (cardControl as CardBox).Rank > lastCard.Rank)
-                                {
-                                    (cardControl as CardBox).FaceUp = true;
-                                }
-                            }
-                            else if ((cardControl as CardBox).Suit == Card.trump) //last card is not trump, but card to play is
-                            {
-                                (cardControl as CardBox).FaceUp = true;
-
-                            }
-                        }
-                    }
-                }
-
-            }
-
+            
+                
 
 
         }

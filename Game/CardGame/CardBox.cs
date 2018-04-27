@@ -32,6 +32,13 @@ namespace CardBoxControl
             }
         }
 
+        private bool isGrey;
+        public bool IsGrey
+        {
+            get { return isGrey; }
+            set { isGrey = value; }
+        }
+
         public Suit Suit
         {
             set
@@ -240,6 +247,12 @@ namespace CardBoxControl
         {
                     
             ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.Black, ButtonBorderStyle.Solid);
+
+            if(IsGrey)
+            {
+                Image unplayableCard = (Image)new Bitmap(this.pbCardDisplay.Image, this.Size);
+                ControlPaint.DrawImageDisabled(e.Graphics, unplayableCard, this.ClientRectangle.X, this.ClientRectangle.Y, Color.Black);
+            }
         }
     }
 

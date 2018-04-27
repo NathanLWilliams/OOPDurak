@@ -290,7 +290,7 @@ namespace Game
         {
             if (IsDeckSizeSelected())
             {
-                durakPage = new DurakPage(GetHumanPlayer(), GetEnemyPlayer(), GetPlayerSelectedDeck());
+                durakPage = new DurakPage(GetHumanPlayer(), GetEnemyPlayer(), GetPlayerSelectedDeck(), rdNewbieMode.Checked);
                 this.Parent.Controls.Add(durakPage);
                 PlayDurak.SetScreenVisible(this.Parent.Controls, durakPage);
             }
