@@ -57,7 +57,7 @@ namespace Game
             // 
             // Form1
             // 
-          
+            this.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ClientSize = new System.Drawing.Size(433, 228);
             this.Controls.Add(this.lblStatuts);
             this.Controls.Add(this.button3);
@@ -69,7 +69,18 @@ namespace Game
 
         }
 
-        
+         private void button3_Click(object sender, EventArgs e)
+        {
+            //exit the program
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Goto Main Menu
+            if (this.Parent.Parent is Form)
+                (this.Parent.Parent as PlayDurak).SetScreen(PlayDurak.Screen.MainMenu);
+        }
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
