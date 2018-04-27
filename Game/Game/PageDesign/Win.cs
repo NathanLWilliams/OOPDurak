@@ -69,6 +69,20 @@ namespace Game
 
         }
 
+         //setting the context of the label from other forms
+        public string LabelText
+        {
+            get
+            {
+                return this.lblStatuts.Text;
+            }
+            set
+            {
+
+                this.lblStatuts.Text = value;
+            }
+        }
+        
          private void button3_Click(object sender, EventArgs e)
         {
             //exit the program
