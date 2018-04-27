@@ -80,18 +80,19 @@ namespace Game
             }
         }
         
-         private void button3_Click(object sender, EventArgs e)
+       private void button3_Click(object sender, EventArgs e)
         {
-            //exit the program
-            System.Windows.Forms.Application.Exit();
+            if (this.Parent is Form)
+                System.Windows.Forms.Application.Exit();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Goto Main Menu
+            //Goto play option
             if (this.Parent is Form)
-                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.MainMenu);
+                (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.PlayOptions);
         }
+
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
