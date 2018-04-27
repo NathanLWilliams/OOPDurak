@@ -18,6 +18,7 @@ namespace Game
         protected Cards cards;
         Size standardCardSize = new Size(87, 141);
         bool IsEnemyView = false;
+        protected bool isChanged = false;
 
         public DeckViewer(bool isEnemy = false)
         {
@@ -48,7 +49,7 @@ namespace Game
         {
             this.cards.Clear();
             this.Controls.Clear();
-            AdjustCards();
+            isChanged = true;
         }
         public void DrawCards(Deck deck, int numberOfCards)
         {
@@ -56,39 +57,35 @@ namespace Game
             for (int i = 0; i < numberOfCards; i++)
             {
                 Card card = deck.DrawCard();
-                this.AddCard(card, false);
+                this.AddCard(card);
             }
-            AdjustCards();
         }
         public void DrawCards(Cards cards)
         {
             for(int i = cards.Count - 1; i >= 0; i--)
             {
-                this.AddCard((Card)cards[i].Clone(), false);
+                this.AddCard((Card)cards[i].Clone());
                 cards.RemoveAt(i);
             }
-            AdjustCards();
         }
         public Cards GetCards()
         {
             return this.cards;
         }
-        public virtual void AddCard(Card card, bool adjust = true)
+        public virtual void AddCard(Card card)
         {
             cards.Add(card);
-
-            if (adjust == true)
-                AdjustCards();
+            isChanged = true;
         }
         public void RemoveCard(int index)
         {
             cards.RemoveAt(index);
-            AdjustCards();
+            isChanged = true;
         }
         public void RemoveCard(Card card)
         {
             cards.Remove(card);
-            AdjustCards();
+            isChanged = true;
         }
         public Card TakeCard(int index)
         {
@@ -124,49 +121,33 @@ namespace Game
         //public void AdjustCards(object source, EventArgs args)
         public virtual void AdjustCards()
         {
-            /*for(int i = 0; i < this.panel1.Controls.Count; i++)
+            if(isChanged)
             {
-                (this.panel1.Controls[i] as CardBox).FaceUp = true;
-                double widthDivider = (2 + this.panel1.Controls.Count/3);
-                int farLeftCardX = this.Size.Width / 2 - (int)((i+1)/2) * (int)(this.panel1.Controls[0].Width / widthDivider);
-                int farRightCardX = this.Size.Width / 2 + (int)((i+1)/2) * (int)(this.panel1.Controls[0].Width / widthDivider);
+                UpdateCardBoxes(true);
+                for (int i = 0; i < this.Controls.Count; i++)
+                {
+                    double widthDivider = (2 + this.Controls.Count / 6);
+                    int firstCardX = this.Size.Width / 2 - (this.Controls.Count + 1) * (int)(this.Controls[0].Width / widthDivider) / 2;
+                    int nextCardX = firstCardX + (i + 1) * (int)(this.Controls[0].Width / widthDivider);
+                    if (IsEnemyView == true)
+                    {
+                        (this.Controls[i] as CardBox).FaceUp = false;
+                    }
+                    else
+                    {
+                        (this.Controls[i] as CardBox).FaceUp = true;
+                    }
 
-                if(this.panel1.Controls.Count % 2 == 0)
-                {
-                    farLeftCardX -= (int)(this.panel1.Controls[0].Width / widthDivider);
-                    farRightCardX -= (int)(this.panel1.Controls[0].Width / widthDivider);
+                    this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2);
+                    this.Controls[i].BringToFront();
                 }
-                
-                if (i % 2 == 0)
-                {
-                    this.panel1.Controls[i].Location = new Point(farLeftCardX - this.panel1.Controls[0].Width / 2, this.Size.Height / 2 - this.panel1.Controls[i].Height / 2);
-                    
-                }
-                else
-                {
-                    this.panel1.Controls[i].Location = new Point(farRightCardX - this.panel1.Controls[0].Width / 2, this.Size.Height / 2 - this.panel1.Controls[i].Height / 2);
-                    this.panel1.Controls[i].BringToFront();
-                }
-            }*/
-
-            UpdateCardBoxes(true);
-            for (int i = 0; i < this.Controls.Count; i++)
-            {
-                double widthDivider = (2 + this.Controls.Count / 6);
-                int firstCardX = this.Size.Width / 2 - (this.Controls.Count + 1) * (int)(this.Controls[0].Width / widthDivider) / 2;
-                int nextCardX = firstCardX + (i + 1) * (int)(this.Controls[0].Width / widthDivider);
-                if (IsEnemyView == true)
-                {
-                    (this.Controls[i] as CardBox).FaceUp = false;
-                }
-                else
-                {
-                    (this.Controls[i] as CardBox).FaceUp = true;
-                }
-
-                this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2);
-                this.Controls[i].BringToFront();
+                isChanged = false;
             }
+        }
+
+        public void SetChanged()
+        {
+            this.isChanged = true;
         }
 
         public virtual void DeckViewer_DragEnter(object sender, DragEventArgs e)

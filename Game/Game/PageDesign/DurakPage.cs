@@ -284,6 +284,11 @@ namespace Game
         private void pbSkipButton_Click(object sender, EventArgs e)
         {
             EndBout();
+            this.boutDeckViewer.SetChanged();
+            this.boutDeckViewer.AdjustCards();
+            this.drawDeckViewer.AdjustCards();
+            this.playerDeckViewer.AdjustCards();
+            this.enemyDeckViewer.AdjustCards();
         }
 
         private void UpdatePlayersHandCount(object sender, ControlEventArgs e)
@@ -300,17 +305,22 @@ namespace Game
         private void OnNextTurn(object sender, EventArgs e)
         {
             NextTurn();
+            if (boutDeckViewer.isFull())
+            {
+                EndBout();
+            }
+            this.boutDeckViewer.AdjustCards();
+            this.drawDeckViewer.AdjustCards();
+            this.playerDeckViewer.AdjustCards();
+            this.enemyDeckViewer.AdjustCards();
         }
 
         public void NextTurn()
         {
             //TODO: Fix ending the bout if full, has problems
-            if(boutDeckViewer.isFull())
-            {
-                EndBout();
-            }
-            else
-            {
+            
+            //else
+            //{
                 //Check if it's the player's turn or the Ai's turn
                 if (isPlayerTurn)
                 {
@@ -336,7 +346,7 @@ namespace Game
                     else
                     {
                         //The AI plays a card
-                        boutDeckViewer.AddCard((Card)cardToPlay.Clone(), true, false);
+                        boutDeckViewer.AddCard((Card)cardToPlay.Clone(), false);
                         enemyDeckViewer.RemoveCard(cardToPlay);
                     }
 
@@ -344,15 +354,14 @@ namespace Game
                     isPlayerTurn = true;
                     (boutDeckViewer as BoutViewer).AllowDrop = true;
                 }
-            }
+            //}
             
         }
 
         /// <summary>
-        /// Ends the bout by switching the roles of the attacker and defender, distributing cards to the loser,
-        /// and clearing the cards from the bout
+        /// Determines what happens to the bout cards after a bout has ended
         /// </summary>
-        public void EndBout()
+        public void DistributeBoutCards()
         {
             if (isPlayerTurn == isPlayerAttacking) //The current player is attacking
             {
@@ -361,39 +370,28 @@ namespace Game
             else if (isPlayerTurn) //Is human player and is defending
             {
                 this.playerDeckViewer.DrawCards(boutDeckViewer.GetCards());
-                boutDeckViewer.AdjustCards();
             }
             else //Is AI and is defending
             {
                 this.enemyDeckViewer.DrawCards(boutDeckViewer.GetCards());
-                boutDeckViewer.AdjustCards();
             }
+        }
 
+        /// <summary>
+        /// Ends the bout by switching the roles of the attacker and defender, distributing cards to the loser,
+        /// and clearing the cards from the bout
+        /// </summary>
+        public void EndBout()
+        {
+
+            //Distribute or reset the cards in the bout
+            DistributeBoutCards();
             //Calls a method to refill the player and AI hand to 6 cards minimum
             RefillCards();
             boutDeckViewer.CardCountAtBoutStart = isPlayerAttacking ? enemyDeckViewer.GetCards().Count : playerDeckViewer.GetCards().Count;
 
-            if(drawDeckViewer.Controls.Count == 0)
-            {
-                if(playerDeckViewer.Controls.Count == 0 && enemyDeckViewer.Controls.Count == 0)
-                {
-                    //It's a tie!
-                    if (this.Parent is PlayDurak)
-                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
-                }
-                else if(playerDeckViewer.Controls.Count == 0)
-                {
-                    //The human player wins!
-                    if (this.Parent is PlayDurak)
-                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
-                }
-                else
-                {
-                    //The AI wins!
-                    if (this.Parent is PlayDurak)
-                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
-                }
-            }
+            //Check if the games end conditions are fulfilled
+            DetermineGameEnd();
 
             //TODO: Make this switching of roles into a method
             //Switch roles of attacker and defender
@@ -414,23 +412,47 @@ namespace Game
         }
 
         /// <summary>
+        /// Checks if the game should be ended and who is the winner
+        /// </summary>
+        public void DetermineGameEnd()
+        {
+            if (drawDeckViewer.Controls.Count == 0)
+            {
+                if (playerDeckViewer.Controls.Count == 0 && enemyDeckViewer.Controls.Count == 0)
+                {
+                    //It's a tie!
+                    if (this.Parent is PlayDurak)
+                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
+                }
+                else if (playerDeckViewer.Controls.Count == 0)
+                {
+                    //The human player wins!
+                    if (this.Parent is PlayDurak)
+                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
+                }
+                else
+                {
+                    //The AI wins!
+                    if (this.Parent is PlayDurak)
+                        (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.GameResults);
+                }
+            }
+        }
+
+        /// <summary>
         /// Refills the player and AIs hands to be at least the minimum number of cards at the end of a bout
         /// </summary>
         public void RefillCards()
         {
-
             while (enemyDeckViewer.GetCards().Count < CARD_MIN_BEFORE_REFILL && drawDeckViewer.GetCards().Count > 0)
             {
-                enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+                enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1));
             }
 
             while (playerDeckViewer.GetCards().Count < CARD_MIN_BEFORE_REFILL && drawDeckViewer.GetCards().Count > 0)
             {
-                playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1), false);
+                playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1));
             }
-            
-            enemyDeckViewer.AdjustCards();
-            playerDeckViewer.AdjustCards();
         }
 
         private void LbEnemyPlayerHandCount_Click(object sender, EventArgs e)
@@ -451,7 +473,12 @@ namespace Game
             this.drawDeckViewer.TabIndex = 10;
             
             this.Controls.Add(this.drawDeckViewer);
-   
+
+            this.boutDeckViewer.AdjustCards();
+            this.drawDeckViewer.AdjustCards();
+            this.playerDeckViewer.AdjustCards();
+            this.enemyDeckViewer.AdjustCards();
+
         }
         private void SetUpPlayers(HumanPlayer myPlayer, AiPlayer enemyPlayer, Deck deck)
         {
@@ -466,7 +493,6 @@ namespace Game
             lbEnemyPlayerName.Text = enemyPlayer.Name;
 
             enemyDeckViewer.DrawCards(deck, 6);
-
             playerDeckViewer.DrawCards(deck, 6);
          
             // set up myPlayer object
@@ -491,8 +517,6 @@ namespace Game
             this.Controls["cdbTrumpCard"].BringToFront();
 
         }
-
-
 
     }
 }

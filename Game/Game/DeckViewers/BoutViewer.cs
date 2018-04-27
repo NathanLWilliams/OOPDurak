@@ -58,10 +58,10 @@ namespace Game
         /// <param name="c"></param>
         /// <param name="adjust"></param>
         /// <param name="willTriggerTurn"></param>
-        public void AddCard(Card c, bool adjust = true, bool willTriggerTurn = false)
+        public void AddCard(Card c, bool willTriggerTurn = false)
         {
             //Console.WriteLine("ADDED CARD");
-            base.AddCard(c, adjust);
+            base.AddCard(c);
 
             // An if structure which determines whether the argument willTriggerTurn is true
             if(willTriggerTurn)
@@ -121,7 +121,7 @@ namespace Game
                             if(toPanel.canPlaceCard(draggedCard.Card))
                             {
                                 fromPanel.RemoveCard(draggedCard.Card);
-                                toPanel.AddCard(draggedCard.Card, true, true);
+                                toPanel.AddCard(draggedCard.Card, true);
                             }
                         }
                     }
@@ -228,36 +228,32 @@ namespace Game
         /// </summary>
         public override void AdjustCards()
         {
-            UpdateCardBoxes(false);
-
-            // If the player is attacking then the cards look like this
-            if(DurakPage.isPlayerAttacking)
+            if(isChanged)
             {
+                UpdateCardBoxes(false);
+                
                 for (int i = 0; i < this.Controls.Count; i++)
                 {
+                    int cardYOffset = 0;
+                    if (DurakPage.isPlayerAttacking)
+                    {
+                        cardYOffset = i % 2 == 0 ? 80 : -80;
+                    }
+                    else
+                    {
+                        cardYOffset = i % 2 == 0 ? -80 : 80;
+                    }
+
                     double widthDivider = (2 + this.Controls.Count / 3);
                     int firstCardX = this.Size.Width / 2 - (this.Controls[0].Width * (int)Math.Floor((double)this.Controls.Count / 2)) / 2;
                     int nextCardX = firstCardX + this.Controls[0].Width * (int)Math.Floor((double)i / 2);
-                    int cardYOffset = i % 2 == 0 ? 80 : -80;
-
                     (this.Controls[i] as CardBox).FaceUp = true;
                     this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2 + cardYOffset);
                     this.Controls[i].BringToFront();
                 }
-            }
-            else
-            {
-                for (int i = 0; i < this.Controls.Count; i++)
-                {
-                    double widthDivider = (2 + this.Controls.Count / 3);
-                    int firstCardX = this.Size.Width / 2 - (this.Controls[0].Width * (int)Math.Floor((double)this.Controls.Count / 2)) / 2;
-                    int nextCardX = firstCardX + this.Controls[0].Width * (int)Math.Floor((double)i / 2);
-                    int cardYOffset = i % 2 == 0 ? -80 : 80;
 
-                    (this.Controls[i] as CardBox).FaceUp = true;
-                    this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2 + cardYOffset);
-                    this.Controls[i].BringToFront();
-                }
+                isChanged = false;
+
             }
             
         }
