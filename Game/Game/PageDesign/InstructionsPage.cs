@@ -10,8 +10,6 @@ namespace Game
     class InstructionsPage : Panel
 
     {
-       
-          
         public InstructionsPage()
         {
             this.pbBackScreen = new PictureBox();
@@ -101,9 +99,9 @@ namespace Game
             this.lblDefend.TabIndex = 1;
             this.lblDefend.Text = "HOW TO Defend";
 
-        // 
-        // lblDefendDescript
-        // 
+            // 
+            // lblDefendDescript
+            // 
             this.lblDefendDescript.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDefendDescript.Location = new System.Drawing.Point(3, 63);
             this.lblDefendDescript.Name = "lblDefendDescript";
@@ -144,9 +142,9 @@ namespace Game
             this.lblRules.Size = new System.Drawing.Size(389, 42);
             this.lblRules.TabIndex = 2;
             this.lblRules.Text = "General Rules";
-        // 
-        // lblRulesDescription
-        // 
+            // 
+            // lblRulesDescription
+            // 
             this.lblRulesDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRulesDescription.Location = new System.Drawing.Point(9, 45);
             this.lblRulesDescription.Name = "lblRulesDescription";
@@ -186,11 +184,16 @@ namespace Game
             this.tbDefense.ResumeLayout(false);
             this.ResumeLayout(false);
 
-        this.Dock = DockStyle.Fill;
-
+            this.Dock = DockStyle.Fill;
 
         }
 
+        /// <summary>
+        /// Click handler for the back picturebox button, 
+        /// sends the user back to the main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PbBackScreen_Click(object sender, EventArgs e)
         {
             //Goto Main Menu options
@@ -198,7 +201,7 @@ namespace Game
                 (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.MainMenu);
         }
 
-        private System.Windows.Forms.TabControl tbInstructions;
+       private System.Windows.Forms.TabControl tbInstructions;
        private System.Windows.Forms.TabPage tbRules;
        private System.Windows.Forms.TabPage tbAttacker;
        private System.Windows.Forms.TabPage tbDefense;
@@ -209,7 +212,7 @@ namespace Game
        private System.Windows.Forms.Label lblRulesDescription;
        private System.Windows.Forms.Label lblRules;
        private System.Windows.Forms.TabPage tbVideo;
-        private PictureBox pbBackScreen;
+       private PictureBox pbBackScreen;
     }
     
 }

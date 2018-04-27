@@ -128,7 +128,11 @@ namespace Game
                 (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.PlayOptions);
         }
 
-        /// Click event handler for the statistics button 
+        /// <summary>
+        /// Click event handler for the statistics button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Statistics_Click(object sender, EventArgs e)
         {
             //Goto statistics
@@ -136,7 +140,11 @@ namespace Game
                 (this.Parent as PlayDurak).SetScreen(PlayDurak.Screen.Statistics);
         }
 
-        /// Click event handler for the instructions button 
+        /// <summary>
+        /// Click event handler for the instructions button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Instructions_Click(object sender, EventArgs e)
         {
             //Goto instructions

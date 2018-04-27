@@ -21,6 +21,10 @@ namespace Game
         public DeckPileViewer(Deck deck) : base(deck)
         {
         }
+
+        /// <summary>
+        /// Updates the cardboxes using the UpdateCardBoxes method and sets their positions
+        /// </summary>
         public override void AdjustCards()
         {
             if(isChanged)

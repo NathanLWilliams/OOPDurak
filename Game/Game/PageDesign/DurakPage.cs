@@ -45,7 +45,7 @@ namespace Game
         {
             Initialize(); // calls the form controls load method
         }
-        // might change AiPlayer class name to enemyPlayer
+
         public DurakPage(HumanPlayer humanPlayer, AiPlayer aiPlayer, Deck deck)
         {
             Initialize();
@@ -220,8 +220,6 @@ namespace Game
             this.lbEnemyPlayerHandCount.Size = new System.Drawing.Size(88, 23);
             this.lbEnemyPlayerHandCount.TabIndex = 14;
             this.lbEnemyPlayerHandCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-
-
             // 
             // boutDeckViewer
             // 
@@ -232,15 +230,6 @@ namespace Game
             this.boutDeckViewer.Size = new System.Drawing.Size(967, 287);
             this.boutDeckViewer.TabIndex = 9;
             this.boutDeckViewer.CardAdded += OnNextTurn;
-            // 
-            // drawDeckViewr
-            // 
-            //this.drawDeckViewer.BackColor = System.Drawing.Color.Lime;
-            //this.drawDeckViewer.Location = new System.Drawing.Point(11, 211);
-            //this.drawDeckViewer.Margin = new System.Windows.Forms.Padding(2);
-            //this.drawDeckViewer.Name = "deckViewer2";
-            //this.drawDeckViewer.Size = new System.Drawing.Size(200, 287);
-            //this.drawDeckViewer.TabIndex = 10;
             // 
             // deckViewer4
             // 
@@ -282,6 +271,11 @@ namespace Game
             this.ResumeLayout(false);
         }
 
+        /// <summary>
+        /// Manually ends a bout upon skip button click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pbSkipButton_Click(object sender, EventArgs e)
         {
             EndBout();
@@ -294,6 +288,12 @@ namespace Game
             this.enemyDeckViewer.AdjustCards();
         }
 
+        /// <summary>
+        /// Updates hand count labels to reflect the number of cards in the
+        /// players hands
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdatePlayersHandCount(object sender, ControlEventArgs e)
         {
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
@@ -469,16 +469,13 @@ namespace Game
             }
         }
 
-        private void LbEnemyPlayerHandCount_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(drawDeckViewer.Controls.Count.ToString());
-        }
-
+        /// <summary>
+        /// Initializes the deck object which players will draw from
+        /// </summary>
+        /// <param name="deck"></param>
         private void InitializeDeck(Deck deck)
         {
             drawDeckViewer = new DeckPileViewer(deck);
-            drawDeckViewer.DrawCards(new CardGame.Deck(Deck.Size.Large, true), 5);
-            // drawDeckViewer.AddCards(deck, deck.Count); // also in DeckPile viewer class need to make adjustments for TrumpCard to show horizontally and do something with deck
             this.drawDeckViewer.BackColor = System.Drawing.Color.Lime;
             this.drawDeckViewer.Location = new System.Drawing.Point(11, 211);
             this.drawDeckViewer.Margin = new System.Windows.Forms.Padding(2);
@@ -495,6 +492,13 @@ namespace Game
             this.enemyDeckViewer.AdjustCards();
 
         }
+
+        /// <summary>
+        /// Sets up the players which will be in the game
+        /// </summary>
+        /// <param name="myPlayer">The human player to set</param>
+        /// <param name="enemyPlayer">The AI player to set</param>
+        /// <param name="deck">The deck which they'll draw from to get their initial cards</param>
         private void SetUpPlayers(HumanPlayer myPlayer, AiPlayer enemyPlayer, Deck deck)
         {
             this.enemyPlayer = enemyPlayer;
@@ -518,6 +522,11 @@ namespace Game
 
             lbMyPlayerHandCount.Text = playerDeckViewer.Controls.Count.ToString();
         }
+
+        /// <summary>
+        /// Sets up the trump card and it's related cardbox
+        /// </summary>
+        /// <param name="deck"></param>
         private void SetupTrumpCard(Deck deck)
         {
             Random randomNumber = new Random();

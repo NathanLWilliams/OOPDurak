@@ -213,7 +213,7 @@ namespace Game
         }
 
         /// <summary>
-        /// Adjusts the cards updating their location
+        /// Updates the cardboxes using the UpdateCardBoxes method and sets their positions
         /// </summary>
         public override void AdjustCards()
         {

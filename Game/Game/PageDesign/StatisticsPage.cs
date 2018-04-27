@@ -181,6 +181,11 @@ namespace Game
             this.Dock = DockStyle.Fill;
         }
 
+        /// <summary>
+        /// Goes back to the main menu screen upon pressing a button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PbBackScreen_Click(object sender, EventArgs e)
         {
             //Goto Main Menu options

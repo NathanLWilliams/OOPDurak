@@ -19,6 +19,7 @@ namespace CardGame
     public abstract class Player
     {
 
+        //The displayed name of the player
         private string name;
 
         /// <summary>
@@ -30,6 +31,7 @@ namespace CardGame
             set { name = value; }
         }
 
+        //The displayed image of the player
         private Image image;
 
         /// <summary>

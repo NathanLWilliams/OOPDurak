@@ -241,6 +241,11 @@ namespace Game
 
         }
 
+        /// <summary>
+        /// Goes back to the main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PbBackScreen_Click(object sender, EventArgs e)
         {
             //Goto Main Menu options
@@ -270,6 +275,11 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Starts a game of durak
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtPlay_Click(object sender, EventArgs e)
         {
             if (IsDeckSizeSelected())
@@ -284,6 +294,11 @@ namespace Game
             }
 
         }
+
+        /// <summary>
+        /// Returns a new deck object based on the selected deck size
+        /// </summary>
+        /// <returns></returns>
         private Deck GetPlayerSelectedDeck()
         {
             Deck gameDeck = new Deck(Deck.Size.Medium); // by defualt its medium
@@ -299,6 +314,11 @@ namespace Game
             
             return gameDeck;
         }
+
+        /// <summary>
+        /// Returns a new default enemy player
+        /// </summary>
+        /// <returns></returns>
         private AiPlayer GetEnemyPlayer()
         {
             AiPlayer enemyPlayer = new AiPlayer();
@@ -307,6 +327,11 @@ namespace Game
 
             return enemyPlayer;
         }
+
+        /// <summary>
+        /// Returns a new default human player
+        /// </summary>
+        /// <returns></returns>
         private HumanPlayer GetHumanPlayer()
         {
             HumanPlayer myPlayer = new HumanPlayer();
@@ -315,6 +340,11 @@ namespace Game
            
             return myPlayer;
         }
+
+        /// <summary>
+        /// Checks if a deck size is selected
+        /// </summary>
+        /// <returns>If a deck size if selected or not</returns>
         private bool IsDeckSizeSelected()
         {
             bool isDeckSizeSelected = false;
