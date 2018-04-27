@@ -1,3 +1,8 @@
+/* BoutViewer.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 26/4/18
+ * Description: A class for the BoutViewer.
+ */
 using CardBoxControl;
 using CardGame;
 using Game;
@@ -10,7 +15,7 @@ namespace Game
 {
 
     /// <summary>
-    /// BoutViewer class which inherits from DeckViewer
+    /// BoutViewer is a class which inherits from DeckViewer
     /// </summary>
     public class BoutViewer : DeckViewer
     {
