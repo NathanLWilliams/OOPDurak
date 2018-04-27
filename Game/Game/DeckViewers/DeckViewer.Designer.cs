@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
+            //this.SuspendLayout();
             // 
             // DeckViewer
             // 
             this.BackColor = System.Drawing.Color.Lime;
             this.Size = new System.Drawing.Size(1000, 400);
-            this.ResumeLayout(false);
+            //this.ResumeLayout(false);
 
         }
 

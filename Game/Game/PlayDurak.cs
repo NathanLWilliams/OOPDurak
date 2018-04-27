@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿/* PlayDurak.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: The form which all the games content will take place on
+ */
+
+using System.Collections.Generic;
 using System.Windows.Forms;
 using CardGame;
 namespace Game
@@ -6,11 +12,13 @@ namespace Game
     public partial class PlayDurak : Form
     {
 
+        /// <summary>
+        /// An enum used to represent which game screen the player is currently looking at
+        /// </summary>
         public enum Screen
         {
             MainMenu = 0,
             Instructions,
-            Statistics,
             Playing,
             PlayOptions,
             GameResults
@@ -18,10 +26,7 @@ namespace Game
 
         static MainMenu menu;
         static pgPlayOptions playOptions;
-        static StatisticsPage stats;
-        //static DurakPage durakPage;
         static InstructionsPage instructionPage;
-        static Win winPage;
 
         public PlayDurak()
         {
@@ -30,25 +35,15 @@ namespace Game
             //Instantiate screens/panels and add them to the form
             menu = new MainMenu();
             playOptions = new pgPlayOptions();
-            stats = new StatisticsPage();
-            //durakPage = new DurakPage(); //- removed it from here as we need its instance after play options page sets game options
             instructionPage = new InstructionsPage();
-            winPage = new Win();
-
 
             this.Controls.Add(menu);
             this.Controls.Add(playOptions);
-            this.Controls.Add(stats);
-            //this.Controls.Add(durakPage);
             this.Controls.Add(instructionPage);
-            this.Controls.Add(winPage);
 
             menu.Visible = true;
             playOptions.Visible = false;
-            stats.Visible = false;
-            //durakPage.Visible = false;
             instructionPage.Visible = false;
-            winPage.Visible = false;
 
         }
 
@@ -69,17 +64,8 @@ namespace Game
                 case Screen.Instructions:
                     SetScreenVisible(this.Controls, instructionPage);
                     break;
-                case Screen.Statistics:
-                    SetScreenVisible(this.Controls, stats);
-                    break;
-                case Screen.Playing:
-                   // SetScreenVisible(this.Controls,;
-                    break;
                 case Screen.PlayOptions:
                     SetScreenVisible(this.Controls, playOptions);
-                    break;
-                case Screen.GameResults:
-                    SetScreenVisible(this.Controls, winPage);
                     break;
                 default:
                     break;
@@ -91,8 +77,6 @@ namespace Game
         /// <param name="passedPanel"></param>
         public static void SetScreenVisible(Control.ControlCollection panelCollection ,Panel passedPanel)
         {
-            
-
             foreach (Control panelItem in panelCollection)
             {
                 if (panelItem is Panel)

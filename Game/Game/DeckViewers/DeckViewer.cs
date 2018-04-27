@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* DeckViewer.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: A class for the panel which is designed to hold and display a players cards
+ */
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -18,6 +24,7 @@ namespace Game
         protected Cards cards;
         Size standardCardSize = new Size(87, 141);
         bool IsEnemyView = false;
+        protected bool isChanged = false;
 
         public DeckViewer(bool isEnemy = false)
         {
@@ -30,7 +37,7 @@ namespace Game
         }
         public DeckViewer(Deck deck, int numberOfCards) : this()
         {
-            this.AddCards(deck, numberOfCards);
+            this.DrawCards(deck, numberOfCards);
         }
         public DeckViewer(Deck deck, bool isEnemy = false)
         {
@@ -41,51 +48,103 @@ namespace Game
 
             this.DragEnter += new DragEventHandler(this.DeckViewer_DragEnter);
             this.DragDrop += new DragEventHandler(this.DeckViewer_DragDrop);
-            this.AddCards(deck, deck.Count);
+            this.DrawCards(deck, deck.Count);
+            
         }
+
+        /// <summary>
+        /// Resets the cards in the deck viewer
+        /// </summary>
         public void Reset()
         {
             this.cards.Clear();
             this.Controls.Clear();
-            AdjustCards();
+            isChanged = true;
         }
-        public void AddCards(Deck deck, int numberOfCards)
+
+        /// <summary>
+        /// Draws cards from a deck and adds them to the deck viewer
+        /// </summary>
+        /// <param name="deck">The deck to draw from</param>
+        /// <param name="numberOfCards">The number of cards to draw</param>
+        public void DrawCards(Deck deck, int numberOfCards)
         {
 
             for (int i = 0; i < numberOfCards; i++)
             {
                 Card card = deck.DrawCard();
-                this.AddCard(card, false);
+                this.AddCard(card);
             }
-            AdjustCards();
         }
+
+        /// <summary>
+        /// Draws cards from a cards object and adds them to the deck viewer
+        /// </summary>
+        /// <param name="cards">The cards object to draw from</param>
+        public void DrawCards(Cards cards)
+        {
+            for(int i = cards.Count - 1; i >= 0; i--)
+            {
+                this.AddCard((Card)cards[i].Clone());
+                cards.RemoveAt(i);
+            }
+        }
+
+        /// <summary>
+        /// Returns the cards in the deck viewer
+        /// </summary>
+        /// <returns></returns>
         public Cards GetCards()
         {
             return this.cards;
         }
-        public virtual void AddCard(Card card, bool adjust = true)
+
+        /// <summary>
+        /// Adds a card to this deck viewer
+        /// </summary>
+        /// <param name="card"></param>
+        public virtual void AddCard(Card card)
         {
             cards.Add(card);
-
-            if (adjust == true)
-                AdjustCards();
+            isChanged = true;
         }
+
+        /// <summary>
+        /// Removes a card from this deckviewer by index
+        /// </summary>
+        /// <param name="index">The index of the card to remove</param>
         public void RemoveCard(int index)
         {
             cards.RemoveAt(index);
-            AdjustCards();
+            isChanged = true;
         }
+
+        /// <summary>
+        /// Removes a card from this deckviewer by reference
+        /// </summary>
+        /// <param name="card">The card to remove</param>
         public void RemoveCard(Card card)
         {
             cards.Remove(card);
-            AdjustCards();
+            isChanged = true;
         }
+
+        /// <summary>
+        /// Takes a card from this deck viewer and returns it
+        /// </summary>
+        /// <param name="index">The index of the card</param>
+        /// <returns>The card taken</returns>
         public Card TakeCard(int index)
         {
             Card temp = (Card)cards[index].Clone();
             this.RemoveCard(index);
             return temp;
         }
+
+        /// <summary>
+        /// Clears and recreates the card boxes to ensure they reflect the cards object
+        /// </summary>
+        /// <param name="willCardsPop">If the cards will pop up when moused over</param>
         public void UpdateCardBoxes(bool willCardsPop)
         {
             this.Controls.Clear();
@@ -111,52 +170,42 @@ namespace Game
             if (this.Controls.Count > 0)
                 this.Controls[this.Controls.Count - 1].Name = "lastCardInView";
         }
-        //public void AdjustCards(object source, EventArgs args)
+
+        /// <summary>
+        /// Updates the cardboxes using the UpdateCardBoxes method and sets their positions
+        /// </summary>
         public virtual void AdjustCards()
         {
-            /*for(int i = 0; i < this.panel1.Controls.Count; i++)
+            if(isChanged)
             {
-                (this.panel1.Controls[i] as CardBox).FaceUp = true;
-                double widthDivider = (2 + this.panel1.Controls.Count/3);
-                int farLeftCardX = this.Size.Width / 2 - (int)((i+1)/2) * (int)(this.panel1.Controls[0].Width / widthDivider);
-                int farRightCardX = this.Size.Width / 2 + (int)((i+1)/2) * (int)(this.panel1.Controls[0].Width / widthDivider);
+                UpdateCardBoxes(true);
+                for (int i = 0; i < this.Controls.Count; i++)
+                {
+                    double widthDivider = (2 + this.Controls.Count / 6);
+                    int firstCardX = this.Size.Width / 2 - (this.Controls.Count + 1) * (int)(this.Controls[0].Width / widthDivider) / 2;
+                    int nextCardX = firstCardX + (i + 1) * (int)(this.Controls[0].Width / widthDivider);
+                    if (IsEnemyView == true)
+                    {
+                        (this.Controls[i] as CardBox).FaceUp = false;
+                    }
+                    else
+                    {
+                        (this.Controls[i] as CardBox).FaceUp = true;
+                    }
 
-                if(this.panel1.Controls.Count % 2 == 0)
-                {
-                    farLeftCardX -= (int)(this.panel1.Controls[0].Width / widthDivider);
-                    farRightCardX -= (int)(this.panel1.Controls[0].Width / widthDivider);
+                    this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2);
+                    this.Controls[i].BringToFront();
                 }
-                
-                if (i % 2 == 0)
-                {
-                    this.panel1.Controls[i].Location = new Point(farLeftCardX - this.panel1.Controls[0].Width / 2, this.Size.Height / 2 - this.panel1.Controls[i].Height / 2);
-                    
-                }
-                else
-                {
-                    this.panel1.Controls[i].Location = new Point(farRightCardX - this.panel1.Controls[0].Width / 2, this.Size.Height / 2 - this.panel1.Controls[i].Height / 2);
-                    this.panel1.Controls[i].BringToFront();
-                }
-            }*/
-
-            UpdateCardBoxes(true);
-            for (int i = 0; i < this.Controls.Count; i++)
-            {
-                double widthDivider = (2 + this.Controls.Count / 3);
-                int firstCardX = this.Size.Width / 2 - (this.Controls.Count + 1) * (int)(this.Controls[0].Width / widthDivider) / 2;
-                int nextCardX = firstCardX + (i + 1) * (int)(this.Controls[0].Width / widthDivider);
-                if (IsEnemyView == true)
-                {
-                    (this.Controls[i] as CardBox).FaceUp = false;
-                }
-                else
-                {
-                    (this.Controls[i] as CardBox).FaceUp = true;
-                }
-
-                this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2);
-                this.Controls[i].BringToFront();
+                isChanged = false;
             }
+        }
+
+        /// <summary>
+        /// Flags that the cards in this deck viewer have changed
+        /// </summary>
+        public void SetChanged()
+        {
+            this.isChanged = true;
         }
 
         public virtual void DeckViewer_DragEnter(object sender, DragEventArgs e)

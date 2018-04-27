@@ -33,7 +33,7 @@ namespace CardGame
         public event EventHandler LastCardDrawn;
 
         #region Constructors
-        public Deck(Size size, bool isAceHigh = false, bool useTrumps = false, Suit trump = Suit.Clubs)
+        public Deck(Size size, bool isAceHigh = false)
         {
             int minRank = isAceHigh ? 2 : 1;
 
@@ -58,8 +58,7 @@ namespace CardGame
             }
 
             Card.isAceHigh = isAceHigh;
-            Card.useTrumps = useTrumps;
-            Card.trump = trump;
+            
         }
 
         private Deck(Cards newCards)
@@ -76,16 +75,16 @@ namespace CardGame
             Card.isAceHigh = isAceHigh;
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Nondefault constructor. Allows a trump suit to be used.
         /// </summary>
         public Deck(bool useTrumps, Suit trump) : this(Size.Large)
         {
             Card.useTrumps = useTrumps;
             Card.trump = trump;
-        }
+        }*/
 
-        /// <summary>
+        /*/// <summary>
         /// Nondefault constructor. Allows aces to be set high and a trump suit
         /// to be used.
         /// </summary>
@@ -94,7 +93,7 @@ namespace CardGame
             Card.isAceHigh = isAceHigh;
             Card.useTrumps = useTrumps;
             Card.trump = trump;
-        }
+        }*/
 
         public Card GetCard(int cardNum)
         {

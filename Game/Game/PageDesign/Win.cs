@@ -1,4 +1,10 @@
-﻿using System;
+﻿/* Win.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: A panel to be added and displayed on the form when a durak game ends, it displays the games result
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,15 +33,7 @@ namespace Game
             this.button1.Text = "Play Again";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(154, 153);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 62);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Menu";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
+          
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(312, 153);
@@ -52,12 +50,12 @@ namespace Game
             this.lblStatuts.Name = "lblStatuts";
             this.lblStatuts.Size = new System.Drawing.Size(429, 141);
             this.lblStatuts.TabIndex = 3;
-            this.lblStatuts.Text = "YOU WIN!";
+            this.lblStatuts.Text = "";
             this.lblStatuts.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
-          
+            this.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ClientSize = new System.Drawing.Size(433, 228);
             this.Controls.Add(this.lblStatuts);
             this.Controls.Add(this.button3);
@@ -69,7 +67,32 @@ namespace Game
 
         }
 
+         //setting the context of the label from other forms
+        public string LabelText
+        {
+            get
+            {
+                return this.lblStatuts.Text;
+            }
+            set
+            {
+
+                this.lblStatuts.Text = value;
+            }
+        }
         
+         private void button3_Click(object sender, EventArgs e)
+        {
+            //exit the program
+            System.Windows.Forms.Application.Exit();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Goto Main Menu
+            if (this.Parent.Parent is Form)
+                (this.Parent.Parent as PlayDurak).SetScreen(PlayDurak.Screen.MainMenu);
+        }
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;

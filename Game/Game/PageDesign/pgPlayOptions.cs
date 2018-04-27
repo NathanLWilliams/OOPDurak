@@ -1,4 +1,10 @@
-﻿using CardGame;
+﻿/* pgPlayOptions.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 27/4/18
+ * Description: A class for the panel which allows the player to select options for the durak game
+ */
+
+using CardGame;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -241,6 +247,11 @@ namespace Game
 
         }
 
+        /// <summary>
+        /// Goes back to the main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PbBackScreen_Click(object sender, EventArgs e)
         {
             //Goto Main Menu options
@@ -270,6 +281,11 @@ namespace Game
             }
         }
 
+        /// <summary>
+        /// Starts a game of durak
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtPlay_Click(object sender, EventArgs e)
         {
             if (IsDeckSizeSelected())
@@ -283,8 +299,12 @@ namespace Game
                 MessageBox.Show("Error! Deck size must be selected");
             }
 
-            
         }
+
+        /// <summary>
+        /// Returns a new deck object based on the selected deck size
+        /// </summary>
+        /// <returns></returns>
         private Deck GetPlayerSelectedDeck()
         {
             Deck gameDeck = new Deck(Deck.Size.Medium); // by defualt its medium
@@ -293,31 +313,44 @@ namespace Game
                 // border style tells us if box is selected
                 if (pbDeckSize.BorderStyle == BorderStyle.Fixed3D)
                 {   
-                    gameDeck = new Deck((Deck.Size)pbDeckSize.Tag, true, true, Suit.Diamonds);
+                    gameDeck = new Deck((Deck.Size)pbDeckSize.Tag, true);
                     gameDeck.Shuffle();
                 }
             }
             
             return gameDeck;
         }
+
+        /// <summary>
+        /// Returns a new default enemy player
+        /// </summary>
+        /// <returns></returns>
         private AiPlayer GetEnemyPlayer()
         {
             AiPlayer enemyPlayer = new AiPlayer();
             enemyPlayer.Image = Properties.Resources.robot;
             enemyPlayer.Name = "Computer";
-            enemyPlayer.Score = 1000; // score could be seperate class
 
             return enemyPlayer;
         }
+
+        /// <summary>
+        /// Returns a new default human player
+        /// </summary>
+        /// <returns></returns>
         private HumanPlayer GetHumanPlayer()
         {
             HumanPlayer myPlayer = new HumanPlayer();
             myPlayer.Image = Properties.Resources.user;
             myPlayer.Name = "John Wick"; // maybe add text box in play options page to get these name like values
-            myPlayer.Score = 1000; // score could be seperate class
            
             return myPlayer;
         }
+
+        /// <summary>
+        /// Checks if a deck size is selected
+        /// </summary>
+        /// <returns>If a deck size if selected or not</returns>
         private bool IsDeckSizeSelected()
         {
             bool isDeckSizeSelected = false;

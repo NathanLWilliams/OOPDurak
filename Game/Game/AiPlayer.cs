@@ -1,4 +1,9 @@
-﻿using Game;
+/* AiPlayer.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 26/4/18
+ * Description: A class for AI Players.
+ */
+using Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,21 +12,11 @@ using System.Threading.Tasks;
 
 namespace CardGame
 {
+    /// <summary>
+    /// AI player class inherits from the abstract player class
+    /// </summary>
     public class AiPlayer : Player
     {
-        /*public Card chooseAction (int action)
-        {
-            Card card = new Card();
-            return card;
-        }
-
-        private int action;
-
-        public int Action
-        {
-            get { return action; }
-            set { action = value; }
-        }*/
 
         /// <summary>
         /// Returns a Card representing what the AiPlayer plans to play,
@@ -52,11 +47,6 @@ namespace CardGame
             }
             
             return tempCard;
-        }
-
-        public void Pass()
-        {
-
         }
     }
 }

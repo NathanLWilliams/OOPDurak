@@ -1,4 +1,10 @@
-﻿using CardBoxControl;
+/* BoutViewer.cs
+ * Group 9 (Nathan Williams, Jonathan Hermans, Karence Ma, Qasim Iqbal)
+ * Date: 26/4/18
+ * Description: A subclass of DeckViewer, this is used to represent the bout which players will place their cards into
+ */
+
+using CardBoxControl;
 using CardGame;
 using Game;
 using System;
@@ -8,38 +14,72 @@ using System.Windows.Forms;
 
 namespace Game
 {
+
+    /// <summary>
+    /// BoutViewer is a class which inherits from DeckViewer
+    /// </summary>
     public class BoutViewer : DeckViewer
     {
-        //TODO: Change this. Tried to get the parent of BoutViewer (DurakPage) in order to get the isAttackerTurn variable there (so we don't need two of them),
-        //yet for some reason I can't reference DurakPage with "(this.Parent as DurakPage).IsAttackerTurn"
-        bool isAttackerTurn = true;
-        public bool IsAttackerTurn
-        {
-            get { return isAttackerTurn; }
-            set { isAttackerTurn = value; }
-        }
+        // Constants and Variables
+        public static int MAXIMUM_CARDS_IN_BOUT = 12;
+        private int cardCountAtBoutStart = 6;
+        // An event flag for added cards
         public event EventHandler CardAdded;
 
+        /// <summary>
+        /// Gets a count of cards and sets the card count
+        /// </summary>
+        public int CardCountAtBoutStart
+        {
+            get { return cardCountAtBoutStart; }
+            set { cardCountAtBoutStart = value; }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         public BoutViewer() : base()
         {
+
         }
+
+        /// <summary>
+        /// Method which adds a deck
+        /// </summary>
+        /// <param name="deck"></param>
         public void AddDeck(Deck deck)
         {
-            this.AddCards(deck, deck.Count);
+            this.DrawCards(deck, deck.Count);
         }
-        public void AddCard(Card c, bool adjust = true, bool willTriggerTurn = false)
-        {
-            Console.WriteLine("ADDED CARD");
-            base.AddCard(c, adjust);
 
+        /// <summary>
+        /// Method which adds a card
+        /// </summary>
+        /// <param name="c"></param>
+        /// <param name="adjust"></param>
+        /// <param name="willTriggerTurn"></param>
+        public void AddCard(Card c, bool willTriggerTurn = false)
+        {
+            //Console.WriteLine("ADDED CARD");
+            base.AddCard(c);
+
+            // An if structure which determines whether the argument willTriggerTurn is true
             if(willTriggerTurn)
                 CardAdded(this, new EventArgs());
         }
+
+        /// <summary>
+        /// Method which determines whether the card was 'dragged'
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>        
         public override void DeckViewer_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetData(typeof(CardBox)) != null)
             {
-                if(this.cards.Count < 12)
+                // An logic structure which determines whether its a player card
+                if(this.isFull() == false)
                 {
                     CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
                     if (draggedCard.Parent.GetType() == typeof(DeckViewer) && (string)draggedCard.Parent.Tag != "enemyDeck")
@@ -52,16 +92,21 @@ namespace Game
                 
             }
         }
+
+        /// <summary>
+        /// Method which determines whether the card was 'dropped' 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public override void DeckViewer_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetData(typeof(CardBox)) != null && this.Controls.Count < 12)
+            if (e.Data.GetData(typeof(CardBox)) != null && this.isFull() == false)
             {
 
-                System.Console.WriteLine("DragDrop");
-                //int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
-                //Card draggedCard = new Card(cardHashCode);
                 CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
 
+
+                // A logic structure which determines which panels to move the card to
                 if (draggedCard != null && draggedCard.Parent.GetType() == typeof(DeckViewer))
                 {
                     DeckViewer fromPanel = draggedCard.Parent as DeckViewer;
@@ -74,21 +119,32 @@ namespace Game
                             if(toPanel.canPlaceCard(draggedCard.Card))
                             {
                                 fromPanel.RemoveCard(draggedCard.Card);
-                                toPanel.AddCard(draggedCard.Card, true, true);
+                                toPanel.AddCard(draggedCard.Card, true);
                             }
                         }
                     }
 
                 }
-                //this.AddCard(draggedCard);
-                //Card newCard = (Card)draggedCard.Card.Clone();
-                //(draggedCard.Parent as DeckViewer).RemoveCard(draggedCard.Card);
-                //this.AddCard(newCard);
-
 
             }
 
 
+        }
+
+        /// <summary>
+        /// Checks whether cards can still be added to this bout viewer
+        /// </summary>
+        /// <returns>Whether the maximum number of cards allowed in the bout has been reached</returns>
+        public bool isFull()
+        {
+            bool full = false;
+
+            // A logic structure which determines whether the maximum number of cards was reached
+            if(this.cards.Count >= BoutViewer.MAXIMUM_CARDS_IN_BOUT || this.cards.Count / 2 >= this.cardCountAtBoutStart)
+            {
+                full = true;
+            }
+            return full;
         }
         /// <summary>
         /// Determines whether either an attacker or defender can place a card in the bout
@@ -99,8 +155,7 @@ namespace Game
         public bool canPlaceCard(Card c)
         {
             bool canPlace = false;
-            
-            if(isAttackerTurn)
+            if(DurakPage.isPlayerAttacking == DurakPage.isPlayerTurn)
             {
                 //No cards in bout currently, attacker can play any card
                 if(this.cards.Count == 0)
@@ -129,7 +184,7 @@ namespace Game
 
                     //Get the last card played
                     Card lastCard = this.cards[this.cards.Count - 1];
-
+                    c.FaceUp = true;
                     //Check if the passed card is of a matching suit and higher rank, trumps are handled slightly differently
 
                     if(c.Suit == lastCard.Suit)
@@ -157,36 +212,38 @@ namespace Game
             
             return canPlace;
         }
+
+        /// <summary>
+        /// Updates the cardboxes using the UpdateCardBoxes method and sets their positions
+        /// </summary>
         public override void AdjustCards()
         {
-            UpdateCardBoxes(false);
-            if(DurakPage.isPlayerAttacking)
+            if(isChanged)
             {
+                UpdateCardBoxes(false);
+                
                 for (int i = 0; i < this.Controls.Count; i++)
                 {
+                    int cardYOffset = 0;
+                    if (DurakPage.isPlayerAttacking)
+                    {
+                        cardYOffset = i % 2 == 0 ? 80 : -80;
+                    }
+                    else
+                    {
+                        cardYOffset = i % 2 == 0 ? -80 : 80;
+                    }
+
                     double widthDivider = (2 + this.Controls.Count / 3);
                     int firstCardX = this.Size.Width / 2 - (this.Controls[0].Width * (int)Math.Floor((double)this.Controls.Count / 2)) / 2;
                     int nextCardX = firstCardX + this.Controls[0].Width * (int)Math.Floor((double)i / 2);
-                    int cardYOffset = i % 2 == 0 ? 80 : -80;
-
                     (this.Controls[i] as CardBox).FaceUp = true;
                     this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2 + cardYOffset);
                     this.Controls[i].BringToFront();
                 }
-            }
-            else
-            {
-                for (int i = 0; i < this.Controls.Count; i++)
-                {
-                    double widthDivider = (2 + this.Controls.Count / 3);
-                    int firstCardX = this.Size.Width / 2 - (this.Controls[0].Width * (int)Math.Floor((double)this.Controls.Count / 2)) / 2;
-                    int nextCardX = firstCardX + this.Controls[0].Width * (int)Math.Floor((double)i / 2);
-                    int cardYOffset = i % 2 == 0 ? -80 : 80;
 
-                    (this.Controls[i] as CardBox).FaceUp = true;
-                    this.Controls[i].Location = new Point(nextCardX - this.Controls[0].Width / 2, this.Size.Height / 2 - this.Controls[i].Height / 2 + cardYOffset);
-                    this.Controls[i].BringToFront();
-                }
+                isChanged = false;
+
             }
             
         }
