@@ -238,9 +238,7 @@ namespace CardBoxControl
 
         private void pbCardDisplay_Paint(object sender, PaintEventArgs e)
         {
-            
             ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.Black, ButtonBorderStyle.Solid);
-
         }
     }
 
