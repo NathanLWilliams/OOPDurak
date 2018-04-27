@@ -52,7 +52,7 @@ namespace Game
             this.lblStatuts.Name = "lblStatuts";
             this.lblStatuts.Size = new System.Drawing.Size(429, 141);
             this.lblStatuts.TabIndex = 3;
-            this.lblStatuts.Text = "YOU WIN!";
+            this.lblStatuts.Text = "";
             this.lblStatuts.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
