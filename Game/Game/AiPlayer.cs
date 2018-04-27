@@ -17,19 +17,6 @@ namespace CardGame
     /// </summary>
     public class AiPlayer : Player
     {
-        /*public Card chooseAction (int action)
-        {
-            Card card = new Card();
-            return card;
-        }
-
-        private int action;
-
-        public int Action
-        {
-            get { return action; }
-            set { action = value; }
-        }*/
 
         /// <summary>
         /// Returns a Card representing what the AiPlayer plans to play,
@@ -60,11 +47,6 @@ namespace CardGame
             }
             
             return tempCard;
-        }
-
-        public void Pass()
-        {
-
         }
     }
 }

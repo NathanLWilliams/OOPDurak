@@ -39,6 +39,7 @@ namespace Game
 
         private const int POP = 25;
         private const int CARD_MIN_BEFORE_REFILL = 6;
+        private const int CARDS_DEALT_AT_START = 6;
 
         public DurakPage()
         {
@@ -284,6 +285,8 @@ namespace Game
         private void pbSkipButton_Click(object sender, EventArgs e)
         {
             EndBout();
+
+            //Update cards if needed
             this.boutDeckViewer.SetChanged();
             this.boutDeckViewer.AdjustCards();
             this.drawDeckViewer.AdjustCards();
@@ -309,12 +312,17 @@ namespace Game
             {
                 EndBout();
             }
+
+            //Update cards if needed
             this.boutDeckViewer.AdjustCards();
             this.drawDeckViewer.AdjustCards();
             this.playerDeckViewer.AdjustCards();
             this.enemyDeckViewer.AdjustCards();
         }
 
+        /// <summary>
+        /// Starts the next turns logic
+        /// </summary>
         public void NextTurn()
         {
             //Check if it's the player's turn or the Ai's turn
@@ -387,12 +395,8 @@ namespace Game
             //Check if the games end conditions are fulfilled
             DetermineGameEnd();
 
-            //TODO: Make this switching of roles into a method
             //Switch roles of attacker and defender
-            isPlayerAttacking = isPlayerAttacking ? false : true;
-            isPlayerTurn = isPlayerAttacking;
-
-            lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
+            SwitchRoles();
 
             //The AI is going to attack
             if (isPlayerAttacking == false)
@@ -403,6 +407,16 @@ namespace Game
                 NextTurn();
             }
             
+        }
+
+        /// <summary>
+        /// Switch the roles of attacker and defender
+        /// </summary>
+        public void SwitchRoles()
+        {
+            isPlayerAttacking = isPlayerAttacking ? false : true;
+            isPlayerTurn = isPlayerAttacking;
+            lblCurrentTurn.Text = isPlayerAttacking ? "Attacker" : "Defender";
         }
 
         /// <summary>
@@ -438,11 +452,13 @@ namespace Game
         /// </summary>
         public void RefillCards()
         {
+            //Refill the AIs cards
             while (enemyDeckViewer.GetCards().Count < CARD_MIN_BEFORE_REFILL && drawDeckViewer.GetCards().Count > 0)
             {
                 enemyDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1));
             }
 
+            //Refill the players cards
             while (playerDeckViewer.GetCards().Count < CARD_MIN_BEFORE_REFILL && drawDeckViewer.GetCards().Count > 0)
             {
                 playerDeckViewer.AddCard(drawDeckViewer.TakeCard(drawDeckViewer.GetCards().Count - 1));
@@ -468,6 +484,7 @@ namespace Game
             
             this.Controls.Add(this.drawDeckViewer);
 
+            //Update the cards if needed
             this.boutDeckViewer.AdjustCards();
             this.drawDeckViewer.AdjustCards();
             this.playerDeckViewer.AdjustCards();
@@ -479,6 +496,7 @@ namespace Game
             this.enemyPlayer = enemyPlayer;
             this.humanPlayer = myPlayer;
 
+            //Player gets to start first
             isPlayerAttacking = true;
             isPlayerTurn = true;
 
@@ -486,8 +504,9 @@ namespace Game
             pbEnemyPlayerImage.Image = enemyPlayer.Image;
             lbEnemyPlayerName.Text = enemyPlayer.Name;
 
-            enemyDeckViewer.DrawCards(deck, 6);
-            playerDeckViewer.DrawCards(deck, 6);
+            //Deal their initial cards
+            enemyDeckViewer.DrawCards(deck, CARDS_DEALT_AT_START);
+            playerDeckViewer.DrawCards(deck, CARDS_DEALT_AT_START);
          
             // set up myPlayer object
             pbMyPlayerImage.Image = myPlayer.Image;
@@ -499,8 +518,7 @@ namespace Game
         {
             Random randomNumber = new Random();
             
-            Card cardChosen = new Card(deck[randomNumber.Next(deck.Count - 1) + 1].GetHashCode());
-            
+            Card cardChosen = new Card(deck[randomNumber.Next(deck.Count)].GetHashCode());
             cdbTrumpCard = new CardBox(cardChosen,false,Orientation.Horizontal);
             cdbTrumpCard.Name = "cdbTrumpCard";
             cdbTrumpCard.FaceUp = true;

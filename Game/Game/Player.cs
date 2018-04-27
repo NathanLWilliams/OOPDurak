@@ -19,24 +19,6 @@ namespace CardGame
     public abstract class Player
     {
 
-        /// <summary>
-        /// A property for the status of the player (human or AI)
-        /// </summary>
-        public enum PlayerStatus
-        {
-
-        }
-
-        /// <summary>
-        /// A property for the card of a player
-        /// </summary>
-        /// <param name="card"></param>
-        /// <returns></returns>
-        public virtual Card PlayCard(Card card)
-        {
-            return card;
-        }
-
         private string name;
 
         /// <summary>

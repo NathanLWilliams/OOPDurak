@@ -11,7 +11,6 @@ namespace Game
 {
     public class DeckPileViewer : DeckViewer
     {
-        //TODO: Fix odd looking card layout when first instantiated
 
         public DeckPileViewer() : base()
         {

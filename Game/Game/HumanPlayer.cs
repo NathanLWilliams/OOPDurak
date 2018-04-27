@@ -17,12 +17,6 @@ namespace CardGame
     public class HumanPlayer : Player
     {
 
-        /// <summary>
-        /// Some functionality only available to player maybe?
-        /// </summary>
-        public void Pass()
-        {
-
-        }
+        //TODO: Figure out some use for the human player or get rid of it
     }
 }

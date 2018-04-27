@@ -102,9 +102,6 @@ namespace Game
             if (e.Data.GetData(typeof(CardBox)) != null && this.isFull() == false)
             {
 
-                //System.Console.WriteLine("DragDrop");
-                //int cardHashCode = Convert.ToInt32(e.Data.GetData(DataFormats.Text).ToString());
-                //Card draggedCard = new Card(cardHashCode);
                 CardBox draggedCard = (CardBox)e.Data.GetData(typeof(CardBox));
 
 
@@ -127,11 +124,6 @@ namespace Game
                     }
 
                 }
-                //this.AddCard(draggedCard);
-                //Card newCard = (Card)draggedCard.Card.Clone();
-                //(draggedCard.Parent as DeckViewer).RemoveCard(draggedCard.Card);
-                //this.AddCard(newCard);
-
 
             }
 
@@ -201,19 +193,16 @@ namespace Game
                             if(lastCard.Rank != Rank.Ace)
                             {
                                 canPlace = true;
-                                //System.Console.WriteLine("1: " + lastCard.ToString() + "        " + c.ToString() +    "          " + (lastCard.Suit == c.Suit));
                             }
                         }
                         else if(lastCard.Rank != Rank.Ace && c.Rank > lastCard.Rank)
                         {
                             canPlace = true;
-                            //System.Console.WriteLine("2: " + lastCard.ToString() + "        " + c.ToString() + "          " + (lastCard.Suit == c.Suit));
                         }
                     }
                     else if(c.Suit == Card.trump) //last card is not trump, but card to play is
                     {
                         canPlace = true;
-                        //System.Console.WriteLine("3: " + lastCard.ToString() + "        " + c.ToString() + "          " + (lastCard.Suit == c.Suit));
                     }
 
                 }
