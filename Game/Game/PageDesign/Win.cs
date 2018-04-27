@@ -19,7 +19,6 @@ namespace Game
         public Win()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.lblStatuts = new System.Windows.Forms.Label();
             this.SuspendLayout();
