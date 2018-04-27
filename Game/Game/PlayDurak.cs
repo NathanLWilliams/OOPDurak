@@ -19,7 +19,6 @@ namespace Game
         {
             MainMenu = 0,
             Instructions,
-            Statistics,
             Playing,
             PlayOptions,
             GameResults
@@ -64,9 +63,6 @@ namespace Game
                     break;
                 case Screen.Instructions:
                     SetScreenVisible(this.Controls, instructionPage);
-                    break;
-                case Screen.Statistics:
-                    SetScreenVisible(this.Controls, stats);
                     break;
                 case Screen.PlayOptions:
                     SetScreenVisible(this.Controls, playOptions);
